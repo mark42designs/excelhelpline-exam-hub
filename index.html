@@ -144,6 +144,16 @@
     font-family:'Manrope',sans-serif;font-weight:700;font-size:13px;color:var(--navy);
   }
 
+  .dataset-downloads{display:flex;flex-wrap:wrap;gap:8px;margin:-8px 0 20px;justify-content:center;}
+  .dataset-downloads:empty{display:none;margin:0;}
+  .dataset-btn{
+    display:inline-flex;align-items:center;gap:6px;
+    background:#fff;border:1.5px solid var(--green);color:var(--green);
+    font-family:'Manrope',sans-serif;font-weight:700;font-size:12.5px;
+    padding:7px 14px;border-radius:999px;cursor:pointer;text-decoration:none;
+  }
+  .dataset-btn:hover{background:var(--green);color:#fff;}
+
   .q-topic-badge{
     display:flex;align-items:center;gap:10px;margin-bottom:16px;
   }
@@ -338,13 +348,13 @@
       <div class="subject-name">MS Excel</div>
       <div class="subject-status ready">Available</div>
     </div>
-    <div class="subject-card disabled">
+    <div class="subject-card" id="subjectSQL">
       <div class="subject-name">SQL</div>
-      <div class="subject-status soon">Coming Soon</div>
+      <div class="subject-status ready">Available</div>
     </div>
-    <div class="subject-card disabled">
+    <div class="subject-card" id="subjectPython">
       <div class="subject-name">Python</div>
-      <div class="subject-status soon">Coming Soon</div>
+      <div class="subject-status ready">Available</div>
     </div>
   </div>
 </div>
@@ -359,17 +369,7 @@
     </span>
   </div>
 
-  <div class="group-label">Module 1 &mdash; Basic Excel</div>
-  <div id="group-m1"></div>
-
-  <div class="group-label">Module 2 &mdash; Intermediate Excel</div>
-  <div id="group-m2"></div>
-
-  <div class="group-label">Module 3 &mdash; Advanced Excel</div>
-  <div id="group-m3"></div>
-
-  <div class="group-label">Final Exam</div>
-  <div id="group-exam"></div>
+  <div id="pickerGroups"></div>
 </div>
 
 <!-- SCREEN 2.5: PASSCODE -->
@@ -390,6 +390,7 @@
 <!-- SCREEN 3: QUIZ -->
 <div class="card hidden" id="screen-quiz">
   <div class="assessment-banner" id="assessmentBanner"></div>
+  <div class="dataset-downloads" id="datasetDownloads"></div>
   <div class="progress-wrap">
     <div class="progress-label"><span id="qCounter">Question 1 of 12</span><span id="timerDisplay"></span></div>
     <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:8.3%;"></div></div>
@@ -462,15 +463,42 @@ const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyy4cRkC-H_IU7X
 // answerKey    — the existing Answer Key tab this grades against (unchanged
 //                naming — these tabs were never renamed)
 const CATALOG = [
-  { group:'m1', id:'m1a1', subjectTab:'MS Excel Class', subjectType:'Module 1 - Activity 1', answerKey:'Module 1 - Activity_1 - Answer Key', title:'Module 1 — Activity 1', sub:'Format Cells, Charts, Data Validation · 12 questions', status:'ready', passcode:'132263', timerMinutes:15 },
-  { group:'m1', id:'m1a2', subjectTab:'MS Excel Class', subjectType:'Module 1 - Activity 2', answerKey:'Module 1 - Activity_2 - Answer Key', title:'Module 1 — Activity 2', sub:'Conditional Formatting, Sort & Filter, Freeze Panes, Protect · 12 questions', status:'ready', passcode:'220730', timerMinutes:15 },
-  { group:'m1', id:'m1hw', subjectTab:'MS Excel Class', subjectType:'Module 1 - Homework', answerKey:'Module 1 - Homework - Answer Key', title:'Module 1 — Homework', sub:'Comprehensive review, all Week 1 topics · 14 questions', status:'ready', passcode:'803711' },
-  { group:'m2', id:'m2a1', subjectTab:'MS Excel Class', subjectType:'Module 2 - Activity 1', answerKey:'Module 2 - Activity_1 - Answer Key', title:'Module 2 — Activity 1', sub:'Cell References, Named Ranges, Advanced Formatting · 12 questions', status:'ready', passcode:'219665', timerMinutes:15 },
-  { group:'m2', id:'m2a2', subjectTab:'MS Excel Class', subjectType:'Module 2 - Activity 2', answerKey:'Module 2 - Activity_2 - Answer Key', title:'Module 2 — Activity 2', sub:'Data Tools, Charts, Advanced Functions · 12 questions', status:'ready', passcode:'863332', timerMinutes:15 },
-  { group:'m2', id:'m2hw', subjectTab:'MS Excel Class', subjectType:'Module 2 - Homework', answerKey:'Module 2 - Homework - Answer Key', title:'Module 2 — Homework', sub:'Comprehensive review, all Week 2 topics · 16 questions', status:'ready', passcode:'389000' },
-  { group:'m3', id:'m3a1', subjectTab:'MS Excel Class', subjectType:'Module 3 - Activity 1', answerKey:'Module 3 - Activity_1 - Answer Key', title:'Module 3 — Activity 1', sub:'PivotTables: creating, fields, sorting, filtering, refreshing · 12 questions', status:'ready', passcode:'434154', timerMinutes:15 },
-  { group:'m3', id:'m3a2', subjectTab:'MS Excel Class', subjectType:'Module 3 - Activity 2', answerKey:'Module 3 - Activity_2 - Answer Key', title:'Module 3 — Activity 2', sub:'Excel Tables, Charts, Web Scraping, Dashboards · 12 questions', status:'ready', passcode:'667891', timerMinutes:15 },
-  { group:'exam', id:'finalexam', subjectTab:'MS Excel Class', subjectType:'MS Excel Exam', answerKey:'MS Excel Exam - Answer Key', title:'MS Excel Exam', sub:'Comprehensive, Weeks 1–3, Basic to Advanced · 30 questions', status:'ready', passcode:'346504', timerMinutes:60 },
+  { subject:'excel', groupLabel:'Module 1 — Basic Excel', group:'m1', id:'m1a1', subjectTab:'MS Excel Class', subjectType:'Module 1 - Activity 1', answerKey:'Module 1 - Activity_1 - Answer Key', title:'Module 1 — Activity 1', sub:'Format Cells, Charts, Data Validation · 12 questions', status:'ready', passcode:'132263', timerMinutes:15 },
+  { subject:'excel', groupLabel:'Module 1 — Basic Excel', group:'m1', id:'m1a2', subjectTab:'MS Excel Class', subjectType:'Module 1 - Activity 2', answerKey:'Module 1 - Activity_2 - Answer Key', title:'Module 1 — Activity 2', sub:'Conditional Formatting, Sort & Filter, Freeze Panes, Protect · 12 questions', status:'ready', passcode:'220730', timerMinutes:15 },
+  { subject:'excel', groupLabel:'Module 1 — Basic Excel', group:'m1', id:'m1hw', subjectTab:'MS Excel Class', subjectType:'Module 1 - Homework', answerKey:'Module 1 - Homework - Answer Key', title:'Module 1 — Homework', sub:'Comprehensive review, all Week 1 topics · 14 questions', status:'ready', passcode:'803711' },
+  { subject:'excel', groupLabel:'Module 2 — Intermediate Excel', group:'m2', id:'m2a1', subjectTab:'MS Excel Class', subjectType:'Module 2 - Activity 1', answerKey:'Module 2 - Activity_1 - Answer Key', title:'Module 2 — Activity 1', sub:'Cell References, Named Ranges, Advanced Formatting · 12 questions', status:'ready', passcode:'219665', timerMinutes:15 },
+  { subject:'excel', groupLabel:'Module 2 — Intermediate Excel', group:'m2', id:'m2a2', subjectTab:'MS Excel Class', subjectType:'Module 2 - Activity 2', answerKey:'Module 2 - Activity_2 - Answer Key', title:'Module 2 — Activity 2', sub:'Data Tools, Charts, Advanced Functions · 12 questions', status:'ready', passcode:'863332', timerMinutes:15 },
+  { subject:'excel', groupLabel:'Module 2 — Intermediate Excel', group:'m2', id:'m2hw', subjectTab:'MS Excel Class', subjectType:'Module 2 - Homework', answerKey:'Module 2 - Homework - Answer Key', title:'Module 2 — Homework', sub:'Comprehensive review, all Week 2 topics · 16 questions', status:'ready', passcode:'389000' },
+  { subject:'excel', groupLabel:'Module 3 — Advanced Excel', group:'m3', id:'m3a1', subjectTab:'MS Excel Class', subjectType:'Module 3 - Activity 1', answerKey:'Module 3 - Activity_1 - Answer Key', title:'Module 3 — Activity 1', sub:'PivotTables: creating, fields, sorting, filtering, refreshing · 12 questions', status:'ready', passcode:'434154', timerMinutes:15 },
+  { subject:'excel', groupLabel:'Module 3 — Advanced Excel', group:'m3', id:'m3a2', subjectTab:'MS Excel Class', subjectType:'Module 3 - Activity 2', answerKey:'Module 3 - Activity_2 - Answer Key', title:'Module 3 — Activity 2', sub:'Excel Tables, Charts, Web Scraping, Dashboards · 12 questions', status:'ready', passcode:'667891', timerMinutes:15 },
+  { subject:'excel', groupLabel:'Final Exam', group:'exam', id:'finalexam', subjectTab:'MS Excel Class', subjectType:'MS Excel Exam', answerKey:'MS Excel Exam - Answer Key', title:'MS Excel Exam', sub:'Comprehensive, Weeks 1–3, Basic to Advanced · 30 questions', status:'ready', passcode:'346504', timerMinutes:60 },
+
+  { subject:'sql', groupLabel:'Module 1 — SQL Basics', group:'sqlm1', id:'sqlm1a1', subjectTab:'SQL Class', subjectType:'Module 1 - Activity 1', answerKey:'SQL Module 1 - Activity_1 - Answer Key', title:'Module 1 — Activity 1', sub:'Create Table, data types, primary key, NOT NULL · 12 questions', status:'ready', passcode:'471619', timerMinutes:15 },
+  { subject:'sql', groupLabel:'Module 1 — SQL Basics', group:'sqlm1', id:'sqlm1a2', subjectTab:'SQL Class', subjectType:'Module 1 - Activity 2', answerKey:'SQL Module 1 - Activity_2 - Answer Key', title:'Module 1 — Activity 2', sub:'Insert records, SELECT queries · 12 questions', status:'ready', passcode:'279861', timerMinutes:15 },
+  { subject:'sql', groupLabel:'Module 1 — SQL Basics', group:'sqlm1', id:'sqlm1hw', subjectTab:'SQL Class', subjectType:'Module 1 - Homework', answerKey:'SQL Module 1 - Homework - Answer Key', title:'Module 1 — Homework', sub:'Related tables, primary & foreign keys, review · 14 questions', status:'ready', passcode:'208664' },
+
+  { subject:'sql', groupLabel:'Module 2 — Filtering & Aggregation', group:'sqlm2', id:'sqlm2a1', subjectTab:'SQL Class', subjectType:'Module 2 - Activity 1', answerKey:'SQL Module 2 - Activity_1 - Answer Key', title:'Module 2 — Activity 1', sub:'Filtering data with WHERE · 12 questions', status:'ready', passcode:'867665', timerMinutes:15, datasets:['deliveries_data'] },
+  { subject:'sql', groupLabel:'Module 2 — Filtering & Aggregation', group:'sqlm2', id:'sqlm2a2', subjectTab:'SQL Class', subjectType:'Module 2 - Activity 2', answerKey:'SQL Module 2 - Activity_2 - Answer Key', title:'Module 2 — Activity 2', sub:'GROUP BY and HAVING · 12 questions', status:'ready', passcode:'280580', timerMinutes:15, datasets:['deliveries_data'] },
+  { subject:'sql', groupLabel:'Module 2 — Filtering & Aggregation', group:'sqlm2', id:'sqlm2a3', subjectTab:'SQL Class', subjectType:'Module 2 - Activity 3', answerKey:'SQL Module 2 - Activity_3 - Answer Key', title:'Module 2 — Activity 3', sub:'UPDATE, DELETE, and ALTER TABLE · 12 questions', status:'ready', passcode:'462986', timerMinutes:15, datasets:['products'] },
+  { subject:'sql', groupLabel:'Module 2 — Filtering & Aggregation', group:'sqlm2', id:'sqlm2hw', subjectTab:'SQL Class', subjectType:'Module 2 - Homework', answerKey:'SQL Module 2 - Homework - Answer Key', title:'Module 2 — Homework', sub:'Hospital Analytics: aggregation & HAVING review · 14 questions', status:'ready', passcode:'187480', datasets:['hospital_records'] },
+
+  { subject:'sql', groupLabel:'Module 3 — Joins & Dashboards', group:'sqlm3', id:'sqlm3a1', subjectTab:'SQL Class', subjectType:'Module 3 - Activity 1', answerKey:'SQL Module 3 - Activity_1 - Answer Key', title:'Module 3 — Activity 1', sub:'Joining Customers & Orders tables · 12 questions', status:'ready', passcode:'897564', timerMinutes:15, datasets:['customers','orders','products'] },
+  { subject:'sql', groupLabel:'Module 3 — Joins & Dashboards', group:'sqlm3', id:'sqlm3a2', subjectTab:'SQL Class', subjectType:'Module 3 - Activity 2', answerKey:'SQL Module 3 - Activity_2 - Answer Key', title:'Module 3 — Activity 2', sub:'Operational Insights Dashboard · 12 questions', status:'ready', passcode:'550259', timerMinutes:15, datasets:['customers','orders','products'] },
+
+  { subject:'sql', groupLabel:'Final Exam', group:'sqlexam', id:'sqlexam', subjectTab:'SQL Class', subjectType:'SQL Exam', answerKey:'SQL Exam - Answer Key', title:'SQL Exam', sub:'Comprehensive, Modules 1–3, Basic to Joins · 33 questions', status:'ready', passcode:'304604', timerMinutes:60 },
+
+  { subject:'python', groupLabel:'Module 1 — Python Fundamentals', group:'pym1', id:'pym1a1', subjectTab:'Python Class', subjectType:'Module 1 - Activity 1', answerKey:'Python Module 1 - Activity_1 - Answer Key', title:'Module 1 — Activity 1', sub:'Python Basics, Environment & Data Types · 5 questions', status:'ready', passcode:'165171', timerMinutes:15 },
+  { subject:'python', groupLabel:'Module 1 — Python Fundamentals', group:'pym1', id:'pym1a2', subjectTab:'Python Class', subjectType:'Module 1 - Activity 2', answerKey:'Python Module 1 - Activity_2 - Answer Key', title:'Module 1 — Activity 2', sub:'Console I/O & Python Operators · 5 questions', status:'ready', passcode:'185797', timerMinutes:15 },
+  { subject:'python', groupLabel:'Module 1 — Python Fundamentals', group:'pym1', id:'pym1hw', subjectTab:'Python Class', subjectType:'Module 1 - Homework', answerKey:'Python Module 1 - Homework - Answer Key', title:'Module 1 — Homework', sub:'Comprehensive review, all Module 1 topics · 10 questions', status:'ready', passcode:'459196' },
+
+  { subject:'python', groupLabel:'Module 2 — Control Flow', group:'pym2', id:'pym2a1', subjectTab:'Python Class', subjectType:'Module 2 - Activity 1', answerKey:'Python Module 2 - Activity_1 - Answer Key', title:'Module 2 — Activity 1', sub:'Comparison & Logical Operators · 5 questions', status:'ready', passcode:'708074', timerMinutes:15 },
+  { subject:'python', groupLabel:'Module 2 — Control Flow', group:'pym2', id:'pym2a2', subjectTab:'Python Class', subjectType:'Module 2 - Activity 2', answerKey:'Python Module 2 - Activity_2 - Answer Key', title:'Module 2 — Activity 2', sub:'Conditional Statements & Loops · 5 questions', status:'ready', passcode:'865035', timerMinutes:15 },
+  { subject:'python', groupLabel:'Module 2 — Control Flow', group:'pym2', id:'pym2hw', subjectTab:'Python Class', subjectType:'Module 2 - Homework', answerKey:'Python Module 2 - Homework - Answer Key', title:'Module 2 — Homework', sub:'Control Flow, Lists & Functions review · 20 questions', status:'ready', passcode:'011670' },
+
+  { subject:'python', groupLabel:'Module 3 — Errors & Data Structures', group:'pym3', id:'pym3a1', subjectTab:'Python Class', subjectType:'Module 3 - Activity 1', answerKey:'Python Module 3 - Activity_1 - Answer Key', title:'Module 3 — Activity 1', sub:'Error Handling & Exception Management · 5 questions', status:'ready', passcode:'882647', timerMinutes:15 },
+  { subject:'python', groupLabel:'Module 3 — Errors & Data Structures', group:'pym3', id:'pym3a2', subjectTab:'Python Class', subjectType:'Module 3 - Activity 2', answerKey:'Python Module 3 - Activity_2 - Answer Key', title:'Module 3 — Activity 2', sub:'Common Exceptions & List vs. Tuple Mutability · 5 questions', status:'ready', passcode:'887158', timerMinutes:15 },
+
+  { subject:'python', groupLabel:'Final Exam', group:'pyexam', id:'pyexam', subjectTab:'Python Class', subjectType:'Python Exam', answerKey:'Python Exam - Answer Key', title:'Python Exam', sub:'Comprehensive, Modules 1–3 · 30 questions', status:'ready', passcode:'857224', timerMinutes:60 },
 ];
 
 // ============================================================
@@ -478,6 +506,322 @@ const CATALOG = [
 // In production these should be fetched from Apps Script instead
 // of shipped in the page, so a student can't view-source the key.
 // ============================================================
+const SQL_DATASETS = {
+  deliveries_data: `"delivery_id","driver_id","region","vehicle_type","delivery_weight","distance_km","fuel_cost","delivery_fee","delivery_time_min","delivery_date"
+"1","101","NCR","Motorcycle","45","8","120","250","35","2025-01-02"
+"2","102","NCR","Van","180","15","400","520","60","2025-01-03"
+"3","103","NCR","Truck","300","25","900","780","95","2025-01-04"
+"4","104","NCR","Motorcycle","60","10","150","300","40","2025-01-05"
+"5","105","NCR","Van","190","18","420","540","75","2025-01-06"
+"6","106","NCR","Truck","250","20","850","720","88","2025-01-07"
+"7","107","NCR","Motorcycle","55","7","110","260","32","2025-01-08"
+"8","108","NCR","Van","170","16","390","510","70","2025-01-09"
+"9","109","NCR","Truck","280","22","880","750","92","2025-01-10"
+"10","110","NCR","Van","160","14","370","490","65","2025-01-11"
+"11","201","Ilocos Region","Truck","320","30","950","600","110","2025-02-01"
+"12","202","Ilocos Region","Truck","310","28","940","580","108","2025-02-02"
+"13","203","Ilocos Region","Truck","290","26","920","560","105","2025-02-03"
+"14","204","Ilocos Region","Van","150","20","400","480","80","2025-02-04"
+"15","205","Ilocos Region","Van","140","18","390","460","75","2025-02-05"
+"16","206","Ilocos Region","Motorcycle","80","10","160","300","45","2025-02-06"
+"17","207","Ilocos Region","Truck","305","29","930","570","107","2025-02-07"
+"18","208","Ilocos Region","Truck","295","27","910","550","104","2025-02-08"
+"19","209","Ilocos Region","Van","130","16","370","440","70","2025-02-09"
+"20","210","Ilocos Region","Van","160","19","410","500","85","2025-02-10"
+"21","301","Central Luzon","Truck","350","32","980","650","115","2025-03-01"
+"22","302","Central Luzon","Truck","360","35","1000","670","120","2025-03-02"
+"23","303","Central Luzon","Truck","340","31","970","630","112","2025-03-03"
+"24","304","Central Luzon","Van","200","22","420","550","90","2025-03-04"
+"25","305","Central Luzon","Van","210","24","440","570","95","2025-03-05"
+"26","306","Central Luzon","Motorcycle","100","12","180","320","55","2025-03-06"
+"27","307","Central Luzon","Van","220","25","460","580","100","2025-03-07"
+"28","308","Central Luzon","Truck","330","30","950","610","110","2025-03-08"
+"29","309","Central Luzon","Van","230","26","470","600","105","2025-03-09"
+"30","310","Central Luzon","Truck","310","28","930","590","108","2025-03-10"
+"31","401","CALABARZON","Truck","280","25","870","540","100","2025-04-01"
+"32","402","CALABARZON","Truck","290","27","890","560","103","2025-04-02"
+"33","403","CALABARZON","Van","200","20","420","500","85","2025-04-03"
+"34","404","CALABARZON","Van","180","18","400","480","80","2025-04-04"
+"35","405","CALABARZON","Motorcycle","75","8","140","250","40","2025-04-05"
+"36","406","CALABARZON","Truck","310","28","920","580","105","2025-04-06"
+"37","407","CALABARZON","Truck","270","24","860","520","98","2025-04-07"
+"38","408","CALABARZON","Van","190","19","410","490","83","2025-04-08"
+"39","409","CALABARZON","Van","210","21","430","510","87","2025-04-09"
+"40","410","CALABARZON","Truck","300","26","900","560","102","2025-04-10"
+"41","501","Bicol Region","Truck","400","35","1050","700","125","2025-05-01"
+"42","502","Bicol Region","Truck","380","33","1020","680","120","2025-05-02"
+"43","503","Bicol Region","Van","210","22","440","540","90","2025-05-03"
+"44","504","Bicol Region","Van","220","23","450","550","95","2025-05-04"
+"45","505","Bicol Region","Motorcycle","90","11","170","320","50","2025-05-05"
+"46","506","Bicol Region","Truck","390","34","1030","690","122","2025-05-06"
+"47","507","Bicol Region","Truck","370","32","1010","670","118","2025-05-07"
+"48","508","Bicol Region","Van","230","24","460","560","97","2025-05-08"
+"49","509","Bicol Region","Truck","400","36","1060","710","126","2025-05-09"
+"50","510","Bicol Region","Van","200","20","430","520","85","2025-05-10"
+"51","601","Western Visayas","Truck","310","29","940","570","106","2025-06-01"
+"52","602","Western Visayas","Truck","300","27","930","560","104","2025-06-02"
+"53","603","Western Visayas","Van","190","19","410","480","82","2025-06-03"
+"54","604","Western Visayas","Van","170","17","390","460","78","2025-06-04"
+"55","605","Western Visayas","Motorcycle","80","9","150","280","45","2025-06-05"
+"56","606","Western Visayas","Truck","320","30","950","580","108","2025-06-06"
+"57","607","Western Visayas","Truck","330","31","960","590","110","2025-06-07"
+"58","608","Western Visayas","Van","180","18","400","470","80","2025-06-08"
+"59","609","Western Visayas","Van","200","20","420","490","85","2025-06-09"
+"60","610","Western Visayas","Truck","340","33","980","600","113","2025-06-10"
+"61","701","Central Visayas","Truck","370","34","1000","640","118","2025-07-01"
+"62","702","Central Visayas","Truck","380","35","1020","660","120","2025-07-02"
+"63","703","Central Visayas","Van","220","22","440","520","90","2025-07-03"
+"64","704","Central Visayas","Van","210","21","430","510","88","2025-07-04"
+"65","705","Central Visayas","Motorcycle","100","10","180","300","55","2025-07-05"
+"66","706","Central Visayas","Truck","360","33","990","620","115","2025-07-06"
+"67","707","Central Visayas","Truck","350","32","970","610","112","2025-07-07"
+"68","708","Central Visayas","Van","230","23","450","530","93","2025-07-08"
+"69","709","Central Visayas","Truck","340","31","960","600","110","2025-07-09"
+"70","710","Central Visayas","Van","240","24","460","540","95","2025-07-10"
+"71","801","Eastern Visayas","Truck","250","22","870","550","100","2025-08-01"
+"72","802","Eastern Visayas","Truck","260","24","890","560","102","2025-08-02"
+"73","803","Eastern Visayas","Van","180","18","400","480","85","2025-08-03"
+"74","804","Eastern Visayas","Van","190","19","410","490","88","2025-08-04"
+"75","805","Eastern Visayas","Motorcycle","75","9","150","260","50","2025-08-05"
+"76","806","Eastern Visayas","Truck","240","21","860","540","98","2025-08-06"
+"77","807","Eastern Visayas","Truck","270","25","900","570","105","2025-08-07"
+"78","808","Eastern Visayas","Van","200","20","420","500","90","2025-08-08"
+"79","809","Eastern Visayas","Truck","280","26","910","580","108","2025-08-09"
+"80","810","Eastern Visayas","Van","210","21","430","510","92","2025-08-10"
+"81","901","Davao Region","Truck","380","35","1020","650","120","2025-09-01"
+"82","902","Davao Region","Truck","370","33","1000","630","118","2025-09-02"
+"83","903","Davao Region","Van","220","22","440","520","90","2025-09-03"
+"84","904","Davao Region","Van","210","21","430","510","88","2025-09-04"
+"85","905","Davao Region","Motorcycle","90","10","160","280","52","2025-09-05"
+"86","906","Davao Region","Truck","360","32","980","610","115","2025-09-06"
+"87","907","Davao Region","Truck","340","31","950","590","110","2025-09-07"
+"88","908","Davao Region","Van","230","23","450","530","92","2025-09-08"
+"89","909","Davao Region","Truck","350","32","970","620","113","2025-09-09"
+"90","910","Davao Region","Van","240","24","460","540","95","2025-09-10"
+"91","1001","SOCCSKSARGEN","Truck","260","25","890","560","102","2025-10-01"
+"92","1002","SOCCSKSARGEN","Truck","270","26","900","570","104","2025-10-02"
+"93","1003","SOCCSKSARGEN","Van","190","20","410","480","85","2025-10-03"
+"94","1004","SOCCSKSARGEN","Van","200","21","420","490","88","2025-10-04"
+"95","1005","SOCCSKSARGEN","Motorcycle","80","9","150","270","48","2025-10-05"
+"96","1006","SOCCSKSARGEN","Truck","280","27","920","580","108","2025-10-06"
+"97","1007","SOCCSKSARGEN","Truck","290","28","930","590","110","2025-10-07"
+"98","1008","SOCCSKSARGEN","Van","210","22","430","510","90","2025-10-08"
+"99","1009","SOCCSKSARGEN","Truck","300","29","940","600","112","2025-10-09"
+"100","1010","SOCCSKSARGEN","Van","220","23","440","520","92","2025-10-10"`,
+  hospital_records: `"record_id","patient_id","patient_age","doctor_name","department","treatment_cost","medicine_cost","length_of_stay"
+"1","101","45","Dr. Santos","Cardiology","18000","3500","6"
+"2","102","61","Dr. Dela Cruz","Cardiology","17000","4000","5"
+"3","103","72","Dr. Villanueva","Geriatrics","9500","2200","7"
+"4","104","68","Dr. Villanueva","Geriatrics","8700","2100","6"
+"5","105","50","Dr. Tan","Orthopedics","15500","3000","5"
+"6","106","37","Dr. Lim","Pediatrics","8500","1800","3"
+"7","107","25","Dr. Ramos","Dermatology","6000","1200","2"
+"8","108","40","Dr. Santos","Cardiology","20000","4500","8"
+"9","109","35","Dr. Chua","Neurology","12000","2500","4"
+"10","110","29","Dr. Lim","Pediatrics","7800","2000","2"
+"11","111","64","Dr. Garcia","Oncology","21000","5000","10"
+"12","112","58","Dr. Garcia","Oncology","19500","4700","9"
+"13","113","42","Dr. Tan","Orthopedics","16200","3100","6"
+"14","114","56","Dr. Dela Cruz","Cardiology","18500","3400","7"
+"15","115","73","Dr. Villanueva","Geriatrics","9100","2300","8"
+"16","116","22","Dr. Ramos","Dermatology","7200","1000","1"
+"17","117","49","Dr. Lopez","Surgery","23000","5200","9"
+"18","118","66","Dr. Garcia","Oncology","22000","4800","11"
+"19","119","30","Dr. Chua","Neurology","11800","2600","4"
+"20","120","27","Dr. Lim","Pediatrics","8000","1500","3"
+"21","121","71","Dr. Villanueva","Geriatrics","9600","2000","9"
+"22","122","38","Dr. Santos","Cardiology","19000","3700","6"
+"23","123","52","Dr. Lopez","Surgery","24000","5300","10"
+"24","124","65","Dr. Garcia","Oncology","20500","4600","10"
+"25","125","43","Dr. Tan","Orthopedics","14000","2900","5"
+"26","126","34","Dr. Ramos","Dermatology","6700","1100","3"
+"27","127","57","Dr. Dela Cruz","Cardiology","16000","3200","6"
+"28","128","70","Dr. Villanueva","Geriatrics","8900","2100","7"
+"29","129","59","Dr. Lopez","Surgery","25000","5100","12"
+"30","130","21","Dr. Lim","Pediatrics","7300","1400","2"
+"31","131","60","Dr. Garcia","Oncology","19800","4300","8"
+"32","132","48","Dr. Tan","Orthopedics","14500","2600","5"
+"33","133","53","Dr. Santos","Cardiology","20000","4000","9"
+"34","134","47","Dr. Lopez","Surgery","25500","5200","11"
+"35","135","39","Dr. Chua","Neurology","11000","2300","5"
+"36","136","32","Dr. Lim","Pediatrics","8500","1600","3"
+"37","137","74","Dr. Villanueva","Geriatrics","8800","2000","10"
+"38","138","55","Dr. Tan","Orthopedics","15000","2700","5"
+"39","139","65","Dr. Garcia","Oncology","21500","5000","9"
+"40","140","58","Dr. Dela Cruz","Cardiology","17500","3800","6"
+"41","141","45","Dr. Santos","Cardiology","16000","3000","5"
+"42","142","67","Dr. Villanueva","Geriatrics","9500","2100","8"
+"43","143","50","Dr. Tan","Orthopedics","15800","2900","6"
+"44","144","41","Dr. Ramos","Dermatology","7200","1300","3"
+"45","145","29","Dr. Lim","Pediatrics","8100","1800","2"
+"46","146","36","Dr. Chua","Neurology","12500","2700","4"
+"47","147","71","Dr. Villanueva","Geriatrics","9100","1900","8"
+"48","148","44","Dr. Lopez","Surgery","22000","5000","10"
+"49","149","61","Dr. Garcia","Oncology","20800","4900","9"
+"50","150","53","Dr. Tan","Orthopedics","14000","2800","5"
+"51","151","64","Dr. Dela Cruz","Cardiology","17200","3700","6"
+"52","152","35","Dr. Ramos","Dermatology","6800","1200","3"
+"53","153","48","Dr. Chua","Neurology","11500","2500","5"
+"54","154","39","Dr. Lim","Pediatrics","7700","1600","3"
+"55","155","75","Dr. Villanueva","Geriatrics","8800","2100","9"
+"56","156","58","Dr. Garcia","Oncology","19000","4600","10"
+"57","157","43","Dr. Lopez","Surgery","23000","5500","11"
+"58","158","68","Dr. Villanueva","Geriatrics","9100","2200","7"
+"59","159","27","Dr. Ramos","Dermatology","7000","1300","2"
+"60","160","54","Dr. Tan","Orthopedics","15500","3000","5"
+"61","161","59","Dr. Dela Cruz","Cardiology","18000","3500","6"
+"62","162","33","Dr. Lim","Pediatrics","7900","1700","3"
+"63","163","62","Dr. Garcia","Oncology","20000","4700","8"
+"64","164","71","Dr. Villanueva","Geriatrics","8700","2100","10"
+"65","165","47","Dr. Lopez","Surgery","26000","5000","12"
+"66","166","49","Dr. Tan","Orthopedics","14500","2700","5"
+"67","167","38","Dr. Chua","Neurology","11200","2300","4"
+"68","168","29","Dr. Ramos","Dermatology","6900","1200","2"
+"69","169","57","Dr. Dela Cruz","Cardiology","16500","3100","6"
+"70","170","63","Dr. Garcia","Oncology","20800","4500","10"
+"71","171","46","Dr. Lopez","Surgery","24000","5200","9"
+"72","172","70","Dr. Villanueva","Geriatrics","9000","2000","8"
+"73","173","32","Dr. Lim","Pediatrics","7500","1700","3"
+"74","174","28","Dr. Ramos","Dermatology","6800","1100","2"
+"75","175","44","Dr. Tan","Orthopedics","15000","3000","5"
+"76","176","53","Dr. Santos","Cardiology","19000","3500","7"
+"77","177","66","Dr. Garcia","Oncology","21500","4900","9"
+"78","178","42","Dr. Lopez","Surgery","22500","5000","11"
+"79","179","61","Dr. Villanueva","Geriatrics","9500","2300","8"
+"80","180","59","Dr. Dela Cruz","Cardiology","18000","3600","6"
+"81","181","26","Dr. Lim","Pediatrics","8000","1600","2"
+"82","182","40","Dr. Ramos","Dermatology","7300","1300","3"
+"83","183","74","Dr. Villanueva","Geriatrics","9000","2000","9"
+"84","184","46","Dr. Tan","Orthopedics","16000","2900","5"
+"85","185","60","Dr. Garcia","Oncology","19800","4800","8"
+"86","186","65","Dr. Dela Cruz","Cardiology","17000","3300","6"
+"87","187","41","Dr. Santos","Cardiology","18500","3900","7"
+"88","188","52","Dr. Lopez","Surgery","23500","5100","10"
+"89","189","31","Dr. Lim","Pediatrics","8300","1700","3"
+"90","190","36","Dr. Chua","Neurology","11800","2400","4"
+"91","191","68","Dr. Villanueva","Geriatrics","8800","2100","7"
+"92","192","44","Dr. Tan","Orthopedics","15200","2800","5"
+"93","193","62","Dr. Garcia","Oncology","20500","4700","9"
+"94","194","70","Dr. Villanueva","Geriatrics","9200","2000","8"
+"95","195","39","Dr. Ramos","Dermatology","7100","1200","3"
+"96","196","33","Dr. Lim","Pediatrics","7700","1500","3"
+"97","197","73","Dr. Villanueva","Geriatrics","9100","2100","9"
+"98","198","47","Dr. Lopez","Surgery","25000","5400","12"
+"99","199","54","Dr. Tan","Orthopedics","14000","2600","5"
+"100","200","64","Dr. Garcia","Oncology","21000","4800","10"
+"101","201","57","Dr. Dela Cruz","Cardiology","18500","3600","6"
+"102","202","25","Dr. Ramos","Dermatology","6700","1100","2"
+"103","203","35","Dr. Chua","Neurology","12000","2600","5"
+"104","204","60","Dr. Garcia","Oncology","20000","4600","9"
+"105","205","71","Dr. Villanueva","Geriatrics","8900","2100","9"
+"106","206","49","Dr. Tan","Orthopedics","15000","3000","5"
+"107","207","28","Dr. Lim","Pediatrics","7900","1700","3"
+"108","208","43","Dr. Lopez","Surgery","24500","5200","11"
+"109","209","38","Dr. Ramos","Dermatology","6800","1200","3"
+"110","210","67","Dr. Garcia","Oncology","21500","4900","10"
+"111","211","72","Dr. Villanueva","Geriatrics","9000","2000","10"
+"112","212","45","Dr. Tan","Orthopedics","14200","2700","5"
+"113","213","52","Dr. Santos","Cardiology","19000","3800","6"
+"114","214","65","Dr. Garcia","Oncology","21000","4800","10"
+"115","215","59","Dr. Dela Cruz","Cardiology","18000","3500","6"
+"116","216","40","Dr. Chua","Neurology","11800","2500","4"
+"117","217","62","Dr. Villanueva","Geriatrics","8700","2200","9"
+"118","218","44","Dr. Tan","Orthopedics","15000","2800","5"`,
+  customers: `customer_id,customer_name,city,signup_date
+11,Maria Santos,Manila,1/12/2023
+12,Jose Dela Cruz,Cebu City,3/5/2023
+13,Ana Mendoza,Davao City,11/22/2022
+14,Luis Ramirez,Quezon City,4/17/2023
+15,Carmen Reyes,Baguio,2/9/2023
+16,Roberto Tan,Iloilo City,9/14/2022
+17,Grace Villanueva,Pasig,6/30/2023
+18,Eduardo Lim,Cavite,7/15/2023
+19,Jenny Cruz,Makati,12/2/2022
+20,Paulo Navarro,Taguig,8/10/2023
+1,Maria Santos,Manila,1/12/2023
+2,Jose Dela Cruz,Cebu City,3/5/2023
+3,Ana Mendoza,Davao City,11/22/2022
+4,Luis Ramirez,Quezon City,4/17/2023
+5,Carmen Reyes,Baguio,2/9/2023
+6,Roberto Tan,Iloilo City,9/14/2022
+7,Grace Villanueva,Pasig,6/30/2023
+8,Eduardo Lim,Cavite,7/15/2023
+9,Jenny Cruz,Makati,12/2/2022
+10,Paulo Navarro,Taguig,8/10/2023`,
+  orders: `order_id,customer_id,product_id,quantity,order_date
+31,11,14,2,1/15/2024
+32,11,18,1,2/3/2024
+33,11,17,3,3/21/2024
+34,12,15,1,1/27/2024
+35,12,12,2,2/10/2024
+36,13,19,2,3/5/2024
+37,13,20,1,4/11/2024
+38,14,13,1,4/18/2024
+39,14,14,1,5/2/2024
+40,15,16,1,6/1/2024
+41,15,20,3,6/12/2024
+42,16,18,2,7/3/2024
+43,17,17,1,8/7/2024
+44,17,13,2,8/22/2024
+45,18,12,1,9/1/2024
+46,18,15,2,9/11/2024
+47,19,14,1,9/21/2024
+48,19,16,3,10/5/2024
+49,20,18,1,10/10/2024
+50,20,20,2,10/15/2024
+1,1,1,2,7/10/2023
+2,1,2,1,8/2/2023
+3,1,9,3,8/15/2023
+4,2,3,1,3/11/2023
+5,2,5,4,3/25/2023
+6,2,7,1,6/1/2023
+7,3,6,2,2/20/2023
+8,3,1,1,3/1/2023
+9,3,8,1,7/12/2023
+10,4,4,1,4/18/2023
+11,4,9,2,5/9/2023
+12,4,10,5,5/19/2023
+13,5,2,1,1/25/2023
+14,5,5,2,3/7/2023
+15,5,6,1,6/22/2023
+16,6,7,3,1/15/2023
+17,6,8,1,2/14/2023
+18,7,9,2,7/4/2023
+19,7,3,1,8/10/2023
+20,7,1,1,9/12/2023
+21,8,10,6,6/5/2023
+22,8,5,3,6/18/2023
+23,9,4,1,5/23/2023
+24,9,2,2,6/30/2023
+25,9,9,1,7/3/2023
+26,10,8,1,8/20/2023
+27,10,1,2,8/25/2023
+28,10,3,1,9/1/2023
+29,10,6,2,9/10/2023
+30,10,9,1,9/11/2023`,
+  products: `product_id,product_name,category,price
+11,Notebook Pack,Stationery,400
+12,Wireless Mouse,Electronics,750
+13,Bluetooth Speaker,Electronics,1800
+14,Office Chair,Furniture,4200
+15,Standing Desk,Furniture,8500
+16,Ceramic Mug,Kitchenware,250
+17,Cookware Set,Kitchenware,3200
+18,Running Shoes,Apparel,3100
+19,Denim Jacket,Apparel,2700
+20,LED Desk Lamp,Electronics,1200
+1,Wireless Mouse,Electronics,750
+2,Bluetooth Speaker,Electronics,1800
+3,Office Chair,Furniture,4200
+4,Standing Desk,Furniture,8500
+5,Ceramic Mug,Kitchenware,250
+6,Cookware Set,Kitchenware,3200
+7,Running Shoes,Apparel,3100
+8,Denim Jacket,Apparel,2700
+9,LED Desk Lamp,Electronics,1200
+10,Notebook Pack,Stationery,400`
+};
+
 const QUESTION_BANKS = {
   m1a1: [
     {topic:"Format Cells", q:'To display 0.95 as "95%" in a cell without changing the underlying value, which formatting should you apply?', options:["Percent format","Currency format","Text format","Scientific format"], correct:0},
@@ -628,6 +972,279 @@ const QUESTION_BANKS = {
     {topic:"Web Scraping", q:"What best describes web scraping in a data-analysis context?", options:["Manually retyping numbers from a printed report", "Automatically importing information from a website into a spreadsheet or file", "A way to lock a worksheet", "A type of number formatting"], correct:1},
     {topic:"Web Scraping", q:"After scraping raw data from a website, what should typically happen before it's used to build a dashboard?", options:["Publish it immediately with no changes", "Clean and organize the data first", "Delete the source column immediately", "Skip straight to formatting fonts"], correct:1},
     {topic:"Dashboards", q:'Which best describes what a "dashboard" pulls together in Excel?', options:["A single blank worksheet", "Multiple summaries, charts, and KPIs combined into one view for an at-a-glance picture", "Just one raw, unformatted data table", "A single password-protected cell"], correct:1},
+  ],
+  sqlm1a1: [
+    {topic:"Create Table", q:"Which SQL statement is used to create a new table?", options:["MAKE TABLE", "CREATE TABLE", "NEW TABLE", "ADD TABLE"], correct:1},
+    {topic:"Data Types", q:"The student number should be a whole number that uniquely identifies each student. Which data type fits best?", options:["INTEGER", "VARCHAR", "DATE", "BOOLEAN"], correct:0},
+    {topic:"Constraints", q:"Which constraint makes a column the unique identifier for each row in the table?", options:["NOT NULL", "PRIMARY KEY", "FOREIGN KEY", "UNIQUE INDEX"], correct:1},
+    {topic:"Constraints", q:"The student's first name must always have a value and cannot be left empty. Which constraint enforces this?", options:["PRIMARY KEY", "NOT NULL", "DEFAULT", "CHECK"], correct:1},
+    {topic:"Data Types", q:"Which data type is best suited for storing a student's first name (text)?", options:["INTEGER", "VARCHAR", "FLOAT", "DATE"], correct:1},
+    {topic:"Data Types", q:"For the student's Age column, which data type is most appropriate?", options:["INTEGER", "VARCHAR", "TEXT", "DATE"], correct:0},
+    {topic:"Data Types", q:"The Address column stores text of varying length. Which data type suits it?", options:["INTEGER", "VARCHAR", "INT", "BOOLEAN"], correct:1},
+    {topic:"Data Types", q:"Can a Contact Number be stored as VARCHAR rather than INTEGER?", options:["Yes — phone numbers can contain leading zeros, spaces, or symbols, so VARCHAR is often safer", "No, numbers must always be INTEGER", "No, VARCHAR cannot store digits", "Only if the table has no primary key"], correct:0},
+    {topic:"Create Table", q:"In CREATE TABLE student (...), what does the word 'student' represent?", options:["A column name", "The name of the table being created", "A data type", "A constraint"], correct:1},
+    {topic:"Constraints", q:"How many primary keys should a single simple table like 'student' typically have?", options:["One", "One per column", "At least three", "None"], correct:0},
+    {topic:"Create Table", q:"Which of these correctly defines an integer primary key column named student_number?", options:["student_number PRIMARY KEY INTEGER", "student_number INTEGER PRIMARY KEY", "student_number KEY INT PRIMARY", "PRIMARY student_number INTEGER"], correct:1},
+    {topic:"Constraints", q:"True or False: A column defined as NOT NULL can be left empty when inserting a new row.", options:["True", "False"], correct:1},
+  ],
+  sqlm1a2: [
+    {topic:"Insert", q:"Which statement adds a new record (row) into a table?", options:["ADD INTO", "INSERT INTO", "PUT INTO", "CREATE ROW"], correct:1},
+    {topic:"Select", q:"Which query selects all columns and all rows from the sales table?", options:["SELECT all FROM sales;", "SELECT * FROM sales;", "SELECT sales;", "GET * FROM sales;"], correct:1},
+    {topic:"Select", q:"Which query selects only the quantity and name columns from sales?", options:["SELECT quantity, name FROM sales;", "SELECT quantity AND name FROM sales;", "SELECT (quantity, name);", "GET quantity, name FROM sales;"], correct:0},
+    {topic:"Select", q:"Which query selects only the price column from every product in sales?", options:["SELECT sales.price;", "SELECT price FROM sales;", "SELECT ONLY price FROM sales;", "SELECT price;"], correct:1},
+    {topic:"Select", q:"In SELECT * FROM sales;, what does the * mean?", options:["Multiply the values", "All columns", "The first column only", "Sort the results"], correct:1},
+    {topic:"Data Types", q:"The sales table stores a product's id, name, quantity, price, and date sold. Which data type best fits price?", options:["INTEGER only", "A decimal/numeric type such as DECIMAL or REAL", "VARCHAR", "BOOLEAN"], correct:1},
+    {topic:"Data Types", q:"Which data type best fits the 'date sold' column?", options:["INTEGER", "VARCHAR only", "DATE", "BOOLEAN"], correct:2},
+    {topic:"Select", q:"Which keyword clause specifies which table you are selecting data from?", options:["SELECT", "FROM", "WHERE", "INTO"], correct:1},
+    {topic:"Insert", q:"When inserting a row, the values you provide should match the table's columns in what way?", options:["In the correct order and matching data types", "In reverse order", "Only text values are allowed", "Order never matters"], correct:0},
+    {topic:"Select", q:"Which statement retrieves data from a table (rather than adding or changing it)?", options:["INSERT", "SELECT", "UPDATE", "CREATE"], correct:1},
+    {topic:"Select", q:"After inserting 3 records into sales, how many rows would SELECT * FROM sales; return (assuming none were deleted)?", options:["1", "0", "3", "All columns but no rows"], correct:2},
+    {topic:"Select", q:"True or False: SELECT name, quantity FROM sales; and SELECT quantity, name FROM sales; return the same columns, just in a different order.", options:["True", "False"], correct:0},
+  ],
+  sqlm1hw: [
+    {topic:"Keys", q:"The Homework asks for two related tables. What is the SQL term for a column that links one table to another?", options:["Primary Key", "Foreign Key", "Index Key", "Link Key"], correct:1},
+    {topic:"Keys", q:"In the Customers table, CustomerID is marked (PK). What does PK stand for?", options:["Primary Key", "Public Key", "Partition Key", "Primary Column"], correct:0},
+    {topic:"Keys", q:"In the Orders table, CustomerID is marked (FK). What does FK stand for?", options:["Final Key", "Formatted Key", "Foreign Key", "Filter Key"], correct:2},
+    {topic:"Keys", q:"Why does the Orders table include CustomerID as a foreign key?", options:["To connect each order to the customer who placed it", "To store the customer's password", "To replace the OrderID", "Foreign keys are decorative only"], correct:0},
+    {topic:"Keys", q:"Which column uniquely identifies each row in the Orders table?", options:["OrderID", "Product", "Quantity", "Date"], correct:0},
+    {topic:"Data Types", q:"Which data type best fits the Customers Email column?", options:["INTEGER", "VARCHAR", "DATE", "BOOLEAN"], correct:1},
+    {topic:"Create Table", q:"Which statement would you use to create the Customers table?", options:["MAKE TABLE Customers", "CREATE TABLE Customers", "NEW TABLE Customers", "TABLE Customers CREATE"], correct:1},
+    {topic:"Select", q:"Which query selects all orders from the Orders table?", options:["SELECT orders;", "SELECT * FROM Orders;", "GET ALL Orders;", "SELECT ALL Orders;"], correct:1},
+    {topic:"Select", q:"Which query selects all customers from the Customers table?", options:["SELECT * FROM Customers;", "SELECT Customers;", "SELECT * Customers;", "FROM Customers SELECT *;"], correct:0},
+    {topic:"Keys", q:"A primary key column should contain values that are:", options:["Unique for every row", "Always the same", "Allowed to be empty", "Text only"], correct:0},
+    {topic:"Data Types", q:"In the Orders table, the Quantity column would best use which data type?", options:["INTEGER", "VARCHAR", "DATE", "BOOLEAN"], correct:0},
+    {topic:"Keys", q:"What does it mean for two tables to be 'related'?", options:["A column in one table refers to a key in the other, linking their data", "They have the same name", "They contain identical data", "They must be in different databases"], correct:0},
+    {topic:"Insert", q:"Which statement adds sample data into the Customers table?", options:["ADD INTO Customers", "INSERT INTO Customers", "CREATE Customers row", "PUT Customers"], correct:1},
+    {topic:"Keys", q:"True or False: A foreign key in one table typically points to the primary key of another table.", options:["True", "False"], correct:0},
+  ],
+  sqlm2a1: [
+    {topic:"Filtering", q:"Which clause is used to filter rows based on a condition?", options:["ORDER BY", "WHERE", "GROUP BY", "HAVING"], correct:1},
+    {topic:"Filtering", q:"Using the deliveries_data table (download available below), how many deliveries have a delivery fee less than 500 pesos?", options:["18", "22", "26", "31"], correct:2},
+    {topic:"Filtering", q:"Which operator checks for 'less than' in a WHERE clause?", options:["=", "<", ">", "<>"], correct:1},
+    {topic:"Filtering", q:"How many deliveries in the dataset were made in the NCR region?", options:["8", "10", "14", "17"], correct:1},
+    {topic:"Filtering", q:"Which WHERE clause correctly filters for deliveries in the NCR region?", options:["WHERE region = NCR", "WHERE region = 'NCR'", "WHERE region == \"NCR\"", "WHERE region IS NCR"], correct:1},
+    {topic:"Filtering", q:"How many deliveries in the dataset were made by a vehicle type OTHER than Truck?", options:["40", "48", "52", "60"], correct:2},
+    {topic:"Filtering", q:"Which operator excludes rows equal to a specific value?", options:["=", "!= (or <>)", "LIKE", "IN"], correct:1},
+    {topic:"Filtering", q:"Which WHERE clause correctly excludes all Truck deliveries?", options:["WHERE vehicle_type != 'Truck'", "WHERE vehicle_type = 'Truck'", "WHERE NOT vehicle_type", "WHERE vehicle_type <> Truck"], correct:0},
+    {topic:"Filtering", q:"True or False: text values used in a WHERE clause (like 'NCR') need to be in quotes, while plain numbers do not.", options:["True", "False"], correct:0},
+    {topic:"Filtering", q:"Of the three vehicle types in the dataset, which one has the MOST deliveries overall?", options:["Motorcycle", "Truck", "Van", "They are all equal"], correct:1},
+    {topic:"Filtering", q:"Which vehicle type has the FEWEST deliveries overall?", options:["Motorcycle", "Truck", "Van", "They are all equal"], correct:0},
+    {topic:"Filtering", q:"Which clause would you add to sort the filtered results by distance, highest first?", options:["ORDER BY distance_km DESC", "SORT distance_km DESC", "GROUP BY distance_km DESC", "FILTER distance_km DESC"], correct:0},
+  ],
+  sqlm2a2: [
+    {topic:"Group By", q:"Which clause groups rows that share the same value in a column, so aggregate functions can be applied per group?", options:["WHERE", "ORDER BY", "GROUP BY", "HAVING"], correct:2},
+    {topic:"Group By", q:"Using GROUP BY vehicle_type, how many deliveries did Motorcycles make in total?", options:["8", "12", "16", "20"], correct:1},
+    {topic:"Group By", q:"Using GROUP BY vehicle_type, how many deliveries did Trucks make in total?", options:["40", "44", "48", "52"], correct:2},
+    {topic:"Having", q:"Which clause filters the RESULTS of a GROUP BY (e.g. only groups with a total above some value), as opposed to filtering individual rows?", options:["WHERE", "HAVING", "SELECT", "FROM"], correct:1},
+    {topic:"Having", q:"Using HAVING SUM(distance_km) > 500, which vehicle types qualify?", options:["Only Truck", "Only Van", "Truck and Van", "All three vehicle types"], correct:2},
+    {topic:"Having", q:"Which vehicle type does NOT qualify for HAVING SUM(distance_km) > 500?", options:["Motorcycle", "Truck", "Van", "None — all three qualify"], correct:0},
+    {topic:"Group By", q:"For each vehicle type, ROI is calculated as (SUM(delivery_fee) - SUM(fuel_cost)) / SUM(fuel_cost). Which vehicle type has the HIGHEST ROI?", options:["Motorcycle", "Truck", "Van", "They are all equal"], correct:0},
+    {topic:"Group By", q:"Which vehicle type actually shows a NEGATIVE ROI — meaning its total fuel cost was higher than its total delivery fees?", options:["Motorcycle", "Truck", "Van", "None have a negative ROI"], correct:1},
+    {topic:"Having", q:"Why can't you write WHERE SUM(distance_km) > 500 instead of using HAVING?", options:["WHERE cannot be used with aggregate functions like SUM() — HAVING is required for that", "WHERE and HAVING are exactly interchangeable", "WHERE only works with text columns", "SUM() cannot be used in SQL at all"], correct:0},
+    {topic:"Group By", q:"In a query like SELECT vehicle_type, COUNT(*) FROM deliveries_data GROUP BY vehicle_type, what does COUNT(*) return for each group?", options:["The sum of all numeric columns", "The number of rows in that group", "The name of the vehicle type", "The average distance for that group"], correct:1},
+    {topic:"Group By", q:"If you GROUP BY vehicle_type but forget to include an aggregate function like COUNT() or SUM(), what problem occurs?", options:["The query groups rows but doesn't summarize anything meaningful for you to read", "The query automatically adds SUM() for you", "The query always fails to run", "GROUP BY requires no aggregate function ever"], correct:0},
+    {topic:"Having", q:"Which of these correctly finds vehicle types with more than 40 total deliveries?", options:["SELECT vehicle_type, COUNT(*) FROM deliveries_data GROUP BY vehicle_type HAVING COUNT(*) > 40", "SELECT vehicle_type FROM deliveries_data WHERE COUNT(*) > 40", "SELECT vehicle_type, COUNT(*) FROM deliveries_data HAVING COUNT(*) > 40", "SELECT vehicle_type GROUP BY COUNT(*) > 40"], correct:0},
+  ],
+  sqlm2a3: [
+    {topic:"Update", q:"Which statement is used to modify existing values in a table?", options:["CHANGE", "MODIFY", "UPDATE", "ALTER"], correct:2},
+    {topic:"Update", q:"Product ID 1 (Wireless Mouse) currently costs 750. What would its price be after a 10% increase?", options:["760", "800", "825", "900"], correct:2},
+    {topic:"Update", q:"Product ID 4 (Standing Desk) currently costs 8500. What would its price be after a 10% increase?", options:["8550", "9000", "9350", "9500"], correct:2},
+    {topic:"Update", q:"Which clause in an UPDATE statement ensures only specific rows are changed, rather than the whole table?", options:["SET", "WHERE", "FROM", "VALUES"], correct:1},
+    {topic:"Update", q:"Which statement correctly increases the price of product IDs 1 and 4 by 10%?", options:["UPDATE products SET price = price * 1.1 WHERE product_id IN (1, 4)", "UPDATE products SET price = price + 10 WHERE product_id IN (1, 4)", "UPDATE products WHERE product_id IN (1, 4) SET price * 1.1", "SET price = price * 1.1 FROM products WHERE product_id IN (1, 4)"], correct:0},
+    {topic:"Update", q:"What is the danger of running an UPDATE statement without a WHERE clause?", options:["Nothing — UPDATE always requires a WHERE clause", "It updates every single row in the table, not just the intended ones", "It only previews the change without saving it", "It automatically creates a backup first"], correct:1},
+    {topic:"Delete", q:"Which statement removes rows from a table entirely?", options:["REMOVE", "DELETE", "DROP", "CLEAR"], correct:1},
+    {topic:"Delete", q:"This dataset's product categories are Electronics, Stationery, Kitchenware, Furniture, and Apparel. Which statement would correctly delete all Kitchenware products?", options:["DELETE FROM products WHERE category = 'Kitchenware'", "DELETE products WHERE category = 'Kitchenware'", "REMOVE FROM products WHERE category = 'Kitchenware'", "DELETE FROM products SET category = 'Kitchenware'"], correct:0},
+    {topic:"Delete", q:"How many products belong to the Kitchenware category in this dataset (and would be removed by that DELETE)?", options:["2", "4", "6", "8"], correct:1},
+    {topic:"Delete", q:"What is the key difference between DELETE FROM products; and DELETE FROM products WHERE category='X';?", options:["There is no difference", "The first deletes every row in the table; the second only deletes matching rows", "The first is faster but does the same thing", "DELETE always requires a WHERE clause to run at all"], correct:1},
+    {topic:"Alter Table", q:"Which statement is used to change a table's structure — for example, adding a new column?", options:["UPDATE TABLE", "MODIFY TABLE", "ALTER TABLE", "CHANGE TABLE"], correct:2},
+    {topic:"Alter Table", q:"Which statement correctly adds a new column called date_added to the products table?", options:["ALTER TABLE products ADD COLUMN date_added DATE", "UPDATE products ADD date_added DATE", "ALTER products SET date_added DATE", "ADD COLUMN date_added TO products"], correct:0},
+  ],
+  sqlm2hw: [
+    {topic:"Aggregation", q:"Which function calculates the average value of a numeric column?", options:["SUM()", "AVG()", "COUNT()", "TOTAL()"], correct:1},
+    {topic:"Aggregation", q:"Which department has the HIGHEST average combined cost (treatment + medicine) per patient?", options:["Cardiology", "Oncology", "Surgery", "Orthopedics"], correct:2},
+    {topic:"Aggregation", q:"Which department's average combined treatment+medicine cost is closest to ₱21,600?", options:["Surgery", "Cardiology", "Neurology", "Pediatrics"], correct:1},
+    {topic:"Aggregation", q:"Is there any department where the average combined cost (treatment + medicine) is below ₱15,000?", options:["No, every department averages above ₱15,000", "Yes — Neurology, Geriatrics, Pediatrics, and Dermatology all average below ₱15,000", "Yes, but only one department", "Cost data does not support this comparison"], correct:1},
+    {topic:"Aggregation", q:"Which department has patients staying the LONGEST on average?", options:["Cardiology", "Oncology", "Surgery", "Geriatrics"], correct:2},
+    {topic:"Aggregation", q:"Which department has the SHORTEST average length of stay?", options:["Pediatrics", "Dermatology", "Neurology", "Orthopedics"], correct:1},
+    {topic:"Having", q:"Which HAVING clause correctly finds departments where the average stay exceeds 5 days?", options:["HAVING length_of_stay > 5", "HAVING AVG(length_of_stay) > 5", "WHERE AVG(length_of_stay) > 5", "HAVING COUNT(length_of_stay) > 5"], correct:1},
+    {topic:"Aggregation", q:"Which doctor has the HIGHEST average treatment cost per patient?", options:["Dr. Garcia", "Dr. Lopez", "Dr. Santos", "Dr. Tan"], correct:1},
+    {topic:"Aggregation", q:"True or False: Every doctor in this dataset has an average treatment cost above ₱10,000 per patient.", options:["True", "False"], correct:1},
+    {topic:"Aggregation", q:"Which department has doctors with an average treatment cost BELOW ₱10,000 (meaning it would NOT appear in a 'costly doctors over ₱10,000' list)?", options:["Dermatology", "Surgery", "Oncology", "Cardiology"], correct:0},
+    {topic:"Aggregation", q:"Which single department has BOTH an average patient age over 60 AND an average treatment cost under ₱12,000?", options:["Oncology", "Cardiology", "Geriatrics", "No department meets both conditions"], correct:2},
+    {topic:"Aggregation", q:"Why might a department have an older average patient age but a lower average treatment cost, as seen with Geriatrics in this data?", options:["Older patients always cost more to treat, without exception", "Age and treatment cost aren't necessarily correlated — the type of care a department provides matters more than patient age alone", "The data must contain an error if this happens", "Geriatric treatments are always the most expensive by definition"], correct:1},
+    {topic:"Group By", q:"To answer 'average cost per department', which two things must a query combine?", options:["ORDER BY and WHERE", "GROUP BY department and AVG(cost)", "SELECT * and DISTINCT", "HAVING and DELETE"], correct:1},
+    {topic:"Having", q:"Which clause would you add to only show doctors whose patient count is 15 or more?", options:["WHERE COUNT(*) >= 15", "HAVING COUNT(*) >= 15", "GROUP BY COUNT(*) >= 15", "ORDER BY COUNT(*) >= 15"], correct:1},
+  ],
+  sqlm3a1: [
+    {topic:"Joins", q:"Which clause combines rows from two tables based on a matching column, like customer_id?", options:["MERGE", "JOIN", "UNION", "LINK"], correct:1},
+    {topic:"Joins", q:"To find each customer's total spending, which tables need to be joined together?", options:["Only Customers", "Only Orders", "Customers and Orders", "Customers, Orders, and Products (to get each item's price)"], correct:3},
+    {topic:"Joins", q:"Why is the Products table needed to calculate a customer's total purchase amount?", options:["It isn't needed at all", "Orders only stores quantity and product_id — the actual price lives in Products", "Products stores customer names", "Orders already contains a total_price column"], correct:1},
+    {topic:"Joins", q:"Based on total spending (quantity × price) correctly grouped by customer ID, who is the #1 top customer?", options:["Eduardo Lim", "Paulo Navarro", "Maria Santos (customer ID 11)", "Jenny Cruz"], correct:2},
+    {topic:"Joins", q:"This dataset has two different customers both named 'Maria Santos' (different customer IDs). Why does this matter for a JOIN query?", options:["It doesn't matter — SQL automatically merges same-named customers", "Grouping by name instead of customer ID would incorrectly combine two different people's totals into one", "Having two people with the same name is not allowed in a database", "The query would fail to run entirely"], correct:1},
+    {topic:"Joins", q:"Which product category generated the MOST total revenue?", options:["Electronics", "Furniture", "Apparel", "Kitchenware"], correct:1},
+    {topic:"Joins", q:"Which product category generated the LEAST total revenue?", options:["Kitchenware", "Stationery", "Apparel", "Electronics"], correct:1},
+    {topic:"Joins", q:"Which clause would you add after a JOIN + GROUP BY to show only the top 5 customers by spending?", options:["WHERE LIMIT 5", "ORDER BY total DESC LIMIT 5", "GROUP BY LIMIT 5", "TOP 5 total"], correct:1},
+    {topic:"Joins", q:"In a JOIN, what does 'ON o.customer_id = c.customer_id' specify?", options:["Which columns to display in the result", "The condition used to match rows between the two tables", "A filter that excludes certain customers", "The sort order of the results"], correct:1},
+    {topic:"Joins", q:"If a customer exists in the Customers table but has never placed an order, what happens with a standard (INNER) JOIN to Orders?", options:["That customer would not appear in the joined results at all", "That customer appears with $0 automatically", "The query fails with an error", "All customers always have at least one order"], correct:0},
+    {topic:"Joins", q:"To calculate revenue per category, which calculation is correct for each order line?", options:["quantity + price", "quantity × price", "quantity ÷ price", "price only, ignoring quantity"], correct:1},
+    {topic:"Joins", q:"Which is the correct table to JOIN Orders with, to find out which category each product belongs to?", options:["Customers", "Products", "Orders (joined to itself)", "No join is needed for this"], correct:1},
+  ],
+  sqlm3a2: [
+    {topic:"Dashboards", q:"Which city generated the most total revenue across all its customers?", options:["Taguig", "Manila", "Cavite", "Quezon City"], correct:1},
+    {topic:"Dashboards", q:"To find revenue per city, which three tables need to work together?", options:["Customers and Orders only", "Customers, Orders, and Products", "Only Products", "Only Customers"], correct:1},
+    {topic:"Dashboards", q:"Which month had the highest total sales across the whole dataset?", options:["January 2024", "March 2024", "September 2024", "August 2023"], correct:2},
+    {topic:"Dashboards", q:"Which function would you use to pull just the year and month out of a full order date for grouping?", options:["A date-formatting function (to extract year and month)", "SUM()", "COUNT()", "WHERE"], correct:0},
+    {topic:"Dashboards", q:"In Manila, which customer has the highest total spending?", options:["Maria Santos (customer ID 11)", "Maria Santos (customer ID 1)", "Jenny Cruz", "Eduardo Lim"], correct:0},
+    {topic:"Dashboards", q:"A 'dashboard' query like this one typically combines which SQL concepts?", options:["Only simple SELECT with no other clauses", "JOINs across multiple tables plus GROUP BY / aggregate functions", "Only INSERT and DELETE", "Only table creation statements"], correct:1},
+    {topic:"Dashboards", q:"Which city had the LOWEST total revenue among cities with any orders?", options:["Baguio", "Pasig", "Davao City", "Iloilo City"], correct:0},
+    {topic:"Dashboards", q:"Why would 'top customers per city' require grouping by BOTH city and customer, not just customer alone?", options:["It wouldn't — grouping by customer alone gives the exact same result", "Without including city in the grouping, you'd lose the ability to compare customers within their own city context", "City and customer can never appear in the same query together", "This distinction only matters for very large datasets"], correct:1},
+    {topic:"Dashboards", q:"If two cities have very close total revenue, which clause ensures the results display in revenue order regardless?", options:["GROUP BY revenue", "ORDER BY revenue DESC", "WHERE revenue IS NOT NULL", "HAVING revenue > 0"], correct:1},
+    {topic:"Dashboards", q:"What real business question does 'which year and month had the highest total sales' help answer?", options:["Which single customer is the most loyal", "Seasonal or timing trends in when sales peak", "Which product is the cheapest", "How many employees work in sales"], correct:1},
+    {topic:"Dashboards", q:"To build this dashboard, which of these is NOT one of the three questions being answered?", options:["Which cities generate the most revenue", "Which year and month had the highest total sales", "Who are the top customers per city", "Which employee processed the most orders"], correct:3},
+    {topic:"Dashboards", q:"A well-built SQL dashboard for a business is best described as:", options:["A single raw, unformatted data dump", "A set of targeted queries that turn raw transaction data into clear answers to real business questions", "A table with no calculations at all", "A tool that only works with one table at a time"], correct:1},
+  ],
+  sqlexam: [
+    {topic:"SQL Basics", q:"What is the primary purpose of SQL?", options:["To design website layouts and user interfaces", "To store, manage, and retrieve data from relational databases", "To compile hardware drivers for servers", "To create encrypted communication protocols"], correct:1},
+    {topic:"SQL Basics", q:'Which of the following best defines a "Relational Database"?', options:["A single text file containing a list of names", "A collection of unrelated images and videos", "A database that stores data in tables linked via primary and foreign keys", "A database that only stores data in a chronological timeline"], correct:2},
+    {topic:"Keys", q:"What is the difference between a Primary Key and a Foreign Key?", options:["A Primary Key is for text, while a Foreign Key is for numbers", "A Primary Key uniquely identifies a row; a Foreign Key links to a Primary Key in another table", "A Primary Key is optional, while a Foreign Key is mandatory for every table", "There is no difference; they are interchangeable terms"], correct:1},
+    {topic:"Insert", q:"Which SQL command is used to add new records into a database?", options:["INSERT", "INSERT INTO", "ADD RECORD", "APPEND INTO"], correct:1},
+    {topic:"Select", q:"How do you retrieve every column from a table named tbl_student?", options:["SELECT * FROM tbl_student;", "GET ALL FROM tbl_student;", "SELECT ALL COLUMNS tbl_student;", "FETCH * tbl_student;"], correct:0},
+    {topic:"Data Types", q:"Which of these is NOT a common SQL data type mentioned in the module?", options:["INT", "VARCHAR", "DECIMAL", "ENCRYPT"], correct:3},
+    {topic:"Constraints", q:"What is the purpose of the NOT NULL constraint?", options:["It prevents the database from being deleted", "It ensures a column cannot have an empty or null value", "It automatically fills a column with zeros", "It limits the number of rows in a table"], correct:1},
+    {topic:"Database", q:"What is the correct syntax to create a new database named db_school?", options:["CREATE DATABASE db_school;", "NEW DATABASE db_school;", "MAKE DATABASE db_school;", "DATABASE CREATE db_school;"], correct:0},
+    {topic:"Alter Table", q:"What does the ALTER TABLE command do?", options:["It deletes the entire table structure", "It modifies an existing table (e.g., adding or deleting columns)", "It changes the data inside the rows", "It renames the database"], correct:1},
+    {topic:"Drop Table", q:"Which command would you use to completely remove a table from the database?", options:["DELETE TABLE", "REMOVE TABLE", "DROP TABLE", "ERASE TABLE"], correct:2},
+    {topic:"Select", q:"What is the benefit of using Aliases (AS) in a SELECT statement?", options:["They make the query run faster", "They rename columns temporarily for better readability in reports", "They permanently change the column name in the database", "They are used to hide sensitive data from the user"], correct:1},
+    {topic:"Sorting", q:"How do you sort results in descending order by price?", options:["ORDER BY price DESC;", "SORT BY price DESC;", "ORDER price DESCENDING;", "GROUP BY price DESC;"], correct:0},
+    {topic:"Select", q:"What is the purpose of the LIMIT clause?", options:["It sets a maximum value for a numeric column", "It restricts the number of rows returned by a query", "It limits the number of users who can access the table", "It restricts the length of a text string"], correct:1},
+    {topic:"Select", q:"In a LIKE operator, which wildcard matches exactly one character?", options:["%", "*", "_", "#"], correct:2},
+    {topic:"Aggregate Functions", q:"Which aggregate function is used to find the average value of a column?", options:["SUM()", "AVG()", "MEAN()", "TOTAL()"], correct:1},
+    {topic:"Having", q:"When should you use the HAVING clause instead of WHERE?", options:["When you want to filter individual rows", "When you want to filter groups after a GROUP BY clause", "When you are using a DELETE statement", "When you are creating a new table"], correct:1},
+    {topic:"Update", q:"What is the correct syntax for updating a specific record?", options:["CHANGE table_name SET col=val WHERE condition;", "UPDATE table_name SET col=val WHERE condition;", "UPDATE col=val IN table_name;", "MODIFY table_name col=val;"], correct:1},
+    {topic:"Delete", q:"Why is the WHERE clause critical when using the DELETE command?", options:["The command will not run without it", "It speeds up the deletion process", "Without it, the command will remove every row in the table", "It specifies which database to use"], correct:2},
+    {topic:"Aggregate Functions", q:"Which aggregate function counts the total number of rows in a result?", options:["SUM()", "COUNT()", "TOTAL()", "ADD()"], correct:1},
+    {topic:"Alter Table", q:"What command is used to add a new column to an existing table?", options:["UPDATE TABLE table_name ADD column;", "ALTER TABLE table_name ADD column_name datatype;", "INSERT INTO table_name COLUMN column_name;", "CREATE COLUMN column_name IN table_name;"], correct:1},
+    {topic:"Joins", q:"What is the main reason for using JOINS?", options:["To merge two databases into one", "To combine rows from two or more tables based on a related column", "To delete duplicate records across tables", "To create a backup of a table"], correct:1},
+    {topic:"Joins", q:"How does an INNER JOIN handle rows that do not have a match in both tables?", options:["It includes them and fills the gaps with zeros", "It excludes them from the final result", "It creates a new record for the missing data", "It stops the query and returns an error"], correct:1},
+    {topic:"Joins", q:"Which statement defines a LEFT JOIN?", options:["It returns only the rows that match in both tables", "It returns all rows from the left table and matching rows from the right", "It returns all rows from the right table and matching rows from the left", "It returns only the rows that do not match"], correct:1},
+    {topic:"Joins", q:"What is the result of a RIGHT JOIN?", options:["All rows from the right table and matching rows from the left", "Only rows unique to the right table", "All rows from both tables regardless of matches", "It is the same as an INNER JOIN"], correct:0},
+    {topic:"Keys", q:"Why are table relationships important for data consistency?", options:["They make the database look more organized", "They ensure data across tables remains connected and accurate via keys", "They allow multiple users to edit the same row", "They reduce the amount of RAM used by the server"], correct:1},
+    {topic:"Joins", q:"What is the correct syntax for an INNER JOIN?", options:["SELECT * FROM t1 JOIN t2 WHERE t1.id = t2.id;", "SELECT * FROM t1 INNER JOIN t2 ON t1.id = t2.id;", "SELECT * FROM t1, t2 WHERE t1.id = t2.id;", "MERGE t1 AND t2 ON id;"], correct:1},
+    {topic:"Joins", q:"To find all customers, including those who have never placed an order, you should use:", options:["INNER JOIN", "RIGHT JOIN", "LEFT JOIN (with Customers as the left table)", "CROSS JOIN"], correct:2},
+    {topic:"Joins", q:"Which join would you use to list all products, including those never sold?", options:["INNER JOIN", "RIGHT JOIN (if Products is the right table)", "CROSS JOIN", "Only in the HAVING clause"], correct:1},
+    {topic:"Joins", q:"Can you combine aggregate functions with JOINS?", options:["No, Joins only work with raw data", "Yes, to gain deeper business insights (e.g., total sales per customer)", "Only if the tables have the same number of rows", "Only in the HAVING clause"], correct:1},
+    {topic:"Normalization", q:'What happens when a database is "normalized"?', options:["All data is moved into a single large table", "Data is split into different tables to reduce duplication and improve efficiency", "All text is converted to lowercase", "The database is deleted and recreated"], correct:1},
+    {topic:"Joins", q:"Scenario: a hospital wants to find all doctors who have attended an admission where the patient has no documented allergies (the allergies field is NULL). Which result correctly answers this (LEFT JOIN + NULL handling)?", options:["A short 3-row result: Miller (Neurology) – Watson, Lee (Pediatrics) – Brown, Lee (Pediatrics) – White", "The raw doctors table (doctor_id, first_name, last_name, specialty) with no filtering at all", "An unfiltered 11-row list pairing every doctor with every patient they've ever treated"], correct:0},
+    {topic:"Joins", q:"Scenario: an analytics team needs the Average Height and Average Weight of patients for every province (joining patients with province_names, rounded to 2 decimals, grouped by province, only provinces with at least one patient). Which result correctly answers this?", options:["The raw doctors table (doctor_id, first_name, last_name, specialty)", "A table of province_name, avg_height, and avg_weight for Ontario, Quebec, British Columbia, and Alberta", "An unfiltered 11-row list pairing every doctor with every patient"], correct:1},
+    {topic:"Joins", q:"Scenario: a hospital wants each doctor's name, specialty, and admission_count, sorted from highest to lowest (JOIN + COUNT + GROUP BY + ORDER BY). Which result correctly answers this?", options:["A table with doctor_name, specialty, and admission_count, correctly sorted highest to lowest (e.g. Alice Smith–Cardiology–3, David Wilson–Orthopedics–3, Robert Miller–Neurology–2, Sarah Lee–Pediatrics–2)", "A table split into separate first_name and last_name columns, showing non-whole-number counts like 104.3333"], correct:0},
+  ],
+  pym1a1: [
+    {topic:"Installing Python", q:"Which command should you run in your terminal to verify that Python is properly installed and check its version?", options:["check python", "python --version", "verify --py", "py -status"], correct:1},
+    {topic:"Python Syntax", q:"How does Python define code blocks and scope, unlike languages that use curly brackets { }?", options:["Semicolons at the end of each line", "Parentheses surrounding code blocks", "Indentation (leading whitespace)", "Special END keywords"], correct:2},
+    {topic:"Python Syntax", q:"Which symbol is used in Python to indicate a single-line comment?", options:["//", "#", "<!--", "/*"], correct:1},
+    {topic:"Data Types", q:"What data type will Python automatically assign to the variable defined as pi = 3.14?", options:["Integer", "Float", "String", "Boolean"], correct:1},
+    {topic:"Data Types", q:"Which data type in Python is specifically used to represent logical values of True or False?", options:["Boolean", "String", "Float", "Integer"], correct:0},
+  ],
+  pym1a2: [
+    {topic:"Input and Output", q:"Which built-in Python function is used to capture input entered by a user in the console?", options:["print()", "scan()", "input()", "read()"], correct:2},
+    {topic:"Comparison Operators", q:"Which operator is strictly used in Python to evaluate whether two expressions or values are equal?", options:["=", "==", "!=", "<="], correct:1},
+    {topic:"Assignment Operators", q:"What is the fundamental purpose of the single equal sign = in Python?", options:["Tests equality between two variables", "Compares memory addresses", "Assigns a value to a variable", "Declares a constant"], correct:2},
+    {topic:"Logical Operators", q:"Which of the following correctly represents the standard logical operators in Python?", options:["&&, ||, !", "AND, OR, NOT (all uppercase)", "and, or, not", "band, bor, bnot"], correct:2},
+    {topic:"Arithmetic Operators", q:"What is the computed result of the arithmetic expression: 10 + 5?", options:["5", "50", "15", '"105"'], correct:2},
+  ],
+  pym1hw: [
+    {topic:"Installing Python", q:"Which command is used in the command prompt or terminal to verify that Python is installed and check its version?", options:["check python", "python --version", "verify --python", "py -status"], correct:1},
+    {topic:"Python Syntax", q:"In Python, which symbol is used to indicate a single-line comment?", options:["//", "<!-- -->", "#", "%"], correct:2},
+    {topic:"Python Syntax", q:"What fundamental formatting feature does Python rely on to define blocks of code and scope, rather than using curly brackets {}?", options:["Semicolons", "Indentation", "Parentheses", "All uppercase syntax"], correct:1},
+    {topic:"Input and Output", q:"Which built-in function is used in Python to display output on the screen?", options:["input()", "echo()", "console.log()", "print()"], correct:3},
+    {topic:"Input and Output", q:"Which built-in function is used to take or capture user input from the console?", options:["read()", "scan()", "input()", "get()"], correct:2},
+    {topic:"Comparison Operators", q:"Which of the following comparison operators is used in Python to test whether two values are equal to each other?", options:["=", "==", "!=", ":="], correct:1},
+    {topic:"Logical Operators", q:"Which of the following are the primary logical operators supported in Python as listed in the presentation?", options:["&&, ||, !", "and, or, not", "AND, OR, NAND", "&|, ^, ~"], correct:1},
+    {topic:"Conditional Statements", q:"Which three keywords are used in Python to construct conditional decision-making statements?", options:["if, else if, else", "if, elseif, end", "if, elif, else", "switch, case, default"], correct:2},
+    {topic:"Data Types", q:"Which data type in Python represents logical truth values, either True or False?", options:["String", "Integer", "Float", "Boolean"], correct:3},
+    {topic:"Loops", q:"Which of the following loop control statements is used to skip the rest of the current iteration and move to the next iteration of the loop?", options:["break", "exit", "continue", "stop"], correct:2},
+  ],
+  pym2a1: [
+    {topic:"Control Flow", q:"What does Python 'Control Flow' determine in a program script?", options:["The execution speed of the CPU", "The order in which instructions are executed", "The size of variable memory allocation", "The network port utilized by the script"], correct:1},
+    {topic:"Comparison Operators", q:"Which symbol represents the 'Not Equal To' comparison operator in Python?", options:["<>", "==", "!=", "NOT="], correct:2},
+    {topic:"Logical Operators", q:"What is the evaluated output of the expression (8 > 3) and (2 > 5)?", options:["True", "False", "8", "None"], correct:1},
+    {topic:"Logical Operators", q:"Which logical operator reverses the boolean result of a condition from True to False (or vice versa)?", options:["not", "and", "or", "rev"], correct:0},
+    {topic:"Comparison Operators", q:"What will print(10 >= 10) display on the console?", options:["False", "True", "10", "SyntaxError"], correct:1},
+  ],
+  pym2a2: [
+    {topic:"Conditional Statements", q:"Which keyword allows checking a secondary condition in Python when the initial if condition fails?", options:["else", "elif", "elseif", "case"], correct:1},
+    {topic:"Conditional Statements", q:"What will be printed if grade = 76 in this code?\nif grade >= 90: print('A')\nelif grade >= 80: print('B')\nelif grade >= 75: print('C')\nelse: print('Failed')", options:["A", "B", "C", "Failed"], correct:2},
+    {topic:"Loops", q:"Which loop structure repeatedly executes code as long as a condition continues to evaluate to True?", options:["for loop", "while loop", "nested loop", "until loop"], correct:1},
+    {topic:"Loops", q:"How many total numbers will be printed by the loop: for i in range(1, 6): print(i)?", options:["4 numbers (1 to 4)", "5 numbers (1 to 5)", "6 numbers (1 to 6)", "7 numbers (0 to 6)"], correct:1},
+    {topic:"Loops", q:"Inside a while loop with count = 1, which operator adds 1 to count in each iteration?", options:["count++", "count += 1", "count =+ 1", "count.next()"], correct:1},
+  ],
+  pym2hw: [
+    {topic:"Control Flow", q:"What is the primary role of 'Control Flow' in Python programming?", options:["Allocates computer memory dynamically", "Determines the order in which instructions are executed", "Translates Python bytecode into machine code", "Manages database storage connections"], correct:1},
+    {topic:"Comparison Operators", q:"Which comparison operator checks if two values are NOT equal in Python?", options:["<>", "==", "!=", "!=="], correct:2},
+    {topic:"Comparison Operators", q:"What will the expression 15 >= 15 evaluate to?", options:["False", "True", "0", "SyntaxError"], correct:1},
+    {topic:"Comparison Operators", q:"Which comparison operator evaluates whether the left value is strictly smaller than the right value?", options:["<=", "<", ">", "=<"], correct:1},
+    {topic:"Logical Operators", q:"Under what condition does the logical operator and return True?", options:["When at least one condition is true", "When only the right condition is false", "Only when both conditions are true", "When both conditions are false"], correct:2},
+    {topic:"Logical Operators", q:"What is the result of the expression: not (10 > 5)?", options:["True", "False", "None", "10"], correct:1},
+    {topic:"Logical Operators", q:"Which logical operator returns True if at least one of the evaluated conditions is true?", options:["and", "or", "not", "xor"], correct:1},
+    {topic:"Conditional Statements", q:"Which Python keyword is used to test an additional condition if the preceding if condition was False?", options:["else", "elif", "elseif", "case"], correct:1},
+    {topic:"Conditional Statements", q:"In an if-elif-else chain, when does the else block execute?", options:["Only when all prior conditions evaluate to False", "Before any elif conditions are checked", "Whenever an error occurs in the program", "At the beginning of the program sequence"], correct:0},
+    {topic:"Conditional Statements", q:"If grade = 82, what will this code print?\nif grade >= 90: print('A')\nelif grade >= 80: print('B')\nelse: print('C')", options:["A", "B", "C", "B and C"], correct:1},
+    {topic:"Loops", q:"Which loop structure repeatedly executes its code block as long as a specified condition remains True?", options:["for loop", "while loop", "repeat loop", "foreach loop"], correct:1},
+    {topic:"Loops", q:"What numbers are produced by the generator range(1, 4) in a standard for loop?", options:["1, 2, 3, 4", "1, 2, 3", "0, 1, 2, 3", "1, 4"], correct:1},
+    {topic:"Loops", q:"How do you correctly write a counter increment statement inside a Python while loop?", options:["count++", "count += 1", "count =+ 1", "inc count"], correct:1},
+    {topic:"Lists and Tuples", q:"What is the primary syntactical difference in literal syntax between a List and a Tuple?", options:["Lists use square brackets [ ], Tuples use parentheses ( )", "Lists use curly braces { }, Tuples use brackets [ ]", "Lists are immutable, Tuples are mutable", "Lists cannot store strings, Tuples can"], correct:0},
+    {topic:"Lists and Tuples", q:"Given fruits = ['Apple', 'Banana', 'Orange'], what does print(fruits[-1]) output?", options:["Apple", "Banana", "Orange", "IndexError"], correct:2},
+    {topic:"Lists and Tuples", q:"Which list method adds a single element to the very end of the list?", options:["fruits.insert()", "fruits.extend()", "fruits.append()", "fruits.push()"], correct:2},
+    {topic:"Lists and Tuples", q:"Which method removes and returns the element at a specified index (or the last item if omitted)?", options:["remove()", "pop()", "clear()", "delete()"], correct:1},
+    {topic:"Functions", q:"Which keyword is used to declare and define a function in Python?", options:["func", "function", "def", "define"], correct:2},
+    {topic:"Functions", q:"What keyword is used inside a Python function to send a computed value back to the caller?", options:["send", "yield", "return", "output"], correct:2},
+    {topic:"Functions", q:"What is the lifetime and scope of a 'Local Variable' defined inside a function?", options:["Accessible anywhere in the program until the machine reboots", "Exists only while the function is running and accessible only within it", "Accessible across imported external modules", "Stored permanently to disk upon execution"], correct:1},
+  ],
+  pym3a1: [
+    {topic:"Error Handling", q:"What is the primary definition of 'Error Handling' in Python?", options:["The process of detecting and managing runtime errors gracefully", "Automatically deleting faulty code from files", "Speeding up mathematical calculations", "Converting Python syntax into machine assembly"], correct:0},
+    {topic:"Try Except Finally", q:"Which code block is executed inside a try-except-finally construct regardless of whether an error occurred or not?", options:["try", "except", "finally", "catch"], correct:2},
+    {topic:"Exceptions", q:"Which exception is automatically raised when a number is divided by zero (e.g., 10 / 0)?", options:["ValueError", "ZeroDivisionError", "TypeError", "NullPointerError"], correct:1},
+    {topic:"Exceptions", q:"What type of error occurs when executing int('hello')?", options:["IndexError", "NameError", "ValueError", "FileNotFoundError"], correct:2},
+    {topic:"Error Handling", q:"What happens if a program encounters an unhandled exception during execution?", options:["It skips to the end of the file", "The program terminates abruptly (crashes)", "Python restarts the operating system", "The exception automatically converts to a warning"], correct:1},
+  ],
+  pym3a2: [
+    {topic:"Exceptions", q:"What error is triggered by attempting to access an out-of-range index like fruits[5] when length is 3?", options:["KeyError", "IndexError", "NameError", "TypeError"], correct:1},
+    {topic:"Lists and Tuples", q:"What is the key difference regarding mutability between Python Lists and Tuples?", options:["Lists are mutable (can be changed); Tuples are immutable", "Lists are immutable; Tuples are mutable", "Both lists and tuples are completely immutable", "Lists cannot hold multiple data types"], correct:0},
+    {topic:"Lists and Tuples", q:"What happens when you execute b = (0, 1, 2); b[0] = 4 in Python?", options:["The first item is updated to 4", "Python raises a TypeError because tuples are immutable", "The tuple is automatically converted to a list", "The number 4 is appended to the end"], correct:1},
+    {topic:"Lists and Tuples", q:"Why are Tuples preferred over Lists for fixed datasets or configuration constants?", options:["Tuples use more memory and are slower", "Tuples ensure data integrity, use less memory, and iterate faster", "Tuples support more built-in editing methods", "Tuples allow duplicate keys"], correct:1},
+    {topic:"Exceptions", q:"What error is raised when attempting to reference a variable that has never been defined or assigned?", options:["NameError", "ValueError", "FileNotFoundError", "SyntaxError"], correct:0},
+  ],
+  pyexam: [
+    {topic:"Installing Python", q:"Which command is entered into the terminal/command prompt to verify a valid Python installation and check its version?", options:["check python", "python --version", "verify --python", "py -status"], correct:1},
+    {topic:"Python Syntax", q:"What syntax rule does Python strictly enforce to define code blocks, indentation, and variable scope?", options:["Curly braces { }", "Leading whitespace indentation", "Semicolons ;", "BEGIN and END tags"], correct:1},
+    {topic:"Python Syntax", q:"Which symbol is used in Python to write a single-line comment?", options:["//", "<!--", "#", "/*"], correct:2},
+    {topic:"Input and Output", q:"Which built-in Python function displays formatted output on the user's screen?", options:["input()", "echo()", "console()", "print()"], correct:3},
+    {topic:"Input and Output", q:"Which function captures user input from the console as a string data type?", options:["input()", "read()", "scan()", "prompt()"], correct:0},
+    {topic:"Data Types", q:"What data type will Python assign to a variable storing is_logged_in = False?", options:["String", "Integer", "Boolean", "Float"], correct:2},
+    {topic:"Comparison Operators", q:"Which comparison operator checks if two values are equal?", options:["=", "==", "!=", "<="], correct:1},
+    {topic:"Comparison Operators", q:"Which comparison operator checks if two values are NOT equal?", options:["<>", "!=", "==", "!=="], correct:1},
+    {topic:"Logical Operators", q:"What will the logical expression (5 > 2) and (10 < 4) evaluate to?", options:["True", "False", "None", "5"], correct:1},
+    {topic:"Logical Operators", q:"Which logical operator reverses the boolean truth value of an expression?", options:["and", "or", "not", "xor"], correct:2},
+    {topic:"Conditional Statements", q:"Which keyword tests an alternative condition if the initial if condition evaluates to False?", options:["else", "elif", "elseif", "case"], correct:1},
+    {topic:"Conditional Statements", q:"In an if-elif-else statement block, when will the code under else execute?", options:["When all preceding conditions evaluate to False", "Before any elif check", "Every time the program runs", "Only when there is a syntax error"], correct:0},
+    {topic:"Loops", q:"Which loop structure repeatedly executes code as long as a specified condition remains True?", options:["for loop", "while loop", "repeat loop", "foreach loop"], correct:1},
+    {topic:"Loops", q:"Which statement terminates a loop immediately and resumes execution outside the loop?", options:["continue", "break", "stop", "exit()"], correct:1},
+    {topic:"Loops", q:"Which statement skips the rest of the current loop iteration and proceeds to the next iteration?", options:["pass_next", "continue", "break", "restart"], correct:1},
+    {topic:"Loops", q:"What numbers are generated by range(1, 5) in Python?", options:["1, 2, 3, 4, 5", "1, 2, 3, 4", "0, 1, 2, 3, 4", "1, 5"], correct:1},
+    {topic:"Functions", q:"Which keyword is used to define a custom, reusable function in Python?", options:["func", "def", "function", "routine"], correct:1},
+    {topic:"Functions", q:"Which keyword sends a computed value from a function back to the caller?", options:["send", "output", "return", "yield"], correct:2},
+    {topic:"Lists and Tuples", q:"Given items = ['a', 'b', 'c'], which element is returned by negative index items[-1]?", options:["'a'", "'b'", "'c'", "IndexError"], correct:2},
+    {topic:"Lists and Tuples", q:"Which list method appends a single new element to the end of an existing list?", options:["insert()", "append()", "extend()", "add()"], correct:1},
+    {topic:"Lists and Tuples", q:"Which list method removes and returns an item at a specified index (or the last item if omitted)?", options:["pop()", "clear()", "remove()", "delete()"], correct:0},
+    {topic:"Lists and Tuples", q:"What is the primary mutability difference between a Python List and a Tuple?", options:["Lists are mutable; Tuples are immutable", "Lists are immutable; Tuples are mutable", "Both cannot be altered once created", "Tuples only store integers"], correct:0},
+    {topic:"Lists and Tuples", q:"What error is raised when attempting to reassign an element in a tuple (e.g., t = (1, 2); t[0] = 9)?", options:["ValueError", "TypeError", "IndexError", "KeyError"], correct:1},
+    {topic:"Functions", q:"What is the scope of a 'Local Variable' declared inside a Python function?", options:["Global across the program", "Accessible only within that function while running", "Permanent on hard drive", "Accessible in other modules"], correct:1},
+    {topic:"Exceptions", q:"Which exception is raised when dividing any number by zero in Python?", options:["ZeroDivisionError", "ValueError", "MathError", "TypeError"], correct:0},
+    {topic:"Exceptions", q:"Which exception is raised when executing int('abc')?", options:["TypeError", "ValueError", "NameError", "IndexError"], correct:1},
+    {topic:"Try Except Finally", q:"In a try-except-finally block, when does the finally block run?", options:["Only if an error occurs", "Only if no error occurs", "Always, regardless of whether an exception occurred", "Never"], correct:2},
+    {topic:"Dictionaries", q:"Which data structure stores information as key-value pairs inside curly braces { }?", options:["List", "Tuple", "Dictionary", "String"], correct:2},
+    {topic:"Dictionaries", q:"What method safely retrieves a dictionary value by key without throwing an error if the key is missing?", options:["get()", "find()", "pop()", "read()"], correct:0},
+    {topic:"Sets", q:"Which built-in Python collection stores only unique elements and automatically discards duplicate entries?", options:["List", "Tuple", "Set", "Dictionary"], correct:2},
   ],
 };
 
@@ -791,38 +1408,69 @@ function updateWhoStrip(){
 }
 
 // ---- Screen 1.5: Subject picker --------------------------------
+let activeSubject = null; // 'excel' | 'sql' | 'python'
 document.getElementById('subjectEditWho').addEventListener('click', () => showScreen('start'));
 document.getElementById('subjectExcel').addEventListener('click', () => {
+  activeSubject = 'excel';
+  renderPicker();
+  showScreen('picker');
+});
+document.getElementById('subjectSQL').addEventListener('click', () => {
+  activeSubject = 'sql';
+  renderPicker();
+  showScreen('picker');
+});
+document.getElementById('subjectPython').addEventListener('click', () => {
+  activeSubject = 'python';
   renderPicker();
   showScreen('picker');
 });
 
 // ---- Screen 2: Picker ----------------------------------------
+// Builds the module/assessment list dynamically for whichever subject the
+// student picked, grouping cards under their groupLabel in catalog order.
 function renderPicker(){
   document.getElementById('whoName').textContent = student.name;
   document.getElementById('whoBatch').textContent = student.batchLabel;
 
-  const groups = { m1: document.getElementById('group-m1'), m2: document.getElementById('group-m2'),
-                    m3: document.getElementById('group-m3'), exam: document.getElementById('group-exam') };
-  Object.values(groups).forEach(g => g.innerHTML = '');
+  const container = document.getElementById('pickerGroups');
+  container.innerHTML = '';
 
-  CATALOG.forEach(item => {
-    const el = document.createElement('div');
-    const disabled = item.status === 'soon';
-    el.className = 'assess-card' + (disabled ? ' disabled' : '');
-    const statusLabel = item.status === 'ready' ? 'Start' : 'Coming soon';
-    const statusClass = item.status === 'ready' ? 'ready' : 'soon';
-    el.innerHTML = `
-      <div>
-        <div class="a-title">${item.title}</div>
-        <div class="a-sub">${item.sub}</div>
-      </div>
-      <span class="a-status ${statusClass}">${statusLabel}</span>
-    `;
-    if(!disabled){
-      el.addEventListener('click', () => startAssessment(item));
+  const items = CATALOG.filter(item => item.subject === activeSubject);
+  const groupOrder = [];
+  const groupMap = {};
+  items.forEach(item => {
+    if(!groupMap[item.groupLabel]){
+      groupMap[item.groupLabel] = [];
+      groupOrder.push(item.groupLabel);
     }
-    groups[item.group].appendChild(el);
+    groupMap[item.groupLabel].push(item);
+  });
+
+  groupOrder.forEach(label => {
+    const heading = document.createElement('div');
+    heading.className = 'group-label';
+    heading.textContent = label;
+    container.appendChild(heading);
+
+    groupMap[label].forEach(item => {
+      const el = document.createElement('div');
+      const disabled = item.status === 'soon';
+      el.className = 'assess-card' + (disabled ? ' disabled' : '');
+      const statusLabel = item.status === 'ready' ? 'Start' : 'Coming soon';
+      const statusClass = item.status === 'ready' ? 'ready' : 'soon';
+      el.innerHTML = `
+        <div>
+          <div class="a-title">${item.title}</div>
+          <div class="a-sub">${item.sub}</div>
+        </div>
+        <span class="a-status ${statusClass}">${statusLabel}</span>
+      `;
+      if(!disabled){
+        el.addEventListener('click', () => startAssessment(item));
+      }
+      container.appendChild(el);
+    });
   });
 }
 
@@ -855,6 +1503,7 @@ document.getElementById('passcodeSubmitBtn').addEventListener('click', () => {
   current = 0;
   answers = new Array(questions.length).fill(null);
   document.getElementById('assessmentBanner').textContent = `You are answering: ${activeAssessment.title}`;
+  renderDatasetDownloads();
   showScreen('quiz');
   renderQuestion();
   startTimer(activeAssessment.timerMinutes);
@@ -961,6 +1610,40 @@ function stopTimer(){
     clearInterval(timerInterval);
     timerInterval = null;
   }
+}
+
+// ---- Dataset downloads -------------------------------------
+// Some SQL questions reference a real dataset (e.g. deliveries_data). If the
+// active assessment lists any, show a download button per file so students
+// can actually open and explore the real data while answering.
+function renderDatasetDownloads(){
+  const container = document.getElementById('datasetDownloads');
+  container.innerHTML = '';
+  const keys = activeAssessment.datasets;
+  if(!keys || !keys.length) return;
+
+  keys.forEach(key => {
+    const btn = document.createElement('button');
+    btn.className = 'dataset-btn';
+    btn.type = 'button';
+    btn.textContent = `⬇ Download ${key}.csv`;
+    btn.addEventListener('click', () => downloadDataset(key));
+    container.appendChild(btn);
+  });
+}
+
+function downloadDataset(key){
+  const csvText = SQL_DATASETS[key];
+  if(!csvText) return;
+  const blob = new Blob([csvText], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `${key}.csv`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
 }
 
 // ---- Screens 4/5/6: Submit, Result, Blocked ---------------------
