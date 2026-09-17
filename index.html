@@ -432,6 +432,7 @@
   <pre class="hidden" id="blockedDetail"></pre>
   <div class="btn-row" style="justify-content:flex-start;">
     <button class="btn secondary" id="blockedBackBtn">Back to assessments</button>
+    <button class="btn hidden" id="blockedRetryBtn">Try again</button>
   </div>
 </div>
 
@@ -1478,6 +1479,12 @@ document.getElementById('editWho').addEventListener('click', () => showScreen('s
 document.getElementById('changeSubjectBtn').addEventListener('click', () => showScreen('subject'));
 document.getElementById('backToPickerBtn').addEventListener('click', () => { renderPicker(); showScreen('picker'); });
 document.getElementById('blockedBackBtn').addEventListener('click', () => { renderPicker(); showScreen('picker'); });
+document.getElementById('blockedRetryBtn').addEventListener('click', () => {
+  // The answers array was never cleared by a failed attempt, so this
+  // resubmits exactly what the student had already selected — no need to
+  // redo the assessment just because one submission attempt failed.
+  submitQuiz();
+});
 
 // ---- Screen 3: Quiz --------------------------------------------
 function startAssessment(item){
@@ -1665,66 +1672,122 @@ async function submitQuiz(timedOut){
     answers: answers.map(i => OPTION_LETTERS[i]), // send the letter (A/B/C/D), matching the "Correct Answer" column in the Answer Key tab
   };
 
-  let res;
-  try {
-    res = await fetch(APPS_SCRIPT_URL, {
-      method: 'POST',
-      body: JSON.stringify(payload),
-    });
-  } catch (networkErr) {
-    // The request never reached / returned from the server at all — this is a
-    // true network failure: wrong URL, no internet, or a CORS block before any
-    // response came back.
-    showDiagnostic(
-      'Could not reach the grading server',
-      'The request failed before getting a response. Common causes: the file was opened directly (file://) instead of hosted on http/https, the Apps Script URL is wrong, or there is no internet connection.',
-      String(networkErr)
-    );
-    return;
-  }
+  // Mobile connections occasionally drop mid-request even when the server
+  // goes on to finish the job successfully in the background (the grade
+  // gets recorded and the email sent — the student just never sees the
+  // response). Rather than showing a scary error on the first hiccup, retry
+  // a couple of times first. This is safe to do even if an earlier attempt
+  // is still quietly finishing server-side, because Code.gs now serializes
+  // every submission with LockService — a retry that arrives while the
+  // original is still being processed will simply wait its turn, then
+  // correctly see "already passed" rather than writing a duplicate row or
+  // sending a second email.
+  const MAX_ATTEMPTS = 5;
+  const RETRY_DELAY_MS = 3000;
 
-  const rawText = await res.text();
-  let data;
-  try {
-    data = JSON.parse(rawText);
-  } catch (parseErr) {
-    // We got an HTTP response, but it wasn't JSON — almost always means the
-    // Apps Script itself threw an error and Google served its own HTML error
-    // page instead of your doPost's output.
-    showDiagnostic(
-      `Server responded with HTTP ${res.status}, but not JSON`,
-      'This usually means your doPost function threw an error on the server (e.g. a sheet name it looked for does not exist) or the deployment is not accessible to "Anyone". Here is the raw response so you can see what Google actually sent back:',
-      rawText.slice(0, 500)
-    );
-    return;
-  }
+  for(let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++){
+    let res;
+    try {
+      res = await fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        body: JSON.stringify(payload),
+      });
+    } catch (networkErr) {
+      if(attempt < MAX_ATTEMPTS){
+        document.getElementById('submittingMsg').textContent =
+          `Connection hiccup — reconnecting (attempt ${attempt + 1} of ${MAX_ATTEMPTS})…`;
+        await new Promise(r => setTimeout(r, RETRY_DELAY_MS));
+        continue;
+      }
+      // The request never reached / returned from the server at all — this is a
+      // true network failure: wrong URL, no internet, or a CORS block before any
+      // response came back.
+      showDiagnostic(
+        'Could not reach the grading server',
+        'We tried several times but the connection kept failing. Check your internet connection, then press "Try again" below — your answers are still selected.',
+        String(networkErr),
+        true
+      );
+      return;
+    }
 
-  if(data.error === 'already_passed'){
-    document.getElementById('blockedTitle').textContent = 'Already completed';
-    document.getElementById('blockedMsg').textContent =
-      `Our records show ${student.email} already passed ${activeAssessment.title}. No need to retake it.`;
-    document.getElementById('blockedDetail').classList.add('hidden');
-    showScreen('blocked');
-    return;
-  }
-  if(data.error){
-    showDiagnostic(
-      'Something went wrong',
-      'We could not record your submission. The server returned:',
-      data.error
-    );
-    return;
-  }
+    const rawText = await res.text();
+    let data;
+    try {
+      data = JSON.parse(rawText);
+    } catch (parseErr) {
+      if(attempt < MAX_ATTEMPTS){
+        document.getElementById('submittingMsg').textContent =
+          `Unexpected response — retrying (attempt ${attempt + 1} of ${MAX_ATTEMPTS})…`;
+        await new Promise(r => setTimeout(r, RETRY_DELAY_MS));
+        continue;
+      }
+      // We got an HTTP response, but it wasn't JSON — almost always means the
+      // Apps Script itself threw an error and Google served its own HTML error
+      // page instead of your doPost's output.
+      showDiagnostic(
+        `Server responded with HTTP ${res.status}, but not JSON`,
+        'This usually means your doPost function threw an error on the server (e.g. a sheet name it looked for does not exist) or the deployment is not accessible to "Anyone". Press "Try again" below, or check with your instructor if it keeps happening. Here is the raw response so you can see what Google actually sent back:',
+        rawText.slice(0, 500),
+        true
+      );
+      return;
+    }
 
-  showResult(data.score, data.total, data.pct);
+    if(data.error === 'already_passed'){
+      document.getElementById('blockedTitle').textContent = 'Already completed';
+      document.getElementById('blockedMsg').textContent =
+        `Our records show ${student.email} already passed ${activeAssessment.title}. No need to retake it.`;
+      document.getElementById('blockedDetail').classList.add('hidden');
+      document.getElementById('blockedRetryBtn').classList.add('hidden');
+      showScreen('blocked');
+      return;
+    }
+    if(data.error === 'server_busy_please_retry'){
+      // Many students are submitting at once and the server is briefly
+      // queued — this is expected under a burst (e.g. a whole class
+      // finishing at the same moment) and resolves itself quickly, so
+      // retry the same way as a network hiccup rather than alarming the
+      // student with an error screen.
+      if(attempt < MAX_ATTEMPTS){
+        document.getElementById('submittingMsg').textContent =
+          `Lots of submissions right now — retrying (attempt ${attempt + 1} of ${MAX_ATTEMPTS})…`;
+        await new Promise(r => setTimeout(r, RETRY_DELAY_MS));
+        continue;
+      }
+      showDiagnostic(
+        'Server is busy',
+        'A lot of students are submitting at the same time. Press "Try again" below — your answers are still selected.',
+        data.error,
+        true
+      );
+      return;
+    }
+    if(data.error){
+      showDiagnostic(
+        'Something went wrong',
+        'We could not record your submission. The server returned:',
+        data.error,
+        true
+      );
+      return;
+    }
+
+    showResult(data.score, data.total, data.pct);
+    return;
+  }
 }
 
-function showDiagnostic(title, message, detail){
+function showDiagnostic(title, message, detail, allowRetry){
   document.getElementById('blockedTitle').textContent = title;
   document.getElementById('blockedMsg').textContent = message;
   const detailEl = document.getElementById('blockedDetail');
   detailEl.textContent = detail;
   detailEl.classList.remove('hidden');
+  // "Try again" resubmits the SAME answers array, which is never cleared by
+  // a failed attempt — only genuinely terminal states (like already_passed)
+  // omit this button, since retrying those would just repeat the same result.
+  document.getElementById('blockedRetryBtn').classList.toggle('hidden', !allowRetry);
   showScreen('blocked');
 }
 
