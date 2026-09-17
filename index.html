@@ -315,6 +315,7 @@
     <div class="batch-row">
       <select id="batchMonth">
         <option value="">Month&hellip;</option>
+        <option value="07">July</option>
         <option value="08">August</option>
         <option value="09">September</option>
         <option value="10">October</option>
@@ -1360,7 +1361,7 @@ for(let d = 1; d <= 31; d++){
   batchDaySelect.appendChild(opt);
 }
 
-const MONTH_NAMES = { '08':'August', '09':'September', '10':'October', '11':'November', '12':'December' };
+const MONTH_NAMES = { '07':'July', '08':'August', '09':'September', '10':'October', '11':'November', '12':'December' };
 
 function setFieldValid(fieldId, isValid){
   document.getElementById(fieldId).classList.toggle('invalid', !isValid);
