@@ -446,7 +446,7 @@
 // ============================================================
 // CONFIG — paste your deployed Apps Script Web App URL below.
 // ============================================================
-const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw0Zk3nsZvUsnTjEpxPe_XOmVb15qbnbZ2jHTK1ddqV94zu2vETTRrhBCm3Bw2BeYNhAA/exec";
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyy4cRkC-H_IU7X0iibg7lP78xUReuEsQ7sl50MBsVtZv3zL8ZqL3A97GvBXV0hf_JpPA/exec";
 
 // ============================================================
 // Assessment catalog — each entry maps to a question bank below.
@@ -1739,18 +1739,7 @@ async function submitQuiz(timedOut){
       document.getElementById('blockedTitle').textContent = 'Already completed';
       document.getElementById('blockedMsg').textContent =
         `Our records show ${student.email} already passed ${activeAssessment.title}. No need to retake it.`;
-      // TEMPORARY DIAGNOSTIC: show exactly how many matching rows the server
-      // actually found, so this can be checked without opening dev tools.
-      // Safe to remove this whole "if" block once the issue is resolved —
-      // the two lines below it (hiding the detail box and retry button)
-      // should stay.
-      if(typeof data.matchedRows === 'number'){
-        const detailEl = document.getElementById('blockedDetail');
-        detailEl.textContent = `[Diagnostic] Server found ${data.matchedRows} matching row(s) for ${student.email} on "${activeAssessment.title}".`;
-        detailEl.classList.remove('hidden');
-      } else {
-        document.getElementById('blockedDetail').classList.add('hidden');
-      }
+      document.getElementById('blockedDetail').classList.add('hidden');
       document.getElementById('blockedRetryBtn').classList.add('hidden');
       showScreen('blocked');
       return;
