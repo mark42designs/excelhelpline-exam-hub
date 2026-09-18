@@ -1739,7 +1739,18 @@ async function submitQuiz(timedOut){
       document.getElementById('blockedTitle').textContent = 'Already completed';
       document.getElementById('blockedMsg').textContent =
         `Our records show ${student.email} already passed ${activeAssessment.title}. No need to retake it.`;
-      document.getElementById('blockedDetail').classList.add('hidden');
+      // TEMPORARY DIAGNOSTIC: show exactly how many matching rows the server
+      // actually found, so this can be checked without opening dev tools.
+      // Safe to remove this whole "if" block once the issue is resolved —
+      // the two lines below it (hiding the detail box and retry button)
+      // should stay.
+      if(typeof data.matchedRows === 'number'){
+        const detailEl = document.getElementById('blockedDetail');
+        detailEl.textContent = `[Diagnostic] Server found ${data.matchedRows} matching row(s) for ${student.email} on "${activeAssessment.title}".`;
+        detailEl.classList.remove('hidden');
+      } else {
+        document.getElementById('blockedDetail').classList.add('hidden');
+      }
       document.getElementById('blockedRetryBtn').classList.add('hidden');
       showScreen('blocked');
       return;
