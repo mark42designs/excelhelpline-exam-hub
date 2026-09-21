@@ -82,7 +82,7 @@
   .instructions li{font-size:13.5px;line-height:1.6;color:var(--ink);margin-bottom:10px;}
   .instructions li:last-child{margin-bottom:0;}
 
-  .subject-grid{display:grid;grid-template-columns:repeat(3, 1fr);gap:14px;margin-top:8px;}
+  .subject-grid{display:grid;grid-template-columns:repeat(4, 1fr);gap:14px;margin-top:8px;}
   .subject-card{
     border:1.5px solid var(--line);border-radius:14px;padding:24px 16px;text-align:center;
     cursor:pointer;transition:border-color .12s ease, background .12s ease;
@@ -349,6 +349,10 @@
       <div class="subject-name">MS Excel</div>
       <div class="subject-status ready">Available</div>
     </div>
+    <div class="subject-card" id="subjectPowerBI">
+      <div class="subject-name">Power BI</div>
+      <div class="subject-status ready">Upload</div>
+    </div>
     <div class="subject-card" id="subjectSQL">
       <div class="subject-name">SQL</div>
       <div class="subject-status ready">Available</div>
@@ -437,6 +441,35 @@
   </div>
 </div>
 
+<!-- SCREEN 7: POWER BI UPLOAD -->
+<div class="card hidden" id="screen-pbix">
+  <div class="who-strip">
+    <span>Signed in as <b id="pbixWhoName"></b> &middot; <span id="pbixWhoBatch"></span></span>
+    <button id="pbixEditWho">Edit</button>
+  </div>
+  <h1>Upload your Power BI file</h1>
+  <div class="assessment-banner" id="pbixAssessmentBanner"></div>
+  <p class="lead">Select your .pbix file below and click Upload. There's no passcode or time limit for this submission, and it isn't automatically graded — your instructor will review it directly.</p>
+  <div class="field" id="pbixFileField">
+    <label class="required">Power BI file (.pbix)</label>
+    <input type="file" id="pbixFileInput" accept=".pbix">
+    <span class="field-error">Please select a .pbix file to upload.</span>
+  </div>
+  <div class="btn-row">
+    <button class="btn secondary" id="pbixBackBtn">Back</button>
+    <button class="btn" id="pbixUploadBtn" disabled>Upload</button>
+  </div>
+</div>
+
+<!-- SCREEN 8: POWER BI UPLOAD CONFIRMATION -->
+<div class="card hidden" id="screen-pbix-done">
+  <span class="result-badge pass">Received!</span>
+  <p class="lead" style="margin-top:0;">Your Power BI file has been uploaded and recorded. A confirmation email has been sent to your address.</p>
+  <div class="btn-row" style="justify-content:flex-start;">
+    <button class="btn secondary" id="pbixDoneBackBtn">Back to assessments</button>
+  </div>
+</div>
+
 <footer class="note">
   ExcelHelpline has been teaching practical Excel skills since 2018.<br>
   Your responses are kept private and are never shared with third-party organizations.
@@ -501,6 +534,16 @@ const CATALOG = [
   { subject:'python', groupLabel:'Module 3 — Errors & Data Structures', group:'pym3', id:'pym3a2', subjectTab:'Python Class', subjectType:'Module 3 - Activity 2', answerKey:'Python Module 3 - Activity_2 - Answer Key', title:'Module 3 — Activity 2', sub:'Common Exceptions & List vs. Tuple Mutability · 5 questions', status:'ready', passcode:'887158', timerMinutes:15 },
 
   { subject:'python', groupLabel:'Final Exam', group:'pyexam', id:'pyexam', subjectTab:'Python Class', subjectType:'Python Exam', answerKey:'Python Exam - Answer Key', title:'Python Exam', sub:'Comprehensive, Modules 1–3 · 30 questions', status:'ready', passcode:'857224', timerMinutes:60 },
+
+  // Power BI items don't have an answer key, passcode, or timer — clicking
+  // one goes straight to the file-upload screen instead of a quiz. The
+  // title here becomes the exact "Subject Type" value written to the
+  // sheet, so it must exactly match whatever entry your sheet's Subject
+  // Type dropdown (if it has one) expects, the same way "Python Exam" had
+  // to be added to that dropdown earlier.
+  { subject:'powerbi', groupLabel:'Power BI', group:'pbix', id:'pbixact1', title:'Dashboard Activity 1', sub:'Upload your Power BI dashboard file (.pbix)', status:'ready' },
+  { subject:'powerbi', groupLabel:'Power BI', group:'pbix', id:'pbixact2', title:'Dashboard Activity 2', sub:'Upload your Power BI dashboard file (.pbix)', status:'ready' },
+  { subject:'powerbi', groupLabel:'Power BI', group:'pbix', id:'pbixhw', title:'Homework', sub:'Upload your Power BI dashboard file (.pbix)', status:'ready' },
 ];
 
 // ============================================================
@@ -1329,6 +1372,8 @@ const screens = {
   submitting: document.getElementById('screen-submitting'),
   result: document.getElementById('screen-result'),
   blocked: document.getElementById('screen-blocked'),
+  pbix: document.getElementById('screen-pbix'),
+  pbixDone: document.getElementById('screen-pbix-done'),
 };
 function showScreen(name){
   Object.values(screens).forEach(s => s.classList.add('hidden'));
@@ -1410,10 +1455,15 @@ function updateWhoStrip(){
 }
 
 // ---- Screen 1.5: Subject picker --------------------------------
-let activeSubject = null; // 'excel' | 'sql' | 'python'
+let activeSubject = null; // 'excel' | 'sql' | 'python' | 'powerbi'
 document.getElementById('subjectEditWho').addEventListener('click', () => showScreen('start'));
 document.getElementById('subjectExcel').addEventListener('click', () => {
   activeSubject = 'excel';
+  renderPicker();
+  showScreen('picker');
+});
+document.getElementById('subjectPowerBI').addEventListener('click', () => {
+  activeSubject = 'powerbi';
   renderPicker();
   showScreen('picker');
 });
@@ -1479,17 +1529,32 @@ function renderPicker(){
 document.getElementById('editWho').addEventListener('click', () => showScreen('start'));
 document.getElementById('changeSubjectBtn').addEventListener('click', () => showScreen('subject'));
 document.getElementById('backToPickerBtn').addEventListener('click', () => { renderPicker(); showScreen('picker'); });
-document.getElementById('blockedBackBtn').addEventListener('click', () => { renderPicker(); showScreen('picker'); });
+// The blocked/error screen is shared by two independent flows now (quiz
+// submissions and Power BI uploads), so "Try Again" and "Back to
+// assessments" need to know which one actually failed. Each showDiagnostic
+// call sets these right before the screen appears; the defaults below cover
+// the original quiz behavior for any code path that doesn't set them.
+let pendingRetryFn = null;
+let pendingBackFn = null;
+
+document.getElementById('blockedBackBtn').addEventListener('click', () => {
+  if(pendingBackFn){ pendingBackFn(); return; }
+  renderPicker();
+  showScreen('picker');
+});
 document.getElementById('blockedRetryBtn').addEventListener('click', () => {
-  // The answers array was never cleared by a failed attempt, so this
-  // resubmits exactly what the student had already selected — no need to
-  // redo the assessment just because one submission attempt failed.
-  submitQuiz();
+  if(pendingRetryFn) pendingRetryFn();
 });
 
 // ---- Screen 3: Quiz --------------------------------------------
 function startAssessment(item){
   activeAssessment = item;
+  if(item.subject === 'powerbi'){
+    // No passcode, no timer, no scoring for these — go straight to the
+    // upload screen instead of the quiz passcode gate.
+    showPbixUploadScreen();
+    return;
+  }
   document.getElementById('passcodeAssessmentName').textContent = item.title;
   document.getElementById('passcodeInput').value = '';
   setFieldValid('passcodeField', true);
@@ -1739,19 +1804,13 @@ async function submitQuiz(timedOut){
       document.getElementById('blockedTitle').textContent = 'Already completed';
       document.getElementById('blockedMsg').textContent =
         `Our records show ${student.email} already passed ${activeAssessment.title}. No need to retake it.`;
-      // TEMPORARY DIAGNOSTIC: show exactly how many matching rows the server
-      // actually found, so this can be checked without opening dev tools.
-      // Safe to remove this whole "if" block once the issue is resolved —
-      // the two lines below it (hiding the detail box and retry button)
-      // should stay.
-      if(typeof data.matchedRows === 'number'){
-        const detailEl = document.getElementById('blockedDetail');
-        detailEl.textContent = `[Diagnostic] Server found ${data.matchedRows} matching row(s) for ${student.email} on "${activeAssessment.title}".`;
-        detailEl.classList.remove('hidden');
-      } else {
-        document.getElementById('blockedDetail').classList.add('hidden');
-      }
+      document.getElementById('blockedDetail').classList.add('hidden');
       document.getElementById('blockedRetryBtn').classList.add('hidden');
+      // Not a retriable failure, so there's nothing to wire up — but reset
+      // explicitly rather than leaving whatever context an earlier Power BI
+      // upload failure (if any) left behind in this same session.
+      pendingRetryFn = null;
+      pendingBackFn = () => { renderPicker(); showScreen('picker'); };
       showScreen('blocked');
       return;
     }
@@ -1790,7 +1849,7 @@ async function submitQuiz(timedOut){
   }
 }
 
-function showDiagnostic(title, message, detail, allowRetry){
+function showDiagnostic(title, message, detail, allowRetry, retryFn, backFn){
   document.getElementById('blockedTitle').textContent = title;
   document.getElementById('blockedMsg').textContent = message;
   const detailEl = document.getElementById('blockedDetail');
@@ -1800,6 +1859,12 @@ function showDiagnostic(title, message, detail, allowRetry){
   // a failed attempt — only genuinely terminal states (like already_passed)
   // omit this button, since retrying those would just repeat the same result.
   document.getElementById('blockedRetryBtn').classList.toggle('hidden', !allowRetry);
+  // retryFn/backFn tell "Try Again" and "Back to assessments" which flow
+  // (quiz or Power BI upload) actually failed, so they redo/return to the
+  // right place. Callers that don't pass them get the quiz-flow defaults,
+  // since that's the only flow that existed before Power BI uploads.
+  pendingRetryFn = retryFn || (() => submitQuiz());
+  pendingBackFn = backFn || (() => { renderPicker(); showScreen('picker'); });
   showScreen('blocked');
 }
 
@@ -1914,6 +1979,188 @@ function launchConfetti(){
 
   // Clean up once every piece has finished falling.
   setTimeout(() => container.remove(), 5500);
+}
+
+// ============================================================
+// Power BI file upload — a separate, independent flow from the quiz
+// system above. No passcode, no timer, no automatic grading: a student
+// picks a .pbix file, it's uploaded and logged, and they get a
+// confirmation email. Reuses the shared "submitting" and "blocked" screens
+// from the quiz flow, but never touches quiz state (questions/answers/
+// activeAssessment) and is wired into the shared retry/back context
+// (pendingRetryFn/pendingBackFn) so a failure here retries the upload,
+// not a quiz submission.
+// ============================================================
+const PBIX_MAX_SIZE_MB = 25; // Apps Script Web Apps have a practical request-size
+                              // ceiling, and base64 encoding inflates a file by about
+                              // a third on top of that — this keeps submissions
+                              // comfortably under whatever that ceiling turns out to
+                              // be in practice. Raise it if real student files need
+                              // more room and large uploads are confirmed to work.
+
+function showPbixUploadScreen(){
+  document.getElementById('pbixWhoName').textContent = student.name;
+  document.getElementById('pbixWhoBatch').textContent = student.batchLabel;
+  document.getElementById('pbixAssessmentBanner').textContent = `You are uploading for: ${activeAssessment.title}`;
+  document.getElementById('pbixFileInput').value = '';
+  document.getElementById('pbixUploadBtn').disabled = true;
+  setFieldValid('pbixFileField', true);
+  document.querySelector('#pbixFileField .field-error').textContent = 'Please select a .pbix file to upload.';
+  showScreen('pbix');
+}
+
+document.getElementById('pbixEditWho').addEventListener('click', () => showScreen('start'));
+document.getElementById('pbixBackBtn').addEventListener('click', () => { renderPicker(); showScreen('picker'); });
+document.getElementById('pbixDoneBackBtn').addEventListener('click', () => { renderPicker(); showScreen('picker'); });
+
+document.getElementById('pbixFileInput').addEventListener('change', () => {
+  const file = document.getElementById('pbixFileInput').files[0];
+  const uploadBtn = document.getElementById('pbixUploadBtn');
+  const errorEl = document.querySelector('#pbixFileField .field-error');
+
+  if(!file){
+    uploadBtn.disabled = true;
+    return;
+  }
+  if(!file.name.toLowerCase().endsWith('.pbix')){
+    errorEl.textContent = 'Please select a .pbix file.';
+    setFieldValid('pbixFileField', false);
+    uploadBtn.disabled = true;
+    return;
+  }
+  if(file.size > PBIX_MAX_SIZE_MB * 1024 * 1024){
+    errorEl.textContent = `This file is larger than ${PBIX_MAX_SIZE_MB}MB. Please check with your instructor if your file is too large to upload here.`;
+    setFieldValid('pbixFileField', false);
+    uploadBtn.disabled = true;
+    return;
+  }
+  setFieldValid('pbixFileField', true);
+  uploadBtn.disabled = false;
+});
+
+document.getElementById('pbixUploadBtn').addEventListener('click', () => {
+  const file = document.getElementById('pbixFileInput').files[0];
+  if(!file) return;
+  submitPbixUpload(file);
+});
+
+async function submitPbixUpload(file){
+  showScreen('submitting');
+  document.getElementById('submittingMsg').textContent = 'Uploading your Power BI file…';
+
+  let base64Data;
+  try {
+    base64Data = await new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result.split(',')[1]); // strip the "data:...;base64," prefix
+      reader.onerror = () => reject(reader.error);
+      reader.readAsDataURL(file);
+    });
+  } catch (readErr) {
+    showDiagnostic(
+      'Could not read the file',
+      'Your browser was unable to read the selected file. Please try selecting it again.',
+      String(readErr),
+      true,
+      () => submitPbixUpload(file),
+      () => { renderPicker(); showScreen('picker'); }
+    );
+    return;
+  }
+
+  const payload = {
+    uploadType: 'pbix',
+    name: student.name,
+    email: student.email,
+    batch: student.batchLabel,
+    subjectType: activeAssessment.title, // "Dashboard Activity 1" / "Dashboard Activity 2" / "Homework"
+    fileName: file.name,
+    mimeType: file.type || 'application/octet-stream',
+    fileData: base64Data,
+  };
+
+  const MAX_ATTEMPTS = 5;
+  const RETRY_DELAY_MS = 3000;
+
+  for(let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++){
+    let res;
+    try {
+      res = await fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        body: JSON.stringify(payload),
+      });
+    } catch (networkErr) {
+      if(attempt < MAX_ATTEMPTS){
+        document.getElementById('submittingMsg').textContent =
+          `Connection hiccup — reconnecting (attempt ${attempt + 1} of ${MAX_ATTEMPTS})…`;
+        await new Promise(r => setTimeout(r, RETRY_DELAY_MS));
+        continue;
+      }
+      showDiagnostic(
+        'Could not reach the upload server',
+        'We tried several times but the connection kept failing. Check your internet connection, then press "Try again" below — your file is still selected.',
+        String(networkErr),
+        true,
+        () => submitPbixUpload(file),
+        () => { renderPicker(); showScreen('picker'); }
+      );
+      return;
+    }
+
+    const rawText = await res.text();
+    let data;
+    try {
+      data = JSON.parse(rawText);
+    } catch (parseErr) {
+      if(attempt < MAX_ATTEMPTS){
+        document.getElementById('submittingMsg').textContent =
+          `Unexpected response — retrying (attempt ${attempt + 1} of ${MAX_ATTEMPTS})…`;
+        await new Promise(r => setTimeout(r, RETRY_DELAY_MS));
+        continue;
+      }
+      showDiagnostic(
+        `Server responded with HTTP ${res.status}, but not JSON`,
+        'This usually means the upload could not be processed by the server. Press "Try again" below, or check with your instructor if it keeps happening. Here is the raw response so you can see what Google actually sent back:',
+        rawText.slice(0, 500),
+        true,
+        () => submitPbixUpload(file),
+        () => { renderPicker(); showScreen('picker'); }
+      );
+      return;
+    }
+
+    if(data.error === 'server_busy_please_retry'){
+      if(attempt < MAX_ATTEMPTS){
+        document.getElementById('submittingMsg').textContent =
+          `Lots of submissions right now — retrying (attempt ${attempt + 1} of ${MAX_ATTEMPTS})…`;
+        await new Promise(r => setTimeout(r, RETRY_DELAY_MS));
+        continue;
+      }
+      showDiagnostic(
+        'Server is busy',
+        'A lot of uploads are happening at the same time. Press "Try again" below — your file is still selected.',
+        data.error,
+        true,
+        () => submitPbixUpload(file),
+        () => { renderPicker(); showScreen('picker'); }
+      );
+      return;
+    }
+    if(data.error){
+      showDiagnostic(
+        'Something went wrong',
+        'We could not save your file. The server returned:',
+        data.error,
+        true,
+        () => submitPbixUpload(file),
+        () => { renderPicker(); showScreen('picker'); }
+      );
+      return;
+    }
+
+    showScreen('pbixDone');
+    return;
+  }
 }
 </script>
 
