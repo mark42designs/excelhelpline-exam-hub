@@ -96,6 +96,28 @@
   .subject-status.soon{background:#f3f4f8;color:var(--ink-soft);}
   @media (max-width:480px){.subject-grid{grid-template-columns:1fr;}}
 
+  /* --- Progress checklist (subject picker) --- */
+  .progress-section{margin-top:26px;padding-top:22px;border-top:1px solid var(--line);}
+  .progress-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:6px;}
+  .progress-heading h2{font-family:'Manrope',sans-serif;font-weight:800;font-size:15px;color:var(--navy);margin:0;}
+  .progress-refresh{background:none;border:none;color:var(--navy);font-weight:600;font-size:12.5px;cursor:pointer;padding:0;}
+  .progress-refresh:hover{text-decoration:underline;}
+  .progress-overall{font-size:12.5px;color:var(--ink-soft);margin:0;}
+  .progress-bar-track{height:8px;background:var(--line);border-radius:6px;overflow:hidden;margin:12px 0 20px;}
+  .progress-bar-fill{height:100%;background:var(--green);border-radius:6px;width:0%;transition:width .5s ease;}
+  .progress-group{margin-bottom:16px;}
+  .progress-group:last-child{margin-bottom:0;}
+  .progress-group-label{font-family:'Manrope',sans-serif;font-weight:800;font-size:11.5px;color:var(--navy);text-transform:uppercase;letter-spacing:0.05em;display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:6px;}
+  .progress-group-count{color:var(--ink-soft);font-weight:600;letter-spacing:0;text-transform:none;white-space:nowrap;}
+  .progress-item{display:flex;align-items:center;gap:10px;padding:7px 0;font-size:13.5px;color:var(--ink);border-top:1px solid #f0f2f7;}
+  .progress-item:first-of-type{border-top:none;}
+  .progress-check{width:20px;height:20px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;line-height:1;}
+  .progress-check.done{background:#e7f5e6;color:#2f7d24;}
+  .progress-check.todo{background:#f6f7fb;border:1.5px solid var(--line);}
+  .progress-item.done .progress-item-title{color:var(--ink-soft);}
+  .progress-item-title{flex:1;}
+  .progress-loading, .progress-error{font-size:13px;color:var(--ink-soft);padding:12px 0 2px;}
+
   label{display:block;font-size:13px;font-weight:600;color:var(--navy);margin:0 0 6px;}
   label.required::after{content:" *";color:var(--red);}
   .field-error{display:none;color:var(--red);font-size:12.5px;margin-top:6px;}
@@ -291,12 +313,13 @@
   <div class="instructions">
     <div class="instructions-title">Instructions</div>
     <ol>
+      <li><b>Use the same Full Name and email every time.</b> Type your Full Name exactly as you want it printed on your certificate, and use the same email address from your very first activity through your final exam — your progress and certificates are tracked by that email, so switching it will split your records.</li>
       <li>Select and take only the Activity, Homework, or Exam you're currently assigned — please don't skip ahead to a later one.</li>
       <li>Enter the passcode for that session, then answer the questions for the subject you selected.</li>
       <li>Activities are timed at 15 minutes and the Exam at 1 hour, starting the moment you begin — Homework has no time limit. If time runs out, whatever you've answered so far is submitted automatically.</li>
       <li>If you pass on your first attempt, there's no need to retake it — your score is already recorded. You'll land on a confirmation screen showing your result was saved.</li>
       <li>A confirmation email with your results will be sent to the email address you entered.</li>
-      <li>Didn't receive an email? That's completely normal — just take a screenshot of your result and send it to the Zoom chat (for Activities) or the Messenger group chat (for Homework and Exams).</li>
+      <li><b>Didn't receive an email? That's completely normal</b> — just take a screenshot of your result and send it to the Zoom chat (for Activities) or the Messenger group chat (for Homework and Exams).</li>
     </ol>
   </div>
 
@@ -362,6 +385,7 @@
       <div class="subject-status ready">Available</div>
     </div>
   </div>
+  <div id="progressSection"></div>
 </div>
 
 <!-- SCREEN 2: PICKER -->
@@ -1445,6 +1469,7 @@ document.getElementById('continueBtn').addEventListener('click', () => {
   };
   updateWhoStrip();
   showScreen('subject');
+  loadProgress();
 });
 
 function updateWhoStrip(){
@@ -1452,6 +1477,89 @@ function updateWhoStrip(){
   document.getElementById('subjectWhoBatch').textContent = student.batchLabel;
   document.getElementById('whoName').textContent = student.name;
   document.getElementById('whoBatch').textContent = student.batchLabel;
+}
+
+// ---- Progress checklist -------------------------------------
+// Looks up everything this email has completed (across all class tabs) and
+// renders a per-subject checklist of done vs. remaining work on the subject
+// picker screen. Matching is by email — the same key the certificates use —
+// which is why the instructions ask students to keep their email consistent.
+function progressKeyForItem(item){
+  // Must mirror how the backend builds its keys: "TabName||Subject Type".
+  if(item.subject === 'powerbi') return 'Power BI Class||' + item.title;
+  return item.subjectTab + '||' + item.subjectType;
+}
+
+async function loadProgress(){
+  const section = document.getElementById('progressSection');
+  section.className = 'progress-section';
+  section.innerHTML = '<div class="progress-loading">Loading your progress&hellip;</div>';
+
+  let completed = [];
+  try {
+    const res = await fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      body: JSON.stringify({ requestType: 'progress', email: student.email }),
+    });
+    const data = JSON.parse(await res.text());
+    if(data.error) throw new Error(data.error);
+    completed = data.completed || [];
+  } catch (err) {
+    section.innerHTML = '<div class="progress-error">Couldn\'t load your progress right now — you can still pick a subject and continue. <button class="progress-refresh" id="progressRetryBtn">Try again</button></div>';
+    const retry = document.getElementById('progressRetryBtn');
+    if(retry) retry.addEventListener('click', loadProgress);
+    return;
+  }
+  renderProgress(new Set(completed));
+}
+
+function renderProgress(doneSet){
+  const section = document.getElementById('progressSection');
+  const subjectsOrder = [
+    { key:'excel', label:'MS Excel' },
+    { key:'powerbi', label:'Power BI' },
+    { key:'sql', label:'SQL' },
+    { key:'python', label:'Python' },
+  ];
+
+  let totalItems = 0, totalDone = 0, groupsHtml = '';
+  subjectsOrder.forEach(subj => {
+    const items = CATALOG.filter(it => it.subject === subj.key && it.status === 'ready');
+    if(!items.length) return;
+    let doneCount = 0, rows = '';
+    items.forEach(it => {
+      const isDone = doneSet.has(progressKeyForItem(it));
+      if(isDone) doneCount++;
+      totalItems++;
+      rows += `<div class="progress-item ${isDone?'done':''}">`
+        + `<span class="progress-check ${isDone?'done':'todo'}">${isDone?'✓':''}</span>`
+        + `<span class="progress-item-title">${it.title}</span>`
+        + `</div>`;
+    });
+    totalDone += doneCount;
+    groupsHtml += `<div class="progress-group">`
+      + `<div class="progress-group-label">${subj.label} <span class="progress-group-count">${doneCount}/${items.length} done</span></div>`
+      + rows
+      + `</div>`;
+  });
+
+  const pct = totalItems ? Math.round((totalDone/totalItems)*100) : 0;
+  section.className = 'progress-section';
+  section.innerHTML =
+    `<div class="progress-heading">`
+      + `<h2>Your progress</h2>`
+      + `<button class="progress-refresh" id="progressRefreshBtn">Refresh</button>`
+    + `</div>`
+    + `<p class="progress-overall">${totalDone} of ${totalItems} completed (${pct}%).</p>`
+    + `<div class="progress-bar-track"><div class="progress-bar-fill"></div></div>`
+    + groupsHtml;
+
+  document.getElementById('progressRefreshBtn').addEventListener('click', loadProgress);
+  // animate the bar on the next frame so it eases to width instead of snapping
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    const fill = section.querySelector('.progress-bar-fill');
+    if(fill) fill.style.width = pct + '%';
+  }));
 }
 
 // ---- Screen 1.5: Subject picker --------------------------------
