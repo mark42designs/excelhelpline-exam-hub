@@ -1,0 +1,321 @@
+Order ID,Order Date,Region,City,Category,Product,Customer Segment,Sales Rep,Quantity,Unit Price,Sales,Cost,Profit
+ORD-1290,2025-01-01,Metro Manila,Quezon City,Personal Care,Shampoo Bottle,Walk-in,Mica Tan,20,260,5200,2860.0,2340.0
+ORD-1268,2025-01-02,Visayas,Tacloban,Beverages,Bottled Water Pack,Walk-in,Karla Vega,20,180,3600,2160.0,1440.0
+ORD-1097,2025-01-08,Visayas,Cebu City,Beverages,Juice Pack,Institutional,Deo Ramos,16,260,4160,2745.6,1414.4
+ORD-1285,2025-01-10,Metro Manila,Taguig,Produce,Salad Mix,Institutional,Mica Tan,31,150,4650,3022.5,1627.5
+ORD-1034,2025-01-14,Luzon,Pampanga,Frozen,Frozen Meat Pack,Online,Deo Ramos,3,650,1950,1521.0,429.0
+ORD-1110,2025-01-17,Metro Manila,Pasig,Frozen,Frozen Vegetables,Online,Mica Tan,19,210,3990,2473.8,1516.2
+ORD-1141,2025-01-17,Visayas,Cebu City,Snacks,Mixed Nuts Pack,Walk-in,Mica Tan,20,210,4200,2646.0,1554.0
+ORD-1317,2025-01-17,Metro Manila,Makati,Personal Care,Soap 4-Pack,Online,Deo Ramos,30,140,4200,2100.0,2100.0
+ORD-1264,2025-01-17,Metro Manila,Manila,Produce,Fresh Vegetable Pack,Institutional,Mica Tan,16,220,3520,2464.0,1056.0
+ORD-1061,2025-01-18,Visayas,Cebu City,Snacks,Mixed Nuts Pack,Online,Mica Tan,13,210,2730,1719.9,1010.1
+ORD-1028,2025-01-18,Visayas,Iloilo,Beverages,Bottled Water Pack,Walk-in,Karla Vega,23,180,4140,2484.0,1656.0
+ORD-1225,2025-01-22,Luzon,Baguio,Household,Tissue Bundle,Institutional,Paulo Reyes,18,220,3960,2296.8,1663.2
+ORD-1027,2025-01-24,Luzon,Bulacan,Snacks,Chips Multipack,Institutional,Karla Vega,20,240,4800,3360.0,1440.0
+ORD-1204,2025-01-27,Visayas,Bacolod,Household,Dishwash Liquid,Institutional,Jenny Sy,10,150,1500,825.0,675.0
+ORD-1203,2025-01-28,Visayas,Cebu City,Frozen,Ice Cream Tub,Walk-in,Deo Ramos,16,320,5120,3072.0,2048.0
+ORD-1146,2025-01-28,Visayas,Cebu City,Household,Dishwash Liquid,Walk-in,Paulo Reyes,28,150,4200,2310.0,1890.0
+ORD-1186,2025-01-30,Luzon,Laguna,Personal Care,Soap 4-Pack,Walk-in,Mica Tan,6,140,840,420.0,420.0
+ORD-1263,2025-01-31,Visayas,Cebu City,Household,Dishwash Liquid,Institutional,Paulo Reyes,36,150,5400,2970.0,2430.0
+ORD-1165,2025-02-01,Metro Manila,Taguig,Produce,Fresh Vegetable Pack,Online,Jenny Sy,7,220,1540,1078.0,462.0
+ORD-1280,2025-02-02,Metro Manila,Pasig,Snacks,Assorted Biscuits,Walk-in,Deo Ramos,40,190,7600,4940.0,2660.0
+ORD-1314,2025-02-02,Visayas,Tacloban,Household,Tissue Bundle,Online,Paulo Reyes,7,220,1540,893.2,646.8
+ORD-1207,2025-02-03,Luzon,Batangas,Frozen,Ice Cream Tub,Institutional,Karla Vega,7,320,2240,1344.0,896.0
+ORD-1134,2025-02-04,Metro Manila,Pasig,Frozen,Frozen Meat Pack,Walk-in,Deo Ramos,9,650,5850,4563.0,1287.0
+ORD-1170,2025-02-04,Mindanao,Cagayan de Oro,Household,Tissue Bundle,Online,Karla Vega,6,220,1320,765.6,554.4
+ORD-1048,2025-02-05,Luzon,Pampanga,Produce,Fresh Vegetable Pack,Institutional,Karla Vega,18,220,3960,2772.0,1188.0
+ORD-1117,2025-02-06,Luzon,Baguio,Produce,Fruit Basket,Institutional,Paulo Reyes,18,480,8640,5875.2,2764.8
+ORD-1135,2025-02-06,Visayas,Bacolod,Household,Tissue Bundle,Online,Paulo Reyes,10,220,2200,1276.0,924.0
+ORD-1158,2025-02-08,Metro Manila,Makati,Snacks,Mixed Nuts Pack,Institutional,Jenny Sy,7,210,1470,926.1,543.9
+ORD-1211,2025-02-10,Visayas,Tacloban,Beverages,Ground Coffee,Institutional,Jenny Sy,20,320,6400,3968.0,2432.0
+ORD-1281,2025-02-13,Luzon,Laguna,Household,Tissue Bundle,Walk-in,Paulo Reyes,7,220,1540,893.2,646.8
+ORD-1206,2025-02-14,Mindanao,Cagayan de Oro,Household,Dishwash Liquid,Online,Deo Ramos,36,150,5400,2970.0,2430.0
+ORD-1010,2025-02-16,Metro Manila,Manila,Household,Dishwash Liquid,Institutional,Mica Tan,12,150,1800,990.0,810.0
+ORD-1149,2025-02-17,Metro Manila,Pasig,Personal Care,Toothpaste,Online,Jenny Sy,8,130,1040,540.8,499.2
+ORD-1190,2025-02-17,Metro Manila,Quezon City,Snacks,Chips Multipack,Institutional,Deo Ramos,16,240,3840,2688.0,1152.0
+ORD-1023,2025-02-18,Mindanao,General Santos,Frozen,Frozen Meat Pack,Walk-in,Mica Tan,7,650,4550,3549.0,1001.0
+ORD-1232,2025-02-20,Visayas,Iloilo,Household,Laundry Detergent,Online,Jenny Sy,7,380,2660,1596.0,1064.0
+ORD-1305,2025-02-20,Luzon,Pampanga,Beverages,Juice Pack,Online,Karla Vega,9,260,2340,1544.4,795.6
+ORD-1005,2025-02-20,Mindanao,Davao,Produce,Salad Mix,Online,Deo Ramos,32,150,4800,3120.0,1680.0
+ORD-1230,2025-02-22,Visayas,Bacolod,Snacks,Mixed Nuts Pack,Walk-in,Jenny Sy,5,210,1050,661.5,388.5
+ORD-1008,2025-02-23,Mindanao,Davao,Household,Dishwash Liquid,Institutional,Deo Ramos,12,150,1800,990.0,810.0
+ORD-1248,2025-02-24,Metro Manila,Taguig,Household,Tissue Bundle,Walk-in,Paulo Reyes,5,220,1100,638.0,462.0
+ORD-1320,2025-02-25,Metro Manila,Manila,Produce,Fresh Vegetable Pack,Institutional,Paulo Reyes,15,220,3300,2310.0,990.0
+ORD-1007,2025-02-25,Luzon,Laguna,Beverages,Bottled Water Pack,Institutional,Deo Ramos,13,180,2340,1404.0,936.0
+ORD-1287,2025-02-26,Luzon,Laguna,Snacks,Chips Multipack,Institutional,Deo Ramos,18,240,4320,3024.0,1296.0
+ORD-1168,2025-02-26,Mindanao,Zamboanga,Snacks,Chips Multipack,Online,Karla Vega,13,240,3120,2184.0,936.0
+ORD-1267,2025-02-27,Visayas,Bacolod,Snacks,Assorted Biscuits,Institutional,Paulo Reyes,10,190,1900,1235.0,665.0
+ORD-1102,2025-02-28,Visayas,Cebu City,Household,Dishwash Liquid,Institutional,Mica Tan,14,150,2100,1155.0,945.0
+ORD-1142,2025-02-28,Metro Manila,Pasig,Snacks,Assorted Biscuits,Online,Paulo Reyes,35,190,6650,4322.5,2327.5
+ORD-1071,2025-02-28,Mindanao,Davao,Snacks,Assorted Biscuits,Institutional,Mica Tan,21,190,3990,2593.5,1396.5
+ORD-1300,2025-03-02,Mindanao,Zamboanga,Personal Care,Toothpaste,Walk-in,Paulo Reyes,20,130,2600,1352.0,1248.0
+ORD-1215,2025-03-03,Visayas,Cebu City,Frozen,Frozen Meat Pack,Institutional,Karla Vega,10,650,6500,5070.0,1430.0
+ORD-1294,2025-03-06,Metro Manila,Quezon City,Beverages,Juice Pack,Institutional,Deo Ramos,12,260,3120,2059.2,1060.8
+ORD-1015,2025-03-06,Luzon,Laguna,Snacks,Assorted Biscuits,Walk-in,Karla Vega,12,190,2280,1482.0,798.0
+ORD-1011,2025-03-07,Mindanao,Zamboanga,Household,Dishwash Liquid,Institutional,Paulo Reyes,23,150,3450,1897.5,1552.5
+ORD-1219,2025-03-09,Visayas,Tacloban,Personal Care,Shampoo Bottle,Walk-in,Mica Tan,7,260,1820,1001.0,819.0
+ORD-1182,2025-03-09,Luzon,Pampanga,Household,Tissue Bundle,Online,Mica Tan,18,220,3960,2296.8,1663.2
+ORD-1104,2025-03-09,Luzon,Laguna,Household,Dishwash Liquid,Online,Mica Tan,35,150,5250,2887.5,2362.5
+ORD-1260,2025-03-09,Luzon,Batangas,Frozen,Ice Cream Tub,Walk-in,Paulo Reyes,11,320,3520,2112.0,1408.0
+ORD-1120,2025-03-11,Visayas,Tacloban,Produce,Fruit Basket,Institutional,Paulo Reyes,19,480,9120,6201.6,2918.4
+ORD-1116,2025-03-11,Luzon,Pampanga,Household,Tissue Bundle,Online,Karla Vega,6,220,1320,765.6,554.4
+ORD-1296,2025-03-11,Mindanao,Davao,Frozen,Ice Cream Tub,Online,Mica Tan,20,320,6400,3840.0,2560.0
+ORD-1288,2025-03-11,Mindanao,Zamboanga,Beverages,Bottled Water Pack,Walk-in,Karla Vega,17,180,3060,1836.0,1224.0
+ORD-1101,2025-03-14,Metro Manila,Makati,Frozen,Ice Cream Tub,Online,Deo Ramos,9,320,2880,1728.0,1152.0
+ORD-1155,2025-03-14,Luzon,Laguna,Personal Care,Soap 4-Pack,Online,Mica Tan,38,140,5320,2660.0,2660.0
+ORD-1233,2025-03-17,Visayas,Tacloban,Produce,Fresh Vegetable Pack,Online,Karla Vega,9,220,1980,1386.0,594.0
+ORD-1055,2025-03-18,Metro Manila,Manila,Frozen,Frozen Meat Pack,Walk-in,Jenny Sy,5,650,3250,2535.0,715.0
+ORD-1243,2025-03-18,Luzon,Pampanga,Produce,Fruit Basket,Online,Deo Ramos,9,480,4320,2937.6,1382.4
+ORD-1249,2025-03-18,Mindanao,Cagayan de Oro,Frozen,Frozen Vegetables,Online,Mica Tan,20,210,4200,2604.0,1596.0
+ORD-1262,2025-03-20,Mindanao,Zamboanga,Frozen,Frozen Vegetables,Online,Deo Ramos,15,210,3150,1953.0,1197.0
+ORD-1173,2025-03-22,Luzon,Batangas,Produce,Salad Mix,Walk-in,Deo Ramos,35,150,5250,3412.5,1837.5
+ORD-1126,2025-03-22,Visayas,Iloilo,Produce,Fruit Basket,Institutional,Paulo Reyes,9,480,4320,2937.6,1382.4
+ORD-1227,2025-03-23,Mindanao,Cagayan de Oro,Produce,Fresh Vegetable Pack,Walk-in,Paulo Reyes,6,220,1320,924.0,396.0
+ORD-1269,2025-03-24,Visayas,Bacolod,Household,Dishwash Liquid,Walk-in,Mica Tan,15,150,2250,1237.5,1012.5
+ORD-1228,2025-03-27,Mindanao,Davao,Snacks,Chips Multipack,Online,Mica Tan,19,240,4560,3192.0,1368.0
+ORD-1247,2025-03-27,Visayas,Bacolod,Produce,Salad Mix,Walk-in,Jenny Sy,32,150,4800,3120.0,1680.0
+ORD-1282,2025-03-31,Luzon,Baguio,Produce,Fruit Basket,Institutional,Paulo Reyes,5,480,2400,1632.0,768.0
+ORD-1256,2025-03-31,Visayas,Bacolod,Snacks,Assorted Biscuits,Online,Mica Tan,37,190,7030,4569.5,2460.5
+ORD-1103,2025-04-01,Metro Manila,Pasig,Beverages,Juice Pack,Walk-in,Paulo Reyes,17,260,4420,2917.2,1502.8
+ORD-1068,2025-04-01,Luzon,Laguna,Personal Care,Shampoo Bottle,Institutional,Deo Ramos,8,260,2080,1144.0,936.0
+ORD-1040,2025-04-03,Metro Manila,Taguig,Snacks,Chips Multipack,Walk-in,Jenny Sy,6,240,1440,1008.0,432.0
+ORD-1074,2025-04-03,Mindanao,General Santos,Beverages,Juice Pack,Online,Jenny Sy,18,260,4680,3088.8,1591.2
+ORD-1087,2025-04-06,Mindanao,Zamboanga,Household,Tissue Bundle,Online,Jenny Sy,9,220,1980,1148.4,831.6
+ORD-1252,2025-04-07,Visayas,Bacolod,Frozen,Frozen Meat Pack,Walk-in,Jenny Sy,5,650,3250,2535.0,715.0
+ORD-1316,2025-04-08,Mindanao,Davao,Produce,Fresh Vegetable Pack,Institutional,Karla Vega,13,220,2860,2002.0,858.0
+ORD-1242,2025-04-09,Visayas,Iloilo,Personal Care,Toothpaste,Walk-in,Mica Tan,28,130,3640,1892.8,1747.2
+ORD-1051,2025-04-10,Metro Manila,Quezon City,Personal Care,Soap 4-Pack,Institutional,Deo Ramos,24,140,3360,1680.0,1680.0
+ORD-1201,2025-04-10,Metro Manila,Quezon City,Frozen,Frozen Meat Pack,Online,Paulo Reyes,5,650,3250,2535.0,715.0
+ORD-1217,2025-04-12,Metro Manila,Manila,Household,Laundry Detergent,Walk-in,Paulo Reyes,20,380,7600,4560.0,3040.0
+ORD-1004,2025-04-14,Metro Manila,Makati,Produce,Salad Mix,Online,Jenny Sy,34,150,5100,3315.0,1785.0
+ORD-1082,2025-04-16,Visayas,Bacolod,Personal Care,Toothpaste,Walk-in,Deo Ramos,27,130,3510,1825.2,1684.8
+ORD-1292,2025-04-18,Visayas,Cebu City,Personal Care,Soap 4-Pack,Online,Paulo Reyes,29,140,4060,2030.0,2030.0
+ORD-1309,2025-04-22,Metro Manila,Quezon City,Frozen,Frozen Meat Pack,Institutional,Paulo Reyes,4,650,2600,2028.0,572.0
+ORD-1218,2025-04-26,Metro Manila,Quezon City,Produce,Fresh Vegetable Pack,Walk-in,Jenny Sy,19,220,4180,2926.0,1254.0
+ORD-1047,2025-04-27,Luzon,Batangas,Beverages,Ground Coffee,Institutional,Karla Vega,8,320,2560,1587.2,972.8
+ORD-1060,2025-04-27,Luzon,Pampanga,Beverages,Bottled Water Pack,Walk-in,Karla Vega,5,180,900,540.0,360.0
+ORD-1088,2025-04-27,Mindanao,General Santos,Frozen,Frozen Vegetables,Online,Mica Tan,16,210,3360,2083.2,1276.8
+ORD-1229,2025-04-28,Metro Manila,Pasig,Household,Dishwash Liquid,Institutional,Jenny Sy,16,150,2400,1320.0,1080.0
+ORD-1301,2025-04-29,Metro Manila,Quezon City,Beverages,Bottled Water Pack,Institutional,Deo Ramos,22,180,3960,2376.0,1584.0
+ORD-1153,2025-05-01,Mindanao,General Santos,Snacks,Assorted Biscuits,Walk-in,Paulo Reyes,14,190,2660,1729.0,931.0
+ORD-1178,2025-05-03,Luzon,Laguna,Produce,Fresh Vegetable Pack,Online,Paulo Reyes,16,220,3520,2464.0,1056.0
+ORD-1037,2025-05-04,Metro Manila,Pasig,Beverages,Ground Coffee,Institutional,Karla Vega,8,320,2560,1587.2,972.8
+ORD-1083,2025-05-04,Luzon,Batangas,Household,Tissue Bundle,Walk-in,Karla Vega,17,220,3740,2169.2,1570.8
+ORD-1250,2025-05-04,Visayas,Tacloban,Personal Care,Toothpaste,Walk-in,Karla Vega,25,130,3250,1690.0,1560.0
+ORD-1112,2025-05-05,Visayas,Iloilo,Frozen,Frozen Vegetables,Institutional,Deo Ramos,12,210,2520,1562.4,957.6
+ORD-1124,2025-05-08,Luzon,Batangas,Beverages,Juice Pack,Online,Paulo Reyes,7,260,1820,1201.2,618.8
+ORD-1109,2025-05-08,Mindanao,General Santos,Frozen,Frozen Meat Pack,Institutional,Mica Tan,11,650,7150,5577.0,1573.0
+ORD-1183,2025-05-08,Mindanao,Cagayan de Oro,Produce,Fresh Vegetable Pack,Walk-in,Karla Vega,7,220,1540,1078.0,462.0
+ORD-1095,2025-05-10,Luzon,Pampanga,Personal Care,Shampoo Bottle,Walk-in,Karla Vega,20,260,5200,2860.0,2340.0
+ORD-1319,2025-05-10,Metro Manila,Quezon City,Household,Tissue Bundle,Institutional,Karla Vega,3,220,660,382.8,277.2
+ORD-1213,2025-05-11,Metro Manila,Makati,Produce,Fruit Basket,Online,Deo Ramos,7,480,3360,2284.8,1075.2
+ORD-1255,2025-05-11,Luzon,Baguio,Beverages,Soft Drinks Case,Online,Paulo Reyes,5,540,2700,2025.0,675.0
+ORD-1199,2025-05-12,Visayas,Tacloban,Produce,Fruit Basket,Online,Deo Ramos,15,480,7200,4896.0,2304.0
+ORD-1154,2025-05-13,Visayas,Iloilo,Beverages,Ground Coffee,Institutional,Paulo Reyes,13,320,4160,2579.2,1580.8
+ORD-1025,2025-05-15,Visayas,Cebu City,Beverages,Ground Coffee,Walk-in,Paulo Reyes,4,320,1280,793.6,486.4
+ORD-1018,2025-05-16,Visayas,Cebu City,Produce,Fruit Basket,Walk-in,Paulo Reyes,9,480,4320,2937.6,1382.4
+ORD-1094,2025-05-19,Visayas,Cebu City,Produce,Fruit Basket,Walk-in,Jenny Sy,12,480,5760,3916.8,1843.2
+ORD-1284,2025-05-19,Mindanao,Cagayan de Oro,Frozen,Ice Cream Tub,Institutional,Deo Ramos,18,320,5760,3456.0,2304.0
+ORD-1311,2025-05-24,Luzon,Baguio,Snacks,Mixed Nuts Pack,Walk-in,Karla Vega,9,210,1890,1190.7,699.3
+ORD-1318,2025-05-24,Mindanao,Davao,Personal Care,Shampoo Bottle,Institutional,Mica Tan,10,260,2600,1430.0,1170.0
+ORD-1151,2025-05-25,Visayas,Iloilo,Personal Care,Toothpaste,Walk-in,Paulo Reyes,18,130,2340,1216.8,1123.2
+ORD-1111,2025-05-26,Luzon,Laguna,Beverages,Bottled Water Pack,Walk-in,Deo Ramos,27,180,4860,2916.0,1944.0
+ORD-1162,2025-05-28,Metro Manila,Manila,Personal Care,Toothpaste,Online,Jenny Sy,17,130,2210,1149.2,1060.8
+ORD-1200,2025-05-28,Visayas,Tacloban,Household,Laundry Detergent,Institutional,Deo Ramos,7,380,2660,1596.0,1064.0
+ORD-1019,2025-05-31,Mindanao,Cagayan de Oro,Snacks,Mixed Nuts Pack,Institutional,Mica Tan,11,210,2310,1455.3,854.7
+ORD-1100,2025-05-31,Visayas,Bacolod,Beverages,Soft Drinks Case,Online,Deo Ramos,8,540,4320,3240.0,1080.0
+ORD-1145,2025-06-01,Luzon,Baguio,Snacks,Mixed Nuts Pack,Online,Deo Ramos,3,210,630,396.9,233.1
+ORD-1143,2025-06-02,Mindanao,General Santos,Personal Care,Toothpaste,Institutional,Paulo Reyes,26,130,3380,1757.6,1622.4
+ORD-1093,2025-06-02,Luzon,Pampanga,Produce,Salad Mix,Institutional,Deo Ramos,6,150,900,585.0,315.0
+ORD-1108,2025-06-02,Visayas,Bacolod,Beverages,Bottled Water Pack,Institutional,Paulo Reyes,11,180,1980,1188.0,792.0
+ORD-1275,2025-06-04,Visayas,Cebu City,Beverages,Bottled Water Pack,Online,Deo Ramos,22,180,3960,2376.0,1584.0
+ORD-1209,2025-06-04,Luzon,Batangas,Produce,Fruit Basket,Institutional,Jenny Sy,18,480,8640,5875.2,2764.8
+ORD-1138,2025-06-05,Mindanao,Cagayan de Oro,Beverages,Ground Coffee,Online,Karla Vega,20,320,6400,3968.0,2432.0
+ORD-1059,2025-06-06,Mindanao,General Santos,Snacks,Mixed Nuts Pack,Online,Jenny Sy,15,210,3150,1984.5,1165.5
+ORD-1164,2025-06-08,Mindanao,Zamboanga,Personal Care,Soap 4-Pack,Online,Paulo Reyes,31,140,4340,2170.0,2170.0
+ORD-1013,2025-06-09,Mindanao,Davao,Household,Laundry Detergent,Institutional,Deo Ramos,17,380,6460,3876.0,2584.0
+ORD-1089,2025-06-10,Luzon,Bulacan,Personal Care,Shampoo Bottle,Walk-in,Deo Ramos,18,260,4680,2574.0,2106.0
+ORD-1144,2025-06-10,Visayas,Iloilo,Personal Care,Soap 4-Pack,Online,Karla Vega,12,140,1680,840.0,840.0
+ORD-1244,2025-06-11,Visayas,Bacolod,Beverages,Juice Pack,Institutional,Paulo Reyes,9,260,2340,1544.4,795.6
+ORD-1046,2025-06-11,Metro Manila,Makati,Frozen,Ice Cream Tub,Walk-in,Deo Ramos,5,320,1600,960.0,640.0
+ORD-1139,2025-06-13,Mindanao,Davao,Frozen,Ice Cream Tub,Online,Deo Ramos,13,320,4160,2496.0,1664.0
+ORD-1307,2025-06-16,Mindanao,Zamboanga,Produce,Fresh Vegetable Pack,Walk-in,Deo Ramos,14,220,3080,2156.0,924.0
+ORD-1246,2025-06-17,Metro Manila,Quezon City,Frozen,Frozen Meat Pack,Online,Deo Ramos,10,650,6500,5070.0,1430.0
+ORD-1003,2025-06-17,Visayas,Cebu City,Snacks,Assorted Biscuits,Institutional,Karla Vega,6,190,1140,741.0,399.0
+ORD-1193,2025-06-18,Luzon,Bulacan,Personal Care,Toothpaste,Institutional,Jenny Sy,7,130,910,473.2,436.8
+ORD-1289,2025-06-18,Metro Manila,Pasig,Beverages,Ground Coffee,Online,Mica Tan,9,320,2880,1785.6,1094.4
+ORD-1303,2025-06-19,Visayas,Cebu City,Household,Laundry Detergent,Institutional,Karla Vega,9,380,3420,2052.0,1368.0
+ORD-1192,2025-06-19,Visayas,Iloilo,Snacks,Chips Multipack,Online,Jenny Sy,17,240,4080,2856.0,1224.0
+ORD-1058,2025-06-20,Mindanao,General Santos,Beverages,Juice Pack,Online,Mica Tan,7,260,1820,1201.2,618.8
+ORD-1310,2025-06-20,Mindanao,Zamboanga,Snacks,Assorted Biscuits,Online,Paulo Reyes,20,190,3800,2470.0,1330.0
+ORD-1261,2025-06-22,Luzon,Laguna,Frozen,Ice Cream Tub,Online,Mica Tan,18,320,5760,3456.0,2304.0
+ORD-1079,2025-06-23,Luzon,Batangas,Household,Dishwash Liquid,Institutional,Jenny Sy,36,150,5400,2970.0,2430.0
+ORD-1254,2025-06-26,Metro Manila,Quezon City,Household,Tissue Bundle,Online,Jenny Sy,9,220,1980,1148.4,831.6
+ORD-1113,2025-06-27,Luzon,Laguna,Household,Dishwash Liquid,Online,Karla Vega,5,150,750,412.5,337.5
+ORD-1031,2025-06-27,Mindanao,Cagayan de Oro,Frozen,Ice Cream Tub,Walk-in,Karla Vega,12,320,3840,2304.0,1536.0
+ORD-1056,2025-06-28,Luzon,Laguna,Household,Dishwash Liquid,Institutional,Karla Vega,11,150,1650,907.5,742.5
+ORD-1131,2025-06-30,Visayas,Tacloban,Household,Dishwash Liquid,Online,Paulo Reyes,11,150,1650,907.5,742.5
+ORD-1063,2025-06-30,Visayas,Iloilo,Beverages,Juice Pack,Online,Mica Tan,7,260,1820,1201.2,618.8
+ORD-1125,2025-07-03,Visayas,Cebu City,Frozen,Ice Cream Tub,Online,Paulo Reyes,17,320,5440,3264.0,2176.0
+ORD-1293,2025-07-05,Mindanao,General Santos,Frozen,Frozen Meat Pack,Walk-in,Karla Vega,6,650,3900,3042.0,858.0
+ORD-1090,2025-07-07,Metro Manila,Makati,Frozen,Frozen Meat Pack,Online,Deo Ramos,3,650,1950,1521.0,429.0
+ORD-1107,2025-07-08,Mindanao,General Santos,Beverages,Soft Drinks Case,Online,Paulo Reyes,12,540,6480,4860.0,1620.0
+ORD-1312,2025-07-11,Metro Manila,Makati,Frozen,Frozen Meat Pack,Online,Karla Vega,10,650,6500,5070.0,1430.0
+ORD-1130,2025-07-11,Metro Manila,Quezon City,Household,Dishwash Liquid,Online,Paulo Reyes,14,150,2100,1155.0,945.0
+ORD-1194,2025-07-12,Luzon,Pampanga,Personal Care,Toothpaste,Online,Karla Vega,14,130,1820,946.4,873.6
+ORD-1315,2025-07-13,Metro Manila,Makati,Beverages,Bottled Water Pack,Institutional,Karla Vega,12,180,2160,1296.0,864.0
+ORD-1119,2025-07-13,Visayas,Iloilo,Household,Dishwash Liquid,Walk-in,Paulo Reyes,19,150,2850,1567.5,1282.5
+ORD-1270,2025-07-15,Luzon,Pampanga,Household,Tissue Bundle,Walk-in,Karla Vega,9,220,1980,1148.4,831.6
+ORD-1150,2025-07-16,Luzon,Bulacan,Household,Laundry Detergent,Institutional,Paulo Reyes,9,380,3420,2052.0,1368.0
+ORD-1188,2025-07-17,Visayas,Cebu City,Personal Care,Shampoo Bottle,Walk-in,Mica Tan,12,260,3120,1716.0,1404.0
+ORD-1308,2025-07-18,Luzon,Pampanga,Produce,Salad Mix,Online,Mica Tan,29,150,4350,2827.5,1522.5
+ORD-1265,2025-07-18,Mindanao,Cagayan de Oro,Beverages,Soft Drinks Case,Institutional,Karla Vega,4,540,2160,1620.0,540.0
+ORD-1156,2025-07-20,Visayas,Iloilo,Household,Tissue Bundle,Online,Deo Ramos,20,220,4400,2552.0,1848.0
+ORD-1273,2025-07-22,Luzon,Pampanga,Produce,Fruit Basket,Online,Jenny Sy,9,480,4320,2937.6,1382.4
+ORD-1152,2025-07-22,Metro Manila,Pasig,Household,Laundry Detergent,Online,Karla Vega,8,380,3040,1824.0,1216.0
+ORD-1038,2025-07-23,Visayas,Tacloban,Household,Laundry Detergent,Walk-in,Paulo Reyes,7,380,2660,1596.0,1064.0
+ORD-1223,2025-07-26,Mindanao,Cagayan de Oro,Personal Care,Soap 4-Pack,Institutional,Karla Vega,7,140,980,490.0,490.0
+ORD-1198,2025-07-26,Metro Manila,Taguig,Beverages,Bottled Water Pack,Online,Paulo Reyes,7,180,1260,756.0,504.0
+ORD-1304,2025-07-27,Visayas,Bacolod,Beverages,Juice Pack,Walk-in,Paulo Reyes,12,260,3120,2059.2,1060.8
+ORD-1147,2025-07-27,Luzon,Pampanga,Snacks,Mixed Nuts Pack,Walk-in,Karla Vega,7,210,1470,926.1,543.9
+ORD-1195,2025-07-29,Luzon,Laguna,Household,Dishwash Liquid,Online,Karla Vega,24,150,3600,1980.0,1620.0
+ORD-1169,2025-07-30,Visayas,Tacloban,Frozen,Frozen Vegetables,Online,Mica Tan,7,210,1470,911.4,558.6
+ORD-1251,2025-07-31,Visayas,Iloilo,Beverages,Juice Pack,Walk-in,Paulo Reyes,11,260,2860,1887.6,972.4
+ORD-1049,2025-08-01,Luzon,Bulacan,Produce,Salad Mix,Online,Mica Tan,38,150,5700,3705.0,1995.0
+ORD-1133,2025-08-02,Metro Manila,Quezon City,Household,Tissue Bundle,Online,Deo Ramos,17,220,3740,2169.2,1570.8
+ORD-1091,2025-08-02,Metro Manila,Pasig,Beverages,Soft Drinks Case,Walk-in,Mica Tan,12,540,6480,4860.0,1620.0
+ORD-1239,2025-08-06,Luzon,Batangas,Frozen,Frozen Vegetables,Online,Mica Tan,6,210,1260,781.2,478.8
+ORD-1258,2025-08-07,Metro Manila,Makati,Snacks,Assorted Biscuits,Online,Mica Tan,5,190,950,617.5,332.5
+ORD-1039,2025-08-07,Metro Manila,Pasig,Frozen,Ice Cream Tub,Walk-in,Mica Tan,13,320,4160,2496.0,1664.0
+ORD-1070,2025-08-10,Luzon,Pampanga,Frozen,Frozen Meat Pack,Walk-in,Karla Vega,12,650,7800,6084.0,1716.0
+ORD-1234,2025-08-11,Mindanao,General Santos,Personal Care,Soap 4-Pack,Online,Deo Ramos,9,140,1260,630.0,630.0
+ORD-1024,2025-08-12,Visayas,Tacloban,Frozen,Frozen Vegetables,Walk-in,Mica Tan,14,210,2940,1822.8,1117.2
+ORD-1032,2025-08-13,Metro Manila,Makati,Frozen,Frozen Meat Pack,Walk-in,Deo Ramos,9,650,5850,4563.0,1287.0
+ORD-1066,2025-08-15,Metro Manila,Pasig,Household,Laundry Detergent,Walk-in,Karla Vega,19,380,7220,4332.0,2888.0
+ORD-1029,2025-08-16,Luzon,Baguio,Personal Care,Soap 4-Pack,Institutional,Deo Ramos,24,140,3360,1680.0,1680.0
+ORD-1166,2025-08-16,Metro Manila,Manila,Beverages,Bottled Water Pack,Institutional,Mica Tan,8,180,1440,864.0,576.0
+ORD-1076,2025-08-21,Mindanao,Cagayan de Oro,Produce,Fruit Basket,Online,Deo Ramos,16,480,7680,5222.4,2457.6
+ORD-1274,2025-08-21,Luzon,Bulacan,Frozen,Ice Cream Tub,Online,Deo Ramos,12,320,3840,2304.0,1536.0
+ORD-1159,2025-08-21,Visayas,Cebu City,Produce,Fruit Basket,Institutional,Karla Vega,20,480,9600,6528.0,3072.0
+ORD-1214,2025-08-21,Metro Manila,Makati,Frozen,Frozen Vegetables,Institutional,Deo Ramos,17,210,3570,2213.4,1356.6
+ORD-1185,2025-08-22,Luzon,Pampanga,Household,Tissue Bundle,Walk-in,Jenny Sy,10,220,2200,1276.0,924.0
+ORD-1021,2025-08-23,Metro Manila,Taguig,Frozen,Frozen Meat Pack,Institutional,Deo Ramos,6,650,3900,3042.0,858.0
+ORD-1140,2025-08-23,Luzon,Batangas,Household,Laundry Detergent,Walk-in,Karla Vega,16,380,6080,3648.0,2432.0
+ORD-1205,2025-08-24,Mindanao,Cagayan de Oro,Beverages,Soft Drinks Case,Institutional,Deo Ramos,6,540,3240,2430.0,810.0
+ORD-1240,2025-08-25,Luzon,Laguna,Frozen,Ice Cream Tub,Walk-in,Deo Ramos,17,320,5440,3264.0,2176.0
+ORD-1160,2025-08-25,Luzon,Laguna,Personal Care,Toothpaste,Online,Paulo Reyes,8,130,1040,540.8,499.2
+ORD-1012,2025-08-25,Mindanao,Zamboanga,Snacks,Mixed Nuts Pack,Walk-in,Paulo Reyes,4,210,840,529.2,310.8
+ORD-1197,2025-08-27,Visayas,Iloilo,Produce,Salad Mix,Institutional,Jenny Sy,21,150,3150,2047.5,1102.5
+ORD-1052,2025-08-28,Luzon,Bulacan,Produce,Salad Mix,Institutional,Jenny Sy,30,150,4500,2925.0,1575.0
+ORD-1026,2025-08-29,Metro Manila,Taguig,Frozen,Frozen Meat Pack,Institutional,Deo Ramos,2,650,1300,1014.0,286.0
+ORD-1016,2025-08-29,Metro Manila,Manila,Personal Care,Toothpaste,Walk-in,Deo Ramos,14,130,1820,946.4,873.6
+ORD-1222,2025-08-30,Metro Manila,Manila,Snacks,Mixed Nuts Pack,Online,Karla Vega,10,210,2100,1323.0,777.0
+ORD-1121,2025-08-31,Visayas,Cebu City,Personal Care,Shampoo Bottle,Institutional,Deo Ramos,12,260,3120,1716.0,1404.0
+ORD-1084,2025-09-02,Mindanao,Davao,Household,Dishwash Liquid,Institutional,Karla Vega,34,150,5100,2805.0,2295.0
+ORD-1036,2025-09-02,Metro Manila,Pasig,Household,Dishwash Liquid,Institutional,Jenny Sy,9,150,1350,742.5,607.5
+ORD-1191,2025-09-04,Visayas,Iloilo,Frozen,Frozen Meat Pack,Online,Jenny Sy,6,650,3900,3042.0,858.0
+ORD-1057,2025-09-05,Metro Manila,Makati,Frozen,Frozen Meat Pack,Online,Paulo Reyes,12,650,7800,6084.0,1716.0
+ORD-1128,2025-09-06,Luzon,Pampanga,Household,Dishwash Liquid,Walk-in,Mica Tan,7,150,1050,577.5,472.5
+ORD-1266,2025-09-07,Metro Manila,Taguig,Personal Care,Toothpaste,Institutional,Deo Ramos,35,130,4550,2366.0,2184.0
+ORD-1044,2025-09-08,Visayas,Bacolod,Personal Care,Toothpaste,Walk-in,Karla Vega,34,130,4420,2298.4,2121.6
+ORD-1118,2025-09-08,Luzon,Laguna,Beverages,Ground Coffee,Walk-in,Karla Vega,19,320,6080,3769.6,2310.4
+ORD-1279,2025-09-11,Luzon,Baguio,Personal Care,Shampoo Bottle,Walk-in,Paulo Reyes,16,260,4160,2288.0,1872.0
+ORD-1245,2025-09-12,Visayas,Iloilo,Household,Tissue Bundle,Institutional,Paulo Reyes,11,220,2420,1403.6,1016.4
+ORD-1175,2025-09-13,Visayas,Iloilo,Beverages,Bottled Water Pack,Online,Karla Vega,37,180,6660,3996.0,2664.0
+ORD-1096,2025-09-13,Visayas,Cebu City,Frozen,Ice Cream Tub,Online,Jenny Sy,3,320,960,576.0,384.0
+ORD-1009,2025-09-14,Mindanao,Zamboanga,Household,Tissue Bundle,Walk-in,Paulo Reyes,8,220,1760,1020.8,739.2
+ORD-1065,2025-09-14,Metro Manila,Manila,Household,Dishwash Liquid,Institutional,Jenny Sy,37,150,5550,3052.5,2497.5
+ORD-1306,2025-09-16,Mindanao,Zamboanga,Beverages,Bottled Water Pack,Institutional,Mica Tan,21,180,3780,2268.0,1512.0
+ORD-1291,2025-09-16,Visayas,Tacloban,Personal Care,Shampoo Bottle,Walk-in,Karla Vega,13,260,3380,1859.0,1521.0
+ORD-1224,2025-09-19,Luzon,Bulacan,Beverages,Juice Pack,Online,Karla Vega,16,260,4160,2745.6,1414.4
+ORD-1163,2025-09-20,Visayas,Bacolod,Produce,Fruit Basket,Walk-in,Karla Vega,17,480,8160,5548.8,2611.2
+ORD-1122,2025-09-20,Visayas,Tacloban,Frozen,Frozen Meat Pack,Online,Karla Vega,10,650,6500,5070.0,1430.0
+ORD-1253,2025-09-21,Luzon,Pampanga,Beverages,Bottled Water Pack,Institutional,Jenny Sy,14,180,2520,1512.0,1008.0
+ORD-1075,2025-09-22,Luzon,Pampanga,Produce,Fruit Basket,Walk-in,Paulo Reyes,17,480,8160,5548.8,2611.2
+ORD-1271,2025-09-22,Mindanao,General Santos,Beverages,Soft Drinks Case,Online,Mica Tan,11,540,5940,4455.0,1485.0
+ORD-1064,2025-09-22,Mindanao,General Santos,Snacks,Chips Multipack,Online,Karla Vega,13,240,3120,2184.0,936.0
+ORD-1033,2025-09-24,Visayas,Tacloban,Snacks,Assorted Biscuits,Institutional,Deo Ramos,8,190,1520,988.0,532.0
+ORD-1081,2025-09-25,Metro Manila,Taguig,Personal Care,Shampoo Bottle,Walk-in,Karla Vega,19,260,4940,2717.0,2223.0
+ORD-1295,2025-09-26,Luzon,Batangas,Beverages,Ground Coffee,Institutional,Jenny Sy,8,320,2560,1587.2,972.8
+ORD-1078,2025-09-27,Luzon,Batangas,Frozen,Ice Cream Tub,Online,Mica Tan,20,320,6400,3840.0,2560.0
+ORD-1002,2025-09-28,Visayas,Iloilo,Frozen,Ice Cream Tub,Online,Deo Ramos,6,320,1920,1152.0,768.0
+ORD-1297,2025-09-30,Luzon,Pampanga,Snacks,Chips Multipack,Walk-in,Paulo Reyes,20,240,4800,3360.0,1440.0
+ORD-1241,2025-09-30,Luzon,Batangas,Frozen,Frozen Vegetables,Online,Paulo Reyes,6,210,1260,781.2,478.8
+ORD-1062,2025-09-30,Mindanao,General Santos,Household,Dishwash Liquid,Walk-in,Karla Vega,9,150,1350,742.5,607.5
+ORD-1283,2025-10-02,Mindanao,General Santos,Beverages,Ground Coffee,Walk-in,Mica Tan,8,320,2560,1587.2,972.8
+ORD-1080,2025-10-02,Metro Manila,Taguig,Personal Care,Shampoo Bottle,Institutional,Deo Ramos,16,260,4160,2288.0,1872.0
+ORD-1127,2025-10-04,Luzon,Bulacan,Frozen,Ice Cream Tub,Walk-in,Jenny Sy,3,320,960,576.0,384.0
+ORD-1115,2025-10-04,Mindanao,Zamboanga,Household,Tissue Bundle,Walk-in,Mica Tan,8,220,1760,1020.8,739.2
+ORD-1276,2025-10-06,Metro Manila,Taguig,Frozen,Frozen Meat Pack,Online,Deo Ramos,2,650,1300,1014.0,286.0
+ORD-1259,2025-10-06,Visayas,Bacolod,Snacks,Assorted Biscuits,Institutional,Mica Tan,14,190,2660,1729.0,931.0
+ORD-1174,2025-10-08,Visayas,Iloilo,Personal Care,Shampoo Bottle,Online,Karla Vega,3,260,780,429.0,351.0
+ORD-1237,2025-10-15,Mindanao,Zamboanga,Beverages,Juice Pack,Institutional,Jenny Sy,19,260,4940,3260.4,1679.6
+ORD-1053,2025-10-19,Mindanao,Zamboanga,Frozen,Frozen Vegetables,Online,Deo Ramos,11,210,2310,1432.2,877.8
+ORD-1187,2025-10-19,Luzon,Pampanga,Produce,Fruit Basket,Walk-in,Karla Vega,5,480,2400,1632.0,768.0
+ORD-1299,2025-10-20,Visayas,Bacolod,Beverages,Juice Pack,Institutional,Paulo Reyes,3,260,780,514.8,265.2
+ORD-1157,2025-10-21,Mindanao,Davao,Personal Care,Soap 4-Pack,Institutional,Karla Vega,12,140,1680,840.0,840.0
+ORD-1054,2025-10-21,Visayas,Cebu City,Household,Laundry Detergent,Institutional,Deo Ramos,20,380,7600,4560.0,3040.0
+ORD-1235,2025-10-23,Visayas,Bacolod,Beverages,Bottled Water Pack,Institutional,Karla Vega,20,180,3600,2160.0,1440.0
+ORD-1136,2025-10-24,Mindanao,Cagayan de Oro,Beverages,Soft Drinks Case,Institutional,Paulo Reyes,6,540,3240,2430.0,810.0
+ORD-1030,2025-10-24,Luzon,Pampanga,Personal Care,Shampoo Bottle,Online,Paulo Reyes,10,260,2600,1430.0,1170.0
+ORD-1184,2025-10-25,Visayas,Tacloban,Personal Care,Soap 4-Pack,Online,Jenny Sy,28,140,3920,1960.0,1960.0
+ORD-1067,2025-10-25,Luzon,Pampanga,Beverages,Ground Coffee,Online,Mica Tan,17,320,5440,3372.8,2067.2
+ORD-1189,2025-10-25,Visayas,Bacolod,Produce,Fresh Vegetable Pack,Institutional,Deo Ramos,18,220,3960,2772.0,1188.0
+ORD-1171,2025-10-26,Metro Manila,Manila,Household,Dishwash Liquid,Institutional,Jenny Sy,18,150,2700,1485.0,1215.0
+ORD-1069,2025-10-26,Luzon,Pampanga,Snacks,Mixed Nuts Pack,Walk-in,Mica Tan,12,210,2520,1587.6,932.4
+ORD-1208,2025-10-28,Luzon,Laguna,Produce,Fresh Vegetable Pack,Online,Paulo Reyes,8,220,1760,1232.0,528.0
+ORD-1302,2025-10-28,Mindanao,Davao,Personal Care,Toothpaste,Institutional,Jenny Sy,23,130,2990,1554.8,1435.2
+ORD-1148,2025-10-30,Metro Manila,Manila,Household,Laundry Detergent,Institutional,Karla Vega,17,380,6460,3876.0,2584.0
+ORD-1077,2025-10-30,Luzon,Baguio,Produce,Fruit Basket,Walk-in,Mica Tan,6,480,2880,1958.4,921.6
+ORD-1123,2025-10-31,Luzon,Batangas,Frozen,Frozen Vegetables,Online,Paulo Reyes,19,210,3990,2473.8,1516.2
+ORD-1231,2025-10-31,Visayas,Cebu City,Beverages,Bottled Water Pack,Online,Mica Tan,20,180,3600,2160.0,1440.0
+ORD-1167,2025-10-31,Visayas,Iloilo,Beverages,Juice Pack,Walk-in,Jenny Sy,16,260,4160,2745.6,1414.4
+ORD-1114,2025-11-03,Visayas,Cebu City,Produce,Fresh Vegetable Pack,Walk-in,Karla Vega,9,220,1980,1386.0,594.0
+ORD-1272,2025-11-04,Metro Manila,Quezon City,Snacks,Chips Multipack,Institutional,Jenny Sy,7,240,1680,1176.0,504.0
+ORD-1099,2025-11-04,Luzon,Pampanga,Snacks,Assorted Biscuits,Institutional,Karla Vega,28,190,5320,3458.0,1862.0
+ORD-1313,2025-11-05,Metro Manila,Pasig,Household,Dishwash Liquid,Online,Mica Tan,13,150,1950,1072.5,877.5
+ORD-1050,2025-11-08,Luzon,Pampanga,Frozen,Frozen Meat Pack,Institutional,Karla Vega,12,650,7800,6084.0,1716.0
+ORD-1043,2025-11-08,Metro Manila,Quezon City,Snacks,Chips Multipack,Institutional,Mica Tan,6,240,1440,1008.0,432.0
+ORD-1238,2025-11-08,Mindanao,Zamboanga,Frozen,Frozen Meat Pack,Walk-in,Paulo Reyes,12,650,7800,6084.0,1716.0
+ORD-1172,2025-11-10,Visayas,Iloilo,Snacks,Chips Multipack,Online,Mica Tan,19,240,4560,3192.0,1368.0
+ORD-1073,2025-11-13,Visayas,Cebu City,Personal Care,Soap 4-Pack,Online,Deo Ramos,24,140,3360,1680.0,1680.0
+ORD-1085,2025-11-13,Luzon,Laguna,Produce,Salad Mix,Online,Paulo Reyes,6,150,900,585.0,315.0
+ORD-1017,2025-11-14,Visayas,Cebu City,Frozen,Frozen Vegetables,Online,Paulo Reyes,14,210,2940,1822.8,1117.2
+ORD-1181,2025-11-15,Luzon,Batangas,Household,Tissue Bundle,Institutional,Deo Ramos,17,220,3740,2169.2,1570.8
+ORD-1132,2025-11-17,Luzon,Baguio,Frozen,Frozen Meat Pack,Online,Paulo Reyes,10,650,6500,5070.0,1430.0
+ORD-1202,2025-11-19,Metro Manila,Pasig,Personal Care,Soap 4-Pack,Walk-in,Deo Ramos,9,140,1260,630.0,630.0
+ORD-1179,2025-11-19,Luzon,Laguna,Frozen,Frozen Meat Pack,Institutional,Karla Vega,11,650,7150,5577.0,1573.0
+ORD-1035,2025-11-21,Luzon,Bulacan,Beverages,Bottled Water Pack,Walk-in,Karla Vega,34,180,6120,3672.0,2448.0
+ORD-1045,2025-11-23,Luzon,Baguio,Frozen,Frozen Meat Pack,Institutional,Deo Ramos,6,650,3900,3042.0,858.0
+ORD-1176,2025-11-23,Mindanao,General Santos,Personal Care,Soap 4-Pack,Walk-in,Jenny Sy,13,140,1820,910.0,910.0
+ORD-1020,2025-11-25,Visayas,Tacloban,Household,Laundry Detergent,Walk-in,Jenny Sy,10,380,3800,2280.0,1520.0
+ORD-1286,2025-11-26,Visayas,Tacloban,Produce,Salad Mix,Online,Mica Tan,31,150,4650,3022.5,1627.5
+ORD-1277,2025-11-28,Mindanao,Zamboanga,Personal Care,Soap 4-Pack,Walk-in,Deo Ramos,38,140,5320,2660.0,2660.0
+ORD-1298,2025-12-01,Luzon,Pampanga,Produce,Fresh Vegetable Pack,Online,Deo Ramos,18,220,3960,2772.0,1188.0
+ORD-1257,2025-12-01,Metro Manila,Makati,Snacks,Chips Multipack,Walk-in,Mica Tan,10,240,2400,1680.0,720.0
+ORD-1236,2025-12-01,Mindanao,Davao,Snacks,Chips Multipack,Institutional,Paulo Reyes,3,240,720,504.0,216.0
+ORD-1210,2025-12-01,Visayas,Cebu City,Frozen,Ice Cream Tub,Online,Paulo Reyes,10,320,3200,1920.0,1280.0
+ORD-1086,2025-12-02,Luzon,Pampanga,Snacks,Assorted Biscuits,Online,Mica Tan,5,190,950,617.5,332.5
+ORD-1014,2025-12-03,Metro Manila,Makati,Household,Tissue Bundle,Walk-in,Jenny Sy,11,220,2420,1403.6,1016.4
+ORD-1006,2025-12-04,Visayas,Iloilo,Personal Care,Soap 4-Pack,Institutional,Karla Vega,19,140,2660,1330.0,1330.0
+ORD-1220,2025-12-04,Mindanao,Zamboanga,Beverages,Soft Drinks Case,Institutional,Karla Vega,5,540,2700,2025.0,675.0
+ORD-1041,2025-12-08,Metro Manila,Taguig,Household,Laundry Detergent,Walk-in,Deo Ramos,4,380,1520,912.0,608.0
+ORD-1221,2025-12-09,Luzon,Batangas,Produce,Fresh Vegetable Pack,Institutional,Paulo Reyes,9,220,1980,1386.0,594.0
+ORD-1001,2025-12-13,Metro Manila,Taguig,Produce,Salad Mix,Online,Mica Tan,17,150,2550,1657.5,892.5
+ORD-1129,2025-12-13,Mindanao,Davao,Beverages,Ground Coffee,Online,Karla Vega,16,320,5120,3174.4,1945.6
+ORD-1092,2025-12-16,Luzon,Bulacan,Household,Dishwash Liquid,Institutional,Jenny Sy,28,150,4200,2310.0,1890.0
+ORD-1212,2025-12-16,Luzon,Batangas,Household,Tissue Bundle,Online,Deo Ramos,9,220,1980,1148.4,831.6
+ORD-1105,2025-12-18,Visayas,Iloilo,Personal Care,Toothpaste,Institutional,Deo Ramos,19,130,2470,1284.4,1185.6
+ORD-1226,2025-12-18,Metro Manila,Manila,Household,Dishwash Liquid,Online,Paulo Reyes,40,150,6000,3300.0,2700.0
+ORD-1042,2025-12-19,Mindanao,Zamboanga,Snacks,Assorted Biscuits,Walk-in,Jenny Sy,22,190,4180,2717.0,1463.0
+ORD-1177,2025-12-19,Visayas,Tacloban,Beverages,Bottled Water Pack,Walk-in,Deo Ramos,16,180,2880,1728.0,1152.0
+ORD-1278,2025-12-20,Luzon,Bulacan,Household,Tissue Bundle,Walk-in,Paulo Reyes,11,220,2420,1403.6,1016.4
+ORD-1022,2025-12-23,Mindanao,Zamboanga,Snacks,Assorted Biscuits,Online,Mica Tan,16,190,3040,1976.0,1064.0
+ORD-1098,2025-12-23,Metro Manila,Quezon City,Personal Care,Shampoo Bottle,Walk-in,Karla Vega,3,260,780,429.0,351.0
+ORD-1180,2025-12-25,Metro Manila,Taguig,Snacks,Chips Multipack,Online,Mica Tan,4,240,960,672.0,288.0
+ORD-1161,2025-12-25,Visayas,Bacolod,Personal Care,Soap 4-Pack,Institutional,Karla Vega,21,140,2940,1470.0,1470.0
+ORD-1196,2025-12-27,Mindanao,General Santos,Household,Dishwash Liquid,Institutional,Deo Ramos,8,150,1200,660.0,540.0
+ORD-1106,2025-12-28,Luzon,Batangas,Snacks,Chips Multipack,Institutional,Mica Tan,13,240,3120,2184.0,936.0
+ORD-1072,2025-12-29,Visayas,Bacolod,Personal Care,Shampoo Bottle,Walk-in,Mica Tan,20,260,5200,2860.0,2340.0
+ORD-1137,2025-12-30,Visayas,Iloilo,Beverages,Ground Coffee,Online,Karla Vega,17,320,5440,3372.8,2067.2
+ORD-1216,2025-12-30,Luzon,Baguio,Frozen,Ice Cream Tub,Institutional,Karla Vega,6,320,1920,1152.0,768.0

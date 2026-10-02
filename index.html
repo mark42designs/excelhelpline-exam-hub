@@ -294,6 +294,30 @@
     header.top .word{font-size:18px;}
     header.top .word span{font-size:12.5px;}
   }
+
+  /* --- Downloadable learning modules (added) --- */
+  .subject-grid{grid-template-columns:repeat(5, 1fr);}
+  .subject-card.modules-card{border-color:#238344;background:#edf8ef;}
+  .subject-card.modules-card .subject-name{color:#176b35;}
+  .subject-card.modules-card:hover{border-color:#176b35;background:#e2f3e6;}
+  .modules-intro{margin:0 0 22px;}
+  .module-subject-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:18px 0 24px;}
+  .module-subject-card{border:1.5px solid var(--line);border-radius:14px;padding:18px;text-align:center;cursor:pointer;background:#fff;transition:border-color .12s ease,background .12s ease;}
+  .module-subject-card:hover,.module-subject-card.active{border-color:#238344;background:#edf8ef;}
+  .module-subject-card strong{display:block;font-family:'Manrope',sans-serif;font-size:15px;color:var(--ink);margin-bottom:6px;}
+  .module-subject-card span{font-size:12px;color:var(--ink-soft);}
+  .module-session{border-top:1px solid var(--line);padding-top:20px;margin-top:20px;}
+  .module-session h2{font-family:'Manrope',sans-serif;font-size:16px;font-weight:800;color:var(--navy);margin:0 0 12px;}
+  .module-session p{font-size:13px;color:var(--ink-soft);margin:0 0 14px;}
+  .module-file{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-top:1px solid #f0f2f7;}
+  .module-file:first-of-type{border-top:0;}
+  .module-file-info{min-width:0;}
+  .module-file-title{font-size:13.5px;font-weight:700;color:var(--ink);}
+  .module-file-type{font-size:11.5px;color:var(--ink-soft);margin-top:3px;}
+  .module-download{flex-shrink:0;background:#e7f5e6;color:#237b2a;border:1px solid #cce8ca;border-radius:999px;padding:8px 13px;font-size:12px;font-weight:700;text-decoration:none;}
+  .module-download:hover{background:#d5edda;}
+  .module-back{margin-top:20px;}
+  @media (max-width:650px){.subject-grid{grid-template-columns:repeat(2,minmax(0,1fr));}.module-subject-grid{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
@@ -384,8 +408,34 @@
       <div class="subject-name">Python</div>
       <div class="subject-status ready">Available</div>
     </div>
+    <div class="subject-card modules-card" id="subjectModules" role="button" tabindex="0">
+      <div class="subject-name">Modules</div>
+      <div class="subject-status ready">Download</div>
+    </div>
   </div>
   <div id="progressSection"></div>
+</div>
+
+<!-- SCREEN 1.6: DOWNLOADABLE MODULES (added) -->
+<div class="card hidden" id="screen-modules">
+  <div class="who-strip">
+    <span>Signed in as <b id="modulesWhoName"></b> &middot; <span id="modulesWhoBatch"></span></span>
+    <button id="modulesEditWho">Edit</button>
+  </div>
+  <h1>Learning Modules</h1>
+  <p class="lead modules-intro">Download the original learning materials and datasets for your sessions.</p>
+  <div class="module-subject-grid">
+    <button type="button" class="module-subject-card active" id="modulesExcel">
+      <strong>MS Excel</strong><span>3 downloadable modules</span>
+    </button>
+    <button type="button" class="module-subject-card" id="modulesPowerBI">
+      <strong>Power BI</strong><span>Session slides, datasets, activities &amp; handouts</span>
+    </button>
+  </div>
+  <div id="modulesContent"></div>
+  <div class="btn-row module-back">
+    <button class="btn secondary" id="modulesBackBtn">Back to subjects</button>
+  </div>
 </div>
 
 <!-- SCREEN 2: PICKER -->
@@ -1390,6 +1440,7 @@ let timerInterval = null;
 const screens = {
   start: document.getElementById('screen-start'),
   subject: document.getElementById('screen-subject'),
+  modules: document.getElementById('screen-modules'),
   picker: document.getElementById('screen-picker'),
   passcode: document.getElementById('screen-passcode'),
   quiz: document.getElementById('screen-quiz'),
@@ -1585,6 +1636,110 @@ document.getElementById('subjectPython').addEventListener('click', () => {
   renderPicker();
   showScreen('picker');
 });
+
+// ---- Downloadable learning modules (added) -------------------
+function renderModules(){
+  document.getElementById('modulesWhoName').textContent = student.name;
+  document.getElementById('modulesWhoBatch').textContent = student.batchLabel;
+  renderModuleContent('excel');
+}
+
+function moduleFile(title, type, path){
+  const row = document.createElement('div');
+  row.className = 'module-file';
+  const info = document.createElement('div');
+  info.className = 'module-file-info';
+  const name = document.createElement('div');
+  name.className = 'module-file-title';
+  name.textContent = title;
+  const fileType = document.createElement('div');
+  fileType.className = 'module-file-type';
+  fileType.textContent = type + ' file';
+  info.append(name,fileType);
+  const link = document.createElement('a');
+  link.className = 'module-download';
+  link.href = path;
+  link.download = '';
+  link.textContent = '↓ Download';
+  link.setAttribute('aria-label','Download ' + title);
+  row.append(info,link);
+  return row;
+}
+
+function renderModuleContent(subject){
+  const container = document.getElementById('modulesContent');
+  const excelBtn = document.getElementById('modulesExcel');
+  const powerbiBtn = document.getElementById('modulesPowerBI');
+  const isExcel = subject === 'excel';
+  excelBtn.classList.toggle('active',isExcel);
+  powerbiBtn.classList.toggle('active',!isExcel);
+  container.innerHTML = '';
+
+  if(isExcel){
+    const section = document.createElement('section');
+    section.className = 'module-session';
+    const heading = document.createElement('h2');
+    heading.textContent = 'MS Excel Modules';
+    const desc = document.createElement('p');
+    desc.textContent = 'Download a copy of each module in XLSX format.';
+    section.append(heading,desc);
+    [
+      ['Module 1','XLSX','modules/excel/module-1.xlsx'],
+      ['Module 2','XLSX','modules/excel/module-2.xlsx'],
+      ['Module 3','XLSX','modules/excel/module-3.xlsx']
+    ].forEach(file => section.appendChild(moduleFile(...file)));
+    container.appendChild(section);
+    return;
+  }
+
+  const sessions = [
+    {title:'Session 1 — Power BI',description:'Presentation, demo dataset, activity file, and student handout.',
+     files:[
+      ['Session 1 Power BI Slides','PPTX','modules/powerbi/session-1/slides.pptx'],
+      ['Session 1 Demo Dataset','XLSX','modules/powerbi/session-1/demo.xlsx'],
+      ['Session 1 Activity','XLSX','modules/powerbi/session-1/activity.xlsx'],
+      ['Power BI Student Handout','PDF','modules/powerbi/session-1/handout.pdf']
+     ]},
+    {title:'Session 2 — Power BI',description:'Presentation, demo and activity datasets, final project, and briefs.',
+     files:[
+      ['Session 2 Power BI Slides','PPTX','modules/powerbi/session-2/slides.pptx'],
+      ['Session 2 Demo Dataset 1','CSV','modules/powerbi/session-2/demo-1.csv'],
+      ['Session 2 Demo Dataset 2','CSV','modules/powerbi/session-2/demo-2.csv'],
+      ['Session 2 Activity 2 Dataset 1','CSV','modules/powerbi/session-2/activity-1.csv'],
+      ['Session 2 Activity 2 Dataset 2','CSV','modules/powerbi/session-2/activity-2.csv'],
+      ['Final Project / Homework','XLSX','modules/powerbi/session-2/final-project.xlsx'],
+      ['Activity 2 Brief / Handout','PDF','modules/powerbi/session-2/activity-brief.pdf'],
+      ['Final Project / Homework Brief','PDF','modules/powerbi/session-2/project-brief.pdf']
+     ]}
+  ];
+  sessions.forEach(session => {
+    const section = document.createElement('section');
+    section.className = 'module-session';
+    const heading = document.createElement('h2');
+    heading.textContent = session.title;
+    const desc = document.createElement('p');
+    desc.textContent = session.description;
+    section.append(heading,desc);
+    session.files.forEach(file => section.appendChild(moduleFile(...file)));
+    container.appendChild(section);
+  });
+}
+
+document.getElementById('subjectModules').addEventListener('click', () => {
+  renderModules();
+  showScreen('modules');
+});
+document.getElementById('subjectModules').addEventListener('keydown', event => {
+  if(event.key === 'Enter' || event.key === ' '){
+    event.preventDefault();
+    renderModules();
+    showScreen('modules');
+  }
+});
+document.getElementById('modulesExcel').addEventListener('click', () => renderModuleContent('excel'));
+document.getElementById('modulesPowerBI').addEventListener('click', () => renderModuleContent('powerbi'));
+document.getElementById('modulesBackBtn').addEventListener('click', () => showScreen('subject'));
+document.getElementById('modulesEditWho').addEventListener('click', () => showScreen('start'));
 
 // ---- Screen 2: Picker ----------------------------------------
 // Builds the module/assessment list dynamically for whichever subject the

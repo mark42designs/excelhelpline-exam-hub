@@ -1,0 +1,301 @@
+Order ID,Order Date,Region,City,Customer Segment,Sales Rep,Product ID,Quantity,Unit Price,Sales,Cost,Profit
+ORD-1109,2025-01-02,Mindanao,General Santos,Corporate,Ana Reyes,T09,4,3990,15960,7980.0,7980.0
+ORD-1019,2025-01-02,Visayas,Iloilo,Reseller,Grace Lim,T08,4,12990,51960,37411.2,14548.8
+ORD-1185,2025-01-04,Mindanao,General Santos,Corporate,Bea Tan,T15,2,54990,109980,90183.6,19796.4
+ORD-1144,2025-01-05,Metro Manila,Taguig,Consumer,Bea Tan,T01,13,1590,20670,8268.0,12402.0
+ORD-1101,2025-01-08,Luzon,Pampanga,Reseller,Grace Lim,T11,2,48990,97980,76424.4,21555.6
+ORD-1162,2025-01-09,Luzon,Pampanga,Reseller,Paolo Cruz,T11,1,48990,48990,38212.2,10777.8
+ORD-1206,2025-01-10,Visayas,Bacolod,Corporate,Paolo Cruz,T15,2,54990,109980,90183.6,19796.4
+ORD-1152,2025-01-13,Visayas,Iloilo,Corporate,Grace Lim,T13,4,39990,159960,121569.6,38390.4
+ORD-1252,2025-01-15,Metro Manila,Quezon City,Reseller,Miguel Santos,T09,13,3990,51870,25935.0,25935.0
+ORD-1156,2025-01-17,Visayas,Iloilo,Consumer,Grace Lim,T02,2,1890,3780,1814.4,1965.6
+ORD-1228,2025-01-19,Luzon,Pampanga,Reseller,Grace Lim,T07,5,4990,24950,13722.5,11227.5
+ORD-1053,2025-01-20,Mindanao,Cagayan de Oro,Corporate,Grace Lim,T16,4,18990,75960,56210.4,19749.6
+ORD-1050,2025-01-22,Visayas,Bacolod,Consumer,Miguel Santos,T12,1,74990,74990,59992.0,14998.0
+ORD-1227,2025-01-22,Visayas,Bacolod,Reseller,Paolo Cruz,T09,5,3990,19950,9975.0,9975.0
+ORD-1225,2025-01-23,Visayas,Bacolod,Corporate,Paolo Cruz,T14,3,8990,26970,18879.0,8091.0
+ORD-1267,2025-01-24,Metro Manila,Makati,Reseller,Paolo Cruz,T06,3,7990,23970,13902.6,10067.4
+ORD-1137,2025-01-24,Visayas,Cebu City,Corporate,Paolo Cruz,T06,3,7990,23970,13902.6,10067.4
+ORD-1180,2025-01-27,Luzon,Batangas,Reseller,Ana Reyes,T08,5,12990,64950,46764.0,18186.0
+ORD-1038,2025-01-30,Metro Manila,Makati,Consumer,Miguel Santos,T13,4,39990,159960,121569.6,38390.4
+ORD-1163,2025-02-02,Mindanao,General Santos,Reseller,Ana Reyes,T05,8,3490,27920,14518.4,13401.6
+ORD-1013,2025-02-03,Luzon,Bulacan,Reseller,Paolo Cruz,T07,7,4990,34930,19211.5,15718.5
+ORD-1224,2025-02-04,Visayas,Iloilo,Reseller,Grace Lim,T13,2,39990,79980,60784.8,19195.2
+ORD-1027,2025-02-04,Metro Manila,Pasig,Consumer,Grace Lim,T13,4,39990,159960,121569.6,38390.4
+ORD-1178,2025-02-05,Luzon,Baguio,Reseller,Miguel Santos,T13,4,39990,159960,121569.6,38390.4
+ORD-1127,2025-02-05,Visayas,Tacloban,Corporate,Ana Reyes,T05,5,3490,17450,9074.0,8376.0
+ORD-1112,2025-02-06,Metro Manila,Makati,Reseller,Bea Tan,T05,15,3490,52350,27222.0,25128.0
+ORD-1141,2025-02-07,Mindanao,Zamboanga,Reseller,Paolo Cruz,T09,12,3990,47880,23940.0,23940.0
+ORD-1187,2025-02-09,Visayas,Tacloban,Reseller,Paolo Cruz,T09,5,3990,19950,9975.0,9975.0
+ORD-1280,2025-02-10,Visayas,Tacloban,Corporate,Miguel Santos,T05,4,3490,13960,7259.2,6700.8
+ORD-1091,2025-02-14,Visayas,Tacloban,Reseller,Bea Tan,T16,7,18990,132930,98368.2,34561.8
+ORD-1285,2025-02-15,Luzon,Bulacan,Corporate,Miguel Santos,T11,1,48990,48990,38212.2,10777.8
+ORD-1171,2025-02-16,Metro Manila,Quezon City,Reseller,Grace Lim,T03,13,1990,25870,11641.5,14228.5
+ORD-1136,2025-02-16,Mindanao,Davao,Consumer,Grace Lim,T12,1,74990,74990,59992.0,14998.0
+ORD-1016,2025-02-16,Metro Manila,Quezon City,Consumer,Paolo Cruz,T14,2,8990,17980,12586.0,5394.0
+ORD-1150,2025-02-16,Mindanao,Davao,Consumer,Paolo Cruz,T05,6,3490,20940,10888.8,10051.2
+ORD-1065,2025-02-17,Luzon,Pampanga,Consumer,Ana Reyes,T15,1,54990,54990,45091.8,9898.2
+ORD-1291,2025-02-18,Luzon,Batangas,Consumer,Ana Reyes,T01,5,1590,7950,3180.0,4770.0
+ORD-1146,2025-02-19,Metro Manila,Pasig,Reseller,Grace Lim,T03,12,1990,23880,10746.0,13134.0
+ORD-1132,2025-02-21,Mindanao,Davao,Consumer,Miguel Santos,T09,7,3990,27930,13965.0,13965.0
+ORD-1002,2025-02-22,Metro Manila,Taguig,Consumer,Ana Reyes,T03,4,1990,7960,3582.0,4378.0
+ORD-1068,2025-02-24,Mindanao,Cagayan de Oro,Reseller,Paolo Cruz,T14,1,8990,8990,6293.0,2697.0
+ORD-1257,2025-02-24,Visayas,Iloilo,Corporate,Paolo Cruz,T03,4,1990,7960,3582.0,4378.0
+ORD-1219,2025-02-26,Visayas,Iloilo,Consumer,Miguel Santos,T07,7,4990,34930,19211.5,15718.5
+ORD-1188,2025-02-28,Mindanao,Davao,Reseller,Paolo Cruz,T07,14,4990,69860,38423.0,31437.0
+ORD-1018,2025-02-28,Visayas,Bacolod,Corporate,Miguel Santos,T12,4,74990,299960,239968.0,59992.0
+ORD-1149,2025-02-28,Mindanao,Davao,Reseller,Paolo Cruz,T15,3,54990,164970,135275.4,29694.6
+ORD-1045,2025-03-01,Metro Manila,Taguig,Corporate,Bea Tan,T16,4,18990,75960,56210.4,19749.6
+ORD-1120,2025-03-01,Mindanao,Davao,Corporate,Ana Reyes,T09,4,3990,15960,7980.0,7980.0
+ORD-1153,2025-03-01,Luzon,Baguio,Corporate,Ana Reyes,T12,1,74990,74990,59992.0,14998.0
+ORD-1025,2025-03-03,Luzon,Batangas,Consumer,Bea Tan,T12,2,74990,149980,119984.0,29996.0
+ORD-1039,2025-03-03,Luzon,Bulacan,Reseller,Ana Reyes,T08,7,12990,90930,65469.6,25460.4
+ORD-1229,2025-03-05,Visayas,Tacloban,Corporate,Grace Lim,T02,3,1890,5670,2721.6,2948.4
+ORD-1246,2025-03-06,Visayas,Cebu City,Reseller,Bea Tan,T02,6,1890,11340,5443.2,5896.8
+ORD-1167,2025-03-06,Visayas,Bacolod,Corporate,Bea Tan,T01,10,1590,15900,6360.0,9540.0
+ORD-1159,2025-03-06,Luzon,Baguio,Reseller,Miguel Santos,T08,4,12990,51960,37411.2,14548.8
+ORD-1247,2025-03-07,Luzon,Batangas,Consumer,Bea Tan,T03,3,1990,5970,2686.5,3283.5
+ORD-1172,2025-03-08,Metro Manila,Taguig,Corporate,Ana Reyes,T10,7,2490,17430,8192.1,9237.9
+ORD-1148,2025-03-09,Visayas,Bacolod,Corporate,Grace Lim,T16,6,18990,113940,84315.6,29624.4
+ORD-1122,2025-03-09,Visayas,Tacloban,Consumer,Bea Tan,T03,13,1990,25870,11641.5,14228.5
+ORD-1147,2025-03-09,Metro Manila,Pasig,Corporate,Miguel Santos,T05,4,3490,13960,7259.2,6700.8
+ORD-1288,2025-03-10,Mindanao,Zamboanga,Corporate,Miguel Santos,T15,4,54990,219960,180367.2,39592.8
+ORD-1226,2025-03-11,Metro Manila,Manila,Consumer,Ana Reyes,T12,2,74990,149980,119984.0,29996.0
+ORD-1258,2025-03-14,Metro Manila,Quezon City,Reseller,Paolo Cruz,T06,4,7990,31960,18536.8,13423.2
+ORD-1235,2025-03-15,Mindanao,Davao,Consumer,Grace Lim,T15,3,54990,164970,135275.4,29694.6
+ORD-1217,2025-03-16,Luzon,Baguio,Reseller,Miguel Santos,T06,8,7990,63920,37073.6,26846.4
+ORD-1126,2025-03-16,Mindanao,Cagayan de Oro,Reseller,Miguel Santos,T10,14,2490,34860,16384.2,18475.8
+ORD-1272,2025-03-17,Luzon,Baguio,Consumer,Miguel Santos,T10,1,2490,2490,1170.3,1319.7
+ORD-1105,2025-03-18,Visayas,Cebu City,Reseller,Paolo Cruz,T15,2,54990,109980,90183.6,19796.4
+ORD-1251,2025-03-20,Luzon,Bulacan,Reseller,Ana Reyes,T09,14,3990,55860,27930.0,27930.0
+ORD-1020,2025-03-20,Visayas,Iloilo,Consumer,Bea Tan,T10,6,2490,14940,7021.8,7918.2
+ORD-1259,2025-03-23,Visayas,Bacolod,Corporate,Bea Tan,T15,4,54990,219960,180367.2,39592.8
+ORD-1294,2025-03-23,Mindanao,Zamboanga,Corporate,Grace Lim,T13,2,39990,79980,60784.8,19195.2
+ORD-1048,2025-03-24,Mindanao,General Santos,Consumer,Ana Reyes,T08,3,12990,38970,28058.4,10911.6
+ORD-1191,2025-03-28,Metro Manila,Taguig,Reseller,Miguel Santos,T13,3,39990,119970,91177.2,28792.8
+ORD-1241,2025-03-30,Mindanao,Davao,Corporate,Ana Reyes,T05,9,3490,31410,16333.2,15076.8
+ORD-1161,2025-03-31,Metro Manila,Quezon City,Corporate,Miguel Santos,T15,3,54990,164970,135275.4,29694.6
+ORD-1290,2025-03-31,Mindanao,General Santos,Consumer,Paolo Cruz,T09,11,3990,43890,21945.0,21945.0
+ORD-1052,2025-04-02,Visayas,Tacloban,Consumer,Ana Reyes,T16,7,18990,132930,98368.2,34561.8
+ORD-1117,2025-04-03,Mindanao,General Santos,Corporate,Paolo Cruz,T12,3,74990,224970,179976.0,44994.0
+ORD-1036,2025-04-08,Visayas,Iloilo,Reseller,Bea Tan,T13,1,39990,39990,30392.4,9597.6
+ORD-1061,2025-04-09,Mindanao,General Santos,Reseller,Grace Lim,T14,7,8990,62930,44051.0,18879.0
+ORD-1099,2025-04-09,Luzon,Laguna,Reseller,Bea Tan,T05,10,3490,34900,18148.0,16752.0
+ORD-1008,2025-04-09,Metro Manila,Quezon City,Consumer,Miguel Santos,T16,2,18990,37980,28105.2,9874.8
+ORD-1211,2025-04-10,Visayas,Tacloban,Corporate,Bea Tan,T01,9,1590,14310,5724.0,8586.0
+ORD-1086,2025-04-12,Metro Manila,Taguig,Reseller,Grace Lim,T15,1,54990,54990,45091.8,9898.2
+ORD-1184,2025-04-15,Visayas,Iloilo,Corporate,Grace Lim,T16,2,18990,37980,28105.2,9874.8
+ORD-1299,2025-04-16,Mindanao,Davao,Consumer,Paolo Cruz,T09,3,3990,11970,5985.0,5985.0
+ORD-1034,2025-04-20,Mindanao,Davao,Consumer,Paolo Cruz,T16,5,18990,94950,70263.0,24687.0
+ORD-1028,2025-04-20,Luzon,Bulacan,Consumer,Paolo Cruz,T09,13,3990,51870,25935.0,25935.0
+ORD-1004,2025-04-23,Mindanao,Zamboanga,Reseller,Paolo Cruz,T11,3,48990,146970,114636.6,32333.4
+ORD-1295,2025-04-23,Luzon,Laguna,Reseller,Bea Tan,T16,6,18990,113940,84315.6,29624.4
+ORD-1054,2025-04-25,Metro Manila,Makati,Corporate,Ana Reyes,T01,13,1590,20670,8268.0,12402.0
+ORD-1124,2025-04-26,Metro Manila,Manila,Consumer,Paolo Cruz,T13,3,39990,119970,91177.2,28792.8
+ORD-1207,2025-04-26,Luzon,Batangas,Consumer,Bea Tan,T12,1,74990,74990,59992.0,14998.0
+ORD-1169,2025-04-27,Mindanao,Zamboanga,Corporate,Ana Reyes,T02,6,1890,11340,5443.2,5896.8
+ORD-1074,2025-04-29,Mindanao,Cagayan de Oro,Corporate,Paolo Cruz,T15,3,54990,164970,135275.4,29694.6
+ORD-1003,2025-04-30,Metro Manila,Taguig,Reseller,Bea Tan,T14,7,8990,62930,44051.0,18879.0
+ORD-1073,2025-05-01,Visayas,Bacolod,Consumer,Miguel Santos,T05,3,3490,10470,5444.4,5025.6
+ORD-1154,2025-05-01,Luzon,Laguna,Reseller,Bea Tan,T01,7,1590,11130,4452.0,6678.0
+ORD-1123,2025-05-03,Luzon,Pampanga,Reseller,Paolo Cruz,T08,2,12990,25980,18705.6,7274.4
+ORD-1222,2025-05-04,Mindanao,Cagayan de Oro,Corporate,Ana Reyes,T13,1,39990,39990,30392.4,9597.6
+ORD-1261,2025-05-04,Luzon,Bulacan,Consumer,Grace Lim,T07,8,4990,39920,21956.0,17964.0
+ORD-1282,2025-05-05,Metro Manila,Taguig,Consumer,Ana Reyes,T14,2,8990,17980,12586.0,5394.0
+ORD-1138,2025-05-06,Mindanao,Cagayan de Oro,Consumer,Bea Tan,T15,4,54990,219960,180367.2,39592.8
+ORD-1254,2025-05-06,Mindanao,Zamboanga,Reseller,Ana Reyes,T03,3,1990,5970,2686.5,3283.5
+ORD-1066,2025-05-06,Mindanao,Davao,Reseller,Bea Tan,T02,4,1890,7560,3628.8,3931.2
+ORD-1011,2025-05-06,Luzon,Laguna,Reseller,Bea Tan,T01,4,1590,6360,2544.0,3816.0
+ORD-1031,2025-05-08,Luzon,Batangas,Consumer,Paolo Cruz,T09,3,3990,11970,5985.0,5985.0
+ORD-1142,2025-05-09,Mindanao,Zamboanga,Corporate,Ana Reyes,T16,4,18990,75960,56210.4,19749.6
+ORD-1098,2025-05-09,Luzon,Baguio,Consumer,Bea Tan,T16,3,18990,56970,42157.8,14812.2
+ORD-1203,2025-05-10,Luzon,Pampanga,Reseller,Miguel Santos,T13,3,39990,119970,91177.2,28792.8
+ORD-1093,2025-05-13,Visayas,Bacolod,Corporate,Bea Tan,T10,1,2490,2490,1170.3,1319.7
+ORD-1080,2025-05-14,Mindanao,Zamboanga,Corporate,Grace Lim,T16,7,18990,132930,98368.2,34561.8
+ORD-1056,2025-05-14,Luzon,Bulacan,Consumer,Bea Tan,T07,7,4990,34930,19211.5,15718.5
+ORD-1293,2025-05-14,Visayas,Iloilo,Consumer,Paolo Cruz,T13,3,39990,119970,91177.2,28792.8
+ORD-1015,2025-05-15,Mindanao,General Santos,Consumer,Bea Tan,T07,8,4990,39920,21956.0,17964.0
+ORD-1263,2025-05-16,Visayas,Tacloban,Corporate,Ana Reyes,T07,10,4990,49900,27445.0,22455.0
+ORD-1041,2025-05-16,Mindanao,Cagayan de Oro,Corporate,Ana Reyes,T06,1,7990,7990,4634.2,3355.8
+ORD-1090,2025-05-19,Mindanao,General Santos,Corporate,Miguel Santos,T01,14,1590,22260,8904.0,13356.0
+ORD-1055,2025-05-23,Visayas,Tacloban,Consumer,Ana Reyes,T09,15,3990,59850,29925.0,29925.0
+ORD-1005,2025-05-23,Luzon,Batangas,Consumer,Paolo Cruz,T07,2,4990,9980,5489.0,4491.0
+ORD-1032,2025-05-23,Mindanao,Cagayan de Oro,Reseller,Ana Reyes,T12,1,74990,74990,59992.0,14998.0
+ORD-1081,2025-05-23,Mindanao,Zamboanga,Consumer,Bea Tan,T12,1,74990,74990,59992.0,14998.0
+ORD-1100,2025-05-25,Metro Manila,Makati,Corporate,Miguel Santos,T07,5,4990,24950,13722.5,11227.5
+ORD-1249,2025-05-26,Metro Manila,Pasig,Reseller,Grace Lim,T14,3,8990,26970,18879.0,8091.0
+ORD-1113,2025-05-28,Mindanao,Davao,Reseller,Paolo Cruz,T01,5,1590,7950,3180.0,4770.0
+ORD-1110,2025-05-28,Visayas,Tacloban,Consumer,Grace Lim,T13,2,39990,79980,60784.8,19195.2
+ORD-1128,2025-06-02,Mindanao,Cagayan de Oro,Corporate,Grace Lim,T02,9,1890,17010,8164.8,8845.2
+ORD-1060,2025-06-03,Visayas,Tacloban,Reseller,Grace Lim,T06,3,7990,23970,13902.6,10067.4
+ORD-1269,2025-06-03,Visayas,Tacloban,Corporate,Ana Reyes,T09,6,3990,23940,11970.0,11970.0
+ORD-1248,2025-06-05,Luzon,Batangas,Consumer,Grace Lim,T05,9,3490,31410,16333.2,15076.8
+ORD-1196,2025-06-08,Mindanao,General Santos,Corporate,Grace Lim,T11,1,48990,48990,38212.2,10777.8
+ORD-1245,2025-06-08,Mindanao,General Santos,Corporate,Bea Tan,T09,2,3990,7980,3990.0,3990.0
+ORD-1177,2025-06-08,Visayas,Bacolod,Consumer,Bea Tan,T11,4,48990,195960,152848.8,43111.2
+ORD-1204,2025-06-08,Mindanao,Cagayan de Oro,Consumer,Grace Lim,T10,9,2490,22410,10532.7,11877.3
+ORD-1085,2025-06-09,Metro Manila,Taguig,Reseller,Paolo Cruz,T12,4,74990,299960,239968.0,59992.0
+ORD-1256,2025-06-10,Visayas,Bacolod,Corporate,Bea Tan,T04,9,1290,11610,4876.2,6733.8
+ORD-1037,2025-06-10,Metro Manila,Quezon City,Reseller,Bea Tan,T09,3,3990,11970,5985.0,5985.0
+ORD-1278,2025-06-12,Mindanao,Zamboanga,Corporate,Grace Lim,T10,2,2490,4980,2340.6,2639.4
+ORD-1118,2025-06-14,Metro Manila,Makati,Reseller,Paolo Cruz,T06,5,7990,39950,23171.0,16779.0
+ORD-1160,2025-06-18,Luzon,Bulacan,Consumer,Miguel Santos,T12,3,74990,224970,179976.0,44994.0
+ORD-1270,2025-06-19,Metro Manila,Manila,Reseller,Ana Reyes,T09,10,3990,39900,19950.0,19950.0
+ORD-1092,2025-06-22,Metro Manila,Manila,Corporate,Miguel Santos,T07,6,4990,29940,16467.0,13473.0
+ORD-1046,2025-06-25,Luzon,Pampanga,Corporate,Ana Reyes,T09,2,3990,7980,3990.0,3990.0
+ORD-1057,2025-06-26,Visayas,Tacloban,Consumer,Paolo Cruz,T10,15,2490,37350,17554.5,19795.5
+ORD-1097,2025-06-26,Mindanao,Zamboanga,Corporate,Grace Lim,T05,5,3490,17450,9074.0,8376.0
+ORD-1043,2025-06-28,Metro Manila,Makati,Consumer,Paolo Cruz,T06,5,7990,39950,23171.0,16779.0
+ORD-1192,2025-06-29,Luzon,Batangas,Corporate,Miguel Santos,T11,2,48990,97980,76424.4,21555.6
+ORD-1082,2025-06-29,Luzon,Baguio,Consumer,Miguel Santos,T11,1,48990,48990,38212.2,10777.8
+ORD-1145,2025-06-30,Luzon,Batangas,Reseller,Miguel Santos,T09,11,3990,43890,21945.0,21945.0
+ORD-1051,2025-07-01,Mindanao,Cagayan de Oro,Consumer,Paolo Cruz,T15,1,54990,54990,45091.8,9898.2
+ORD-1173,2025-07-01,Mindanao,Davao,Corporate,Grace Lim,T05,2,3490,6980,3629.6,3350.4
+ORD-1006,2025-07-03,Visayas,Bacolod,Corporate,Bea Tan,T13,1,39990,39990,30392.4,9597.6
+ORD-1244,2025-07-04,Visayas,Tacloban,Reseller,Ana Reyes,T08,2,12990,25980,18705.6,7274.4
+ORD-1059,2025-07-06,Mindanao,Davao,Corporate,Ana Reyes,T05,12,3490,41880,21777.6,20102.4
+ORD-1201,2025-07-06,Visayas,Bacolod,Corporate,Bea Tan,T02,1,1890,1890,907.2,982.8
+ORD-1213,2025-07-10,Metro Manila,Taguig,Consumer,Miguel Santos,T12,3,74990,224970,179976.0,44994.0
+ORD-1216,2025-07-11,Luzon,Baguio,Reseller,Grace Lim,T07,13,4990,64870,35678.5,29191.5
+ORD-1205,2025-07-12,Visayas,Iloilo,Reseller,Paolo Cruz,T08,6,12990,77940,56116.8,21823.2
+ORD-1007,2025-07-13,Metro Manila,Taguig,Reseller,Grace Lim,T05,10,3490,34900,18148.0,16752.0
+ORD-1009,2025-07-14,Visayas,Tacloban,Corporate,Grace Lim,T07,4,4990,19960,10978.0,8982.0
+ORD-1143,2025-07-15,Visayas,Bacolod,Reseller,Paolo Cruz,T07,5,4990,24950,13722.5,11227.5
+ORD-1236,2025-07-16,Metro Manila,Taguig,Corporate,Grace Lim,T14,6,8990,53940,37758.0,16182.0
+ORD-1130,2025-07-16,Luzon,Laguna,Reseller,Paolo Cruz,T12,4,74990,299960,239968.0,59992.0
+ORD-1292,2025-07-16,Luzon,Laguna,Corporate,Bea Tan,T06,1,7990,7990,4634.2,3355.8
+ORD-1131,2025-07-17,Luzon,Laguna,Reseller,Bea Tan,T11,3,48990,146970,114636.6,32333.4
+ORD-1017,2025-07-17,Mindanao,General Santos,Reseller,Ana Reyes,T09,11,3990,43890,21945.0,21945.0
+ORD-1223,2025-07-19,Mindanao,Davao,Corporate,Ana Reyes,T01,6,1590,9540,3816.0,5724.0
+ORD-1078,2025-07-19,Visayas,Tacloban,Consumer,Bea Tan,T16,1,18990,18990,14052.6,4937.4
+ORD-1079,2025-07-21,Metro Manila,Quezon City,Corporate,Miguel Santos,T04,1,1290,1290,541.8,748.2
+ORD-1134,2025-07-23,Metro Manila,Pasig,Corporate,Paolo Cruz,T09,14,3990,55860,27930.0,27930.0
+ORD-1286,2025-07-23,Mindanao,Cagayan de Oro,Consumer,Grace Lim,T07,10,4990,49900,27445.0,22455.0
+ORD-1190,2025-07-25,Metro Manila,Manila,Corporate,Miguel Santos,T05,6,3490,20940,10888.8,10051.2
+ORD-1104,2025-07-25,Mindanao,Davao,Reseller,Ana Reyes,T10,3,2490,7470,3510.9,3959.1
+ORD-1096,2025-07-27,Luzon,Pampanga,Corporate,Bea Tan,T09,9,3990,35910,17955.0,17955.0
+ORD-1284,2025-07-28,Mindanao,General Santos,Corporate,Grace Lim,T16,1,18990,18990,14052.6,4937.4
+ORD-1029,2025-07-28,Luzon,Baguio,Corporate,Grace Lim,T13,4,39990,159960,121569.6,38390.4
+ORD-1030,2025-07-30,Mindanao,Davao,Corporate,Grace Lim,T11,1,48990,48990,38212.2,10777.8
+ORD-1283,2025-07-31,Visayas,Tacloban,Consumer,Ana Reyes,T13,2,39990,79980,60784.8,19195.2
+ORD-1296,2025-08-01,Mindanao,Cagayan de Oro,Reseller,Ana Reyes,T14,8,8990,71920,50344.0,21576.0
+ORD-1215,2025-08-01,Metro Manila,Manila,Consumer,Paolo Cruz,T09,2,3990,7980,3990.0,3990.0
+ORD-1179,2025-08-03,Mindanao,Zamboanga,Corporate,Grace Lim,T16,2,18990,37980,28105.2,9874.8
+ORD-1212,2025-08-03,Luzon,Batangas,Corporate,Ana Reyes,T08,8,12990,103920,74822.4,29097.6
+ORD-1111,2025-08-06,Metro Manila,Taguig,Consumer,Grace Lim,T14,3,8990,26970,18879.0,8091.0
+ORD-1170,2025-08-07,Visayas,Bacolod,Reseller,Paolo Cruz,T07,2,4990,9980,5489.0,4491.0
+ORD-1231,2025-08-09,Luzon,Bulacan,Consumer,Ana Reyes,T06,6,7990,47940,27805.2,20134.8
+ORD-1168,2025-08-09,Metro Manila,Quezon City,Consumer,Paolo Cruz,T10,8,2490,19920,9362.4,10557.6
+ORD-1103,2025-08-14,Visayas,Iloilo,Corporate,Ana Reyes,T12,1,74990,74990,59992.0,14998.0
+ORD-1255,2025-08-14,Mindanao,General Santos,Corporate,Bea Tan,T04,3,1290,3870,1625.4,2244.6
+ORD-1273,2025-08-14,Visayas,Tacloban,Reseller,Miguel Santos,T16,7,18990,132930,98368.2,34561.8
+ORD-1181,2025-08-15,Mindanao,General Santos,Corporate,Grace Lim,T09,4,3990,15960,7980.0,7980.0
+ORD-1237,2025-08-16,Metro Manila,Taguig,Corporate,Paolo Cruz,T14,6,8990,53940,37758.0,16182.0
+ORD-1233,2025-08-17,Metro Manila,Pasig,Corporate,Ana Reyes,T09,2,3990,7980,3990.0,3990.0
+ORD-1218,2025-08-18,Metro Manila,Quezon City,Consumer,Miguel Santos,T12,4,74990,299960,239968.0,59992.0
+ORD-1214,2025-08-19,Luzon,Laguna,Corporate,Grace Lim,T11,1,48990,48990,38212.2,10777.8
+ORD-1265,2025-08-19,Visayas,Cebu City,Corporate,Grace Lim,T15,3,54990,164970,135275.4,29694.6
+ORD-1158,2025-08-21,Metro Manila,Makati,Consumer,Grace Lim,T08,4,12990,51960,37411.2,14548.8
+ORD-1035,2025-08-21,Visayas,Tacloban,Reseller,Paolo Cruz,T10,3,2490,7470,3510.9,3959.1
+ORD-1042,2025-08-23,Metro Manila,Quezon City,Reseller,Grace Lim,T08,3,12990,38970,28058.4,10911.6
+ORD-1165,2025-08-23,Metro Manila,Quezon City,Corporate,Ana Reyes,T02,8,1890,15120,7257.6,7862.4
+ORD-1140,2025-08-24,Visayas,Cebu City,Reseller,Bea Tan,T01,3,1590,4770,1908.0,2862.0
+ORD-1084,2025-08-27,Visayas,Bacolod,Reseller,Ana Reyes,T14,3,8990,26970,18879.0,8091.0
+ORD-1064,2025-08-31,Luzon,Baguio,Reseller,Bea Tan,T05,6,3490,20940,10888.8,10051.2
+ORD-1271,2025-08-31,Visayas,Iloilo,Corporate,Miguel Santos,T13,4,39990,159960,121569.6,38390.4
+ORD-1199,2025-09-01,Luzon,Baguio,Corporate,Ana Reyes,T03,9,1990,17910,8059.5,9850.5
+ORD-1021,2025-09-08,Metro Manila,Quezon City,Consumer,Ana Reyes,T06,4,7990,31960,18536.8,13423.2
+ORD-1230,2025-09-12,Mindanao,Zamboanga,Consumer,Paolo Cruz,T09,2,3990,7980,3990.0,3990.0
+ORD-1260,2025-09-13,Visayas,Tacloban,Corporate,Bea Tan,T11,4,48990,195960,152848.8,43111.2
+ORD-1114,2025-09-14,Mindanao,General Santos,Consumer,Paolo Cruz,T13,3,39990,119970,91177.2,28792.8
+ORD-1186,2025-09-14,Visayas,Cebu City,Corporate,Ana Reyes,T03,8,1990,15920,7164.0,8756.0
+ORD-1274,2025-09-14,Mindanao,Davao,Consumer,Bea Tan,T14,6,8990,53940,37758.0,16182.0
+ORD-1164,2025-09-15,Luzon,Bulacan,Reseller,Bea Tan,T13,3,39990,119970,91177.2,28792.8
+ORD-1088,2025-09-17,Visayas,Cebu City,Consumer,Paolo Cruz,T02,6,1890,11340,5443.2,5896.8
+ORD-1125,2025-09-18,Visayas,Tacloban,Consumer,Paolo Cruz,T02,9,1890,17010,8164.8,8845.2
+ORD-1243,2025-09-18,Luzon,Baguio,Consumer,Paolo Cruz,T15,1,54990,54990,45091.8,9898.2
+ORD-1300,2025-09-20,Mindanao,General Santos,Reseller,Paolo Cruz,T08,5,12990,64950,46764.0,18186.0
+ORD-1182,2025-09-20,Metro Manila,Pasig,Corporate,Bea Tan,T03,8,1990,15920,7164.0,8756.0
+ORD-1094,2025-09-22,Luzon,Baguio,Corporate,Paolo Cruz,T14,4,8990,35960,25172.0,10788.0
+ORD-1121,2025-09-23,Visayas,Tacloban,Consumer,Grace Lim,T03,9,1990,17910,8059.5,9850.5
+ORD-1239,2025-09-23,Mindanao,Davao,Reseller,Paolo Cruz,T06,4,7990,31960,18536.8,13423.2
+ORD-1106,2025-09-25,Mindanao,General Santos,Reseller,Paolo Cruz,T01,5,1590,7950,3180.0,4770.0
+ORD-1183,2025-09-27,Visayas,Cebu City,Reseller,Ana Reyes,T16,1,18990,18990,14052.6,4937.4
+ORD-1297,2025-09-28,Visayas,Cebu City,Consumer,Bea Tan,T08,4,12990,51960,37411.2,14548.8
+ORD-1281,2025-10-03,Visayas,Bacolod,Reseller,Bea Tan,T15,2,54990,109980,90183.6,19796.4
+ORD-1077,2025-10-03,Luzon,Laguna,Corporate,Paolo Cruz,T16,1,18990,18990,14052.6,4937.4
+ORD-1024,2025-10-04,Luzon,Pampanga,Corporate,Bea Tan,T01,8,1590,12720,5088.0,7632.0
+ORD-1135,2025-10-05,Metro Manila,Taguig,Reseller,Grace Lim,T11,2,48990,97980,76424.4,21555.6
+ORD-1075,2025-10-05,Mindanao,General Santos,Corporate,Paolo Cruz,T11,1,48990,48990,38212.2,10777.8
+ORD-1242,2025-10-05,Visayas,Bacolod,Reseller,Miguel Santos,T14,6,8990,53940,37758.0,16182.0
+ORD-1129,2025-10-06,Mindanao,General Santos,Reseller,Miguel Santos,T07,10,4990,49900,27445.0,22455.0
+ORD-1276,2025-10-07,Visayas,Bacolod,Consumer,Miguel Santos,T09,5,3990,19950,9975.0,9975.0
+ORD-1049,2025-10-07,Metro Manila,Pasig,Consumer,Paolo Cruz,T10,3,2490,7470,3510.9,3959.1
+ORD-1062,2025-10-08,Metro Manila,Pasig,Corporate,Bea Tan,T07,10,4990,49900,27445.0,22455.0
+ORD-1071,2025-10-08,Mindanao,Cagayan de Oro,Corporate,Miguel Santos,T02,14,1890,26460,12700.8,13759.2
+ORD-1198,2025-10-11,Metro Manila,Manila,Consumer,Grace Lim,T10,10,2490,24900,11703.0,13197.0
+ORD-1175,2025-10-12,Visayas,Cebu City,Consumer,Paolo Cruz,T05,14,3490,48860,25407.2,23452.8
+ORD-1266,2025-10-13,Visayas,Iloilo,Reseller,Paolo Cruz,T14,1,8990,8990,6293.0,2697.0
+ORD-1069,2025-10-13,Luzon,Baguio,Corporate,Bea Tan,T04,9,1290,11610,4876.2,6733.8
+ORD-1277,2025-10-13,Visayas,Iloilo,Reseller,Miguel Santos,T06,8,7990,63920,37073.6,26846.4
+ORD-1176,2025-10-15,Metro Manila,Taguig,Consumer,Grace Lim,T07,12,4990,59880,32934.0,26946.0
+ORD-1264,2025-10-15,Luzon,Pampanga,Consumer,Paolo Cruz,T09,9,3990,35910,17955.0,17955.0
+ORD-1087,2025-10-17,Metro Manila,Pasig,Reseller,Grace Lim,T09,2,3990,7980,3990.0,3990.0
+ORD-1022,2025-10-18,Metro Manila,Quezon City,Reseller,Miguel Santos,T03,3,1990,5970,2686.5,3283.5
+ORD-1107,2025-10-19,Metro Manila,Taguig,Reseller,Miguel Santos,T11,3,48990,146970,114636.6,32333.4
+ORD-1253,2025-10-20,Mindanao,Davao,Reseller,Grace Lim,T01,8,1590,12720,5088.0,7632.0
+ORD-1298,2025-10-21,Luzon,Batangas,Corporate,Ana Reyes,T05,11,3490,38390,19962.8,18427.2
+ORD-1279,2025-10-21,Mindanao,General Santos,Corporate,Ana Reyes,T07,5,4990,24950,13722.5,11227.5
+ORD-1076,2025-10-22,Mindanao,General Santos,Corporate,Paolo Cruz,T12,4,74990,299960,239968.0,59992.0
+ORD-1174,2025-10-23,Luzon,Batangas,Consumer,Grace Lim,T04,14,1290,18060,7585.2,10474.8
+ORD-1058,2025-10-23,Luzon,Pampanga,Corporate,Ana Reyes,T13,2,39990,79980,60784.8,19195.2
+ORD-1155,2025-10-28,Luzon,Laguna,Reseller,Paolo Cruz,T12,3,74990,224970,179976.0,44994.0
+ORD-1026,2025-10-29,Luzon,Baguio,Reseller,Ana Reyes,T13,2,39990,79980,60784.8,19195.2
+ORD-1070,2025-11-01,Visayas,Tacloban,Reseller,Paolo Cruz,T10,14,2490,34860,16384.2,18475.8
+ORD-1262,2025-11-02,Mindanao,Zamboanga,Consumer,Paolo Cruz,T08,3,12990,38970,28058.4,10911.6
+ORD-1287,2025-11-05,Metro Manila,Pasig,Reseller,Bea Tan,T06,8,7990,63920,37073.6,26846.4
+ORD-1193,2025-11-05,Luzon,Baguio,Corporate,Paolo Cruz,T14,8,8990,71920,50344.0,21576.0
+ORD-1115,2025-11-06,Visayas,Cebu City,Reseller,Bea Tan,T11,1,48990,48990,38212.2,10777.8
+ORD-1268,2025-11-07,Luzon,Pampanga,Consumer,Paolo Cruz,T09,10,3990,39900,19950.0,19950.0
+ORD-1210,2025-11-09,Visayas,Tacloban,Consumer,Grace Lim,T14,8,8990,71920,50344.0,21576.0
+ORD-1044,2025-11-10,Metro Manila,Taguig,Consumer,Miguel Santos,T05,5,3490,17450,9074.0,8376.0
+ORD-1240,2025-11-10,Visayas,Tacloban,Consumer,Ana Reyes,T15,4,54990,219960,180367.2,39592.8
+ORD-1139,2025-11-14,Luzon,Laguna,Consumer,Paolo Cruz,T08,5,12990,64950,46764.0,18186.0
+ORD-1083,2025-11-15,Luzon,Batangas,Reseller,Ana Reyes,T16,4,18990,75960,56210.4,19749.6
+ORD-1250,2025-11-17,Visayas,Cebu City,Consumer,Bea Tan,T10,10,2490,24900,11703.0,13197.0
+ORD-1202,2025-11-20,Visayas,Cebu City,Reseller,Paolo Cruz,T07,5,4990,24950,13722.5,11227.5
+ORD-1195,2025-11-20,Visayas,Bacolod,Corporate,Bea Tan,T08,2,12990,25980,18705.6,7274.4
+ORD-1221,2025-11-20,Luzon,Batangas,Consumer,Bea Tan,T06,6,7990,47940,27805.2,20134.8
+ORD-1047,2025-11-21,Mindanao,Zamboanga,Corporate,Miguel Santos,T11,3,48990,146970,114636.6,32333.4
+ORD-1089,2025-11-22,Mindanao,Cagayan de Oro,Reseller,Bea Tan,T04,11,1290,14190,5959.8,8230.2
+ORD-1102,2025-11-23,Mindanao,Davao,Corporate,Paolo Cruz,T13,4,39990,159960,121569.6,38390.4
+ORD-1072,2025-11-23,Visayas,Tacloban,Corporate,Ana Reyes,T16,5,18990,94950,70263.0,24687.0
+ORD-1001,2025-11-24,Metro Manila,Quezon City,Consumer,Miguel Santos,T07,12,4990,59880,32934.0,26946.0
+ORD-1220,2025-11-24,Mindanao,Davao,Reseller,Bea Tan,T12,1,74990,74990,59992.0,14998.0
+ORD-1014,2025-11-26,Mindanao,Cagayan de Oro,Consumer,Bea Tan,T07,9,4990,44910,24700.5,20209.5
+ORD-1200,2025-11-27,Luzon,Baguio,Corporate,Paolo Cruz,T14,3,8990,26970,18879.0,8091.0
+ORD-1197,2025-11-27,Metro Manila,Taguig,Corporate,Paolo Cruz,T10,10,2490,24900,11703.0,13197.0
+ORD-1289,2025-11-28,Visayas,Iloilo,Corporate,Grace Lim,T13,2,39990,79980,60784.8,19195.2
+ORD-1238,2025-11-29,Visayas,Iloilo,Reseller,Miguel Santos,T11,4,48990,195960,152848.8,43111.2
+ORD-1033,2025-11-30,Metro Manila,Quezon City,Corporate,Paolo Cruz,T15,4,54990,219960,180367.2,39592.8
+ORD-1063,2025-12-02,Visayas,Tacloban,Reseller,Miguel Santos,T02,9,1890,17010,8164.8,8845.2
+ORD-1133,2025-12-02,Luzon,Baguio,Corporate,Bea Tan,T01,12,1590,19080,7632.0,11448.0
+ORD-1040,2025-12-03,Visayas,Bacolod,Reseller,Grace Lim,T14,4,8990,35960,25172.0,10788.0
+ORD-1023,2025-12-04,Mindanao,Cagayan de Oro,Reseller,Paolo Cruz,T05,4,3490,13960,7259.2,6700.8
+ORD-1108,2025-12-05,Metro Manila,Makati,Reseller,Ana Reyes,T15,2,54990,109980,90183.6,19796.4
+ORD-1208,2025-12-05,Visayas,Iloilo,Consumer,Miguel Santos,T09,3,3990,11970,5985.0,5985.0
+ORD-1232,2025-12-05,Visayas,Bacolod,Consumer,Paolo Cruz,T02,6,1890,11340,5443.2,5896.8
+ORD-1119,2025-12-06,Mindanao,Davao,Corporate,Grace Lim,T03,6,1990,11940,5373.0,6567.0
+ORD-1275,2025-12-06,Mindanao,General Santos,Corporate,Bea Tan,T07,6,4990,29940,16467.0,13473.0
+ORD-1234,2025-12-10,Mindanao,Zamboanga,Reseller,Miguel Santos,T10,1,2490,2490,1170.3,1319.7
+ORD-1010,2025-12-10,Visayas,Cebu City,Consumer,Bea Tan,T10,12,2490,29880,14043.6,15836.4
+ORD-1151,2025-12-11,Visayas,Tacloban,Reseller,Miguel Santos,T07,8,4990,39920,21956.0,17964.0
+ORD-1116,2025-12-11,Visayas,Cebu City,Reseller,Paolo Cruz,T16,5,18990,94950,70263.0,24687.0
+ORD-1194,2025-12-15,Visayas,Bacolod,Consumer,Paolo Cruz,T16,8,18990,151920,112420.8,39499.2
+ORD-1012,2025-12-17,Visayas,Cebu City,Corporate,Paolo Cruz,T15,3,54990,164970,135275.4,29694.6
+ORD-1157,2025-12-18,Visayas,Bacolod,Corporate,Miguel Santos,T12,1,74990,74990,59992.0,14998.0
+ORD-1095,2025-12-20,Mindanao,General Santos,Consumer,Grace Lim,T03,4,1990,7960,3582.0,4378.0
+ORD-1189,2025-12-20,Visayas,Cebu City,Consumer,Paolo Cruz,T03,10,1990,19900,8955.0,10945.0
+ORD-1209,2025-12-21,Luzon,Laguna,Corporate,Miguel Santos,T12,4,74990,299960,239968.0,59992.0
+ORD-1067,2025-12-23,Mindanao,General Santos,Consumer,Ana Reyes,T04,15,1290,19350,8127.0,11223.0
+ORD-1166,2025-12-31,Mindanao,Davao,Reseller,Miguel Santos,T12,1,74990,74990,59992.0,14998.0
