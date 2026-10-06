@@ -1,0 +1,37 @@
+course_id,instructor_id,department,course_name,units,num_students,avg_grade,total_hours_taught,semester,academic_year
+1,201,Enginering,Thermodynamics,null,55,85,48,1st,2025-2026
+2,202,Enginering,Statics,null,50,82,45,1st,2025-2026
+3,203,Enginering,Dynamics,null,60,84,50,1st,2025-2026
+4,204,Enginering,Fluid Mechanics,null,58,80,52,1st,2025-2026
+5,205,IT,Database Systems,null,65,88,42,1st,2025-2026
+6,206,IT,Web Development,null,70,90,40,1st,2025-2026
+7,207,IT,Machine Learning,null,60,92,44,1st,2025-2026
+8,208,IT,Networks,null,68,87,46,1st,2025-2026
+9,209,Science,Biology 101,null,45,86,38,1st,2025-2026
+10,210,Science,Chemistry 102,null,40,84,36,1st,2025-2026
+11,211,Science,Physics 103,null,48,83,39,1st,2025-2026
+12,212,Science,Earth Science,null,42,81,35,1st,2025-2026
+13,213,Arts,Art Appreciation,null,30,95,28,1st,2025-2026
+14,214,Arts,Music Theory,null,25,94,26,1st,2025-2026
+15,215,Arts,Creative Writing,null,28,96,27,1st,2025-2026
+16,216,Humanities,Ethics,null,32,91,29,1st,2025-2026
+17,217,Humanities,Philosophy,null,30,90,30,1st,2025-2026
+18,218,Business,Marketing 101,null,55,88,40,1st,2025-2026
+19,219,Business,Accounting 1,null,52,85,42,1st,2025-2026
+20,220,Business,Management,null,60,86,43,1st,2025-2026
+21,221,Enginering,Thermo II,null,58,83,48,2nd,2025-2026
+22,222,Enginering,Structural Analysis,null,57,82,49,2nd,2025-2026
+23,223,IT,Data Structures,null,66,89,41,2nd,2025-2026
+24,224,IT,AI Applications,null,72,93,45,2nd,2025-2026
+25,225,Science,Microbiology,null,44,84,37,2nd,2025-2026
+26,226,Science,Organic Chemistry,null,46,82,38,2nd,2025-2026
+27,227,Arts,Painting,null,27,95,25,2nd,2025-2026
+28,228,Humanities,History,null,33,89,31,2nd,2025-2026
+29,229,Business,Economics,null,57,87,41,2nd,2025-2026
+30,230,Business,Finance,null,59,88,42,2nd,2025-2026
+31,231,Enginering,Materials,null,62,84,50,1st,2024-2025
+32,232,IT,Software Engg,null,69,91,44,1st,2024-2025
+33,233,Science,Anatomy,null,43,85,38,1st,2024-2025
+34,234,Arts,Drama,null,28,94,26,1st,2024-2025
+35,235,Humanities,Sociology,null,31,92,29,1st,2024-2025
+36,236,Business,Entrepreneurship,null,63,89,43,1st,2024-2025

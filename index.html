@@ -431,6 +431,12 @@
     <button type="button" class="module-subject-card" id="modulesPowerBI">
       <strong>Power BI</strong><span>Session slides, datasets, activities &amp; handouts</span>
     </button>
+    <button type="button" class="module-subject-card" id="modulesSQL">
+      <strong>SQL</strong><span>3 sessions &mdash; slides, datasets &amp; guides</span>
+    </button>
+    <button type="button" class="module-subject-card" id="modulesPython">
+      <strong>Python</strong><span>3 sessions &mdash; lecture slides</span>
+    </button>
   </div>
   <div id="modulesContent"></div>
   <div class="btn-row module-back">
@@ -1666,42 +1672,27 @@ function moduleFile(title, type, path){
   return row;
 }
 
-function renderModuleContent(subject){
-  const container = document.getElementById('modulesContent');
-  const excelBtn = document.getElementById('modulesExcel');
-  const powerbiBtn = document.getElementById('modulesPowerBI');
-  const isExcel = subject === 'excel';
-  excelBtn.classList.toggle('active',isExcel);
-  powerbiBtn.classList.toggle('active',!isExcel);
-  container.innerHTML = '';
+// Subject buttons shown on the Modules screen, in display order.
+const MODULE_SUBJECTS = ['excel','powerbi','sql','python'];
+const MODULE_BTN = { excel:'modulesExcel', powerbi:'modulesPowerBI', sql:'modulesSQL', python:'modulesPython' };
 
-  if(isExcel){
-    const section = document.createElement('section');
-    section.className = 'module-session';
-    const heading = document.createElement('h2');
-    heading.textContent = 'MS Excel Modules';
-    const desc = document.createElement('p');
-    desc.textContent = 'Download a copy of each module in XLSX format.';
-    section.append(heading,desc);
-    [
+// File data per subject. 'flat' = one list of files; 'sessions' = grouped by session.
+// Each file is [display title, type label, path]. Paths must match the files in the repo.
+const MODULE_DATA = {
+  excel: { type:'flat', heading:'MS Excel Modules', description:'Download a copy of each module in XLSX format.',
+    files:[
       ['Module 1','XLSX','modules/excel/module-1.xlsx'],
       ['Module 2','XLSX','modules/excel/module-2.xlsx'],
       ['Module 3','XLSX','modules/excel/module-3.xlsx']
-    ].forEach(file => section.appendChild(moduleFile(...file)));
-    container.appendChild(section);
-    return;
-  }
-
-  const sessions = [
-    {title:'Session 1 — Power BI',description:'Presentation, demo dataset, activity file, and student handout.',
-     files:[
+    ]},
+  powerbi: { type:'sessions', sessions:[
+    {title:'Session 1 — Power BI', description:'Presentation, demo dataset, activity file, and student handout.', files:[
       ['Session 1 Power BI Slides','PPTX','modules/powerbi/session-1/slides.pptx'],
       ['Session 1 Demo Dataset','XLSX','modules/powerbi/session-1/demo.xlsx'],
       ['Session 1 Activity','XLSX','modules/powerbi/session-1/activity.xlsx'],
       ['Power BI Student Handout','PDF','modules/powerbi/session-1/handout.pdf']
-     ]},
-    {title:'Session 2 — Power BI',description:'Presentation, demo and activity datasets, final project, and briefs.',
-     files:[
+    ]},
+    {title:'Session 2 — Power BI', description:'Presentation, demo and activity datasets, final project, and briefs.', files:[
       ['Session 2 Power BI Slides','PPTX','modules/powerbi/session-2/slides.pptx'],
       ['Session 2 Demo Dataset 1','CSV','modules/powerbi/session-2/demo-1.csv'],
       ['Session 2 Demo Dataset 2','CSV','modules/powerbi/session-2/demo-2.csv'],
@@ -1710,19 +1701,74 @@ function renderModuleContent(subject){
       ['Final Project / Homework','XLSX','modules/powerbi/session-2/final-project.xlsx'],
       ['Activity 2 Brief / Handout','PDF','modules/powerbi/session-2/activity-brief.pdf'],
       ['Final Project / Homework Brief','PDF','modules/powerbi/session-2/project-brief.pdf']
-     ]}
-  ];
-  sessions.forEach(session => {
+    ]}
+  ]},
+  sql: { type:'sessions', sessions:[
+    {title:'Session 1 — SQL', description:'Introduction to SQL and the MySQL Workbench setup guide.', files:[
+      ['Session 1 SQL Slides','PPTX','modules/sql/session-1/intro-to-sql-module1.pptx'],
+      ['MySQL Workbench Setup Guide','DOCX','modules/sql/session-1/workbench-guide-module1.docx']
+    ]},
+    {title:'Session 2 — SQL', description:'Slides, Excel-to-MySQL import guide, demo datasets, and homework.', files:[
+      ['Session 2 SQL Slides','PPTX','modules/sql/session-2/sql-for-data-analytics-module2.pptx'],
+      ['How to Import Excel to MySQL Workbench','DOCX','modules/sql/session-2/how-to-import-excel-to-mysql-workbench.docx'],
+      ['Deliveries Data','CSV','modules/sql/session-2/deliveries-data.csv'],
+      ['University Data','CSV','modules/sql/session-2/university-data.csv'],
+      ['Sales DB','CSV','modules/sql/session-2/sales-db.csv'],
+      ['Hospital Records (Homework)','CSV','modules/sql/session-2/hospital-records-homework.csv'],
+      ['Homework 2 Brief','DOCX','modules/sql/session-2/homework-2-sql.docx']
+    ]},
+    {title:'Session 3 — SQL', description:'Slides, mini-project brief, and datasets.', files:[
+      ['Session 3 SQL Slides','PPTX','modules/sql/session-3/sql-for-data-analytics-3.pptx'],
+      ['Mini Project Brief','DOCX','modules/sql/session-3/mini-project-sql-3.docx'],
+      ['Customer Table Sample','CSV','modules/sql/session-3/customer-table-sample.csv'],
+      ['Order Table Sample','CSV','modules/sql/session-3/order-table-sample.csv'],
+      ['Customers','CSV','modules/sql/session-3/customers.csv'],
+      ['Orders','CSV','modules/sql/session-3/orders.csv'],
+      ['Products','CSV','modules/sql/session-3/products.csv']
+    ]}
+  ]},
+  python: { type:'sessions', sessions:[
+    {title:'Session 1 — Python', description:'Introduction and Python fundamentals.', files:[
+      ['Intro to Python Fundamentals','PPTX','modules/python/session-1/intro-to-python-fundamentals.pptx'],
+      ['Python Fundamentals','PPTX','modules/python/session-1/python-fundamentals.pptx']
+    ]},
+    {title:'Session 2 — Python', description:'Recap session.', files:[
+      ['Session 2 Python Slides (Recap)','PPTX','modules/python/session-2/python-recap-module-2.pptx']
+    ]},
+    {title:'Session 3 — Python', description:'Module 3 lecture.', files:[
+      ['Session 3 Python Slides','PPTX','modules/python/session-3/python-module-3.pptx']
+    ]}
+  ]}
+};
+
+function renderModuleContent(subject){
+  const container = document.getElementById('modulesContent');
+  MODULE_SUBJECTS.forEach(key => {
+    const btn = document.getElementById(MODULE_BTN[key]);
+    if(btn) btn.classList.toggle('active', key === subject);
+  });
+  container.innerHTML = '';
+
+  const data = MODULE_DATA[subject];
+  if(!data) return;
+
+  const buildSection = (title, description, files) => {
     const section = document.createElement('section');
     section.className = 'module-session';
     const heading = document.createElement('h2');
-    heading.textContent = session.title;
+    heading.textContent = title;
     const desc = document.createElement('p');
-    desc.textContent = session.description;
+    desc.textContent = description;
     section.append(heading,desc);
-    session.files.forEach(file => section.appendChild(moduleFile(...file)));
+    files.forEach(file => section.appendChild(moduleFile(...file)));
     container.appendChild(section);
-  });
+  };
+
+  if(data.type === 'flat'){
+    buildSection(data.heading, data.description, data.files);
+    return;
+  }
+  data.sessions.forEach(s => buildSection(s.title, s.description, s.files));
 }
 
 document.getElementById('subjectModules').addEventListener('click', () => {
@@ -1738,6 +1784,8 @@ document.getElementById('subjectModules').addEventListener('keydown', event => {
 });
 document.getElementById('modulesExcel').addEventListener('click', () => renderModuleContent('excel'));
 document.getElementById('modulesPowerBI').addEventListener('click', () => renderModuleContent('powerbi'));
+document.getElementById('modulesSQL').addEventListener('click', () => renderModuleContent('sql'));
+document.getElementById('modulesPython').addEventListener('click', () => renderModuleContent('python'));
 document.getElementById('modulesBackBtn').addEventListener('click', () => showScreen('subject'));
 document.getElementById('modulesEditWho').addEventListener('click', () => showScreen('start'));
 
